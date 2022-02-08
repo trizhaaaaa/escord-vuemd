@@ -9,9 +9,9 @@ export default {
   name: "guide",
   data() {
     return {
-      title: "Guide",
+      title: "Guide"
     };
-  },
+  }
 };
 </script>
 

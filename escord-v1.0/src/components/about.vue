@@ -11,7 +11,7 @@ export default {
     return {
       title: "About",
     };
-  },
+  }
 };
 </script>
 
