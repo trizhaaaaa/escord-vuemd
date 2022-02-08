@@ -1,18 +1,25 @@
 <template>
   <div id="app">
     <escord-header />
-    <escord-footer/>
+
+    <escord-landing/>
+
+    <escord-footer />
   </div>
 </template>
 
 <script>
-import Header from "./components/Header.vue";
-import Footer from "./components/Footer.vue";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+
+import Landing from "./components/Landing";
 
 export default {
   components: {
     "escord-header": Header,
-    "escord-footer": Footer
+    "escord-footer": Footer,
+
+    "escord-landing": Landing
   },
 
   name: "App",
@@ -24,8 +31,10 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Cuprum&display=swap');
+
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: Century Gothic;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

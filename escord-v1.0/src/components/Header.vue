@@ -40,7 +40,7 @@ img.logo-max {
   padding: 20px 20px 10px;
 }
 img.logo-max:hover {
-  filter: drop-shadow(-3px 8px 1px rgba(248, 190, 0, 0.233));
+  filter: drop-shadow(-3px 8px 1px #f8be003b);
 }
 nav {
   margin-right: 5%;

@@ -17,13 +17,13 @@ export default {
 
 <style scoped>
 footer {
-  background: #545454;
   padding: 1px;
   width: 100vw;
 }
 p {
-  color: #ff9807;
+  color: #545454;
   text-align: center;
+  text-shadow: 0px 3px 2px #5454547c;
 }
 p.disclaimer {
   font-weight: bold;
