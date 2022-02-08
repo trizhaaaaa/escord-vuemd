@@ -1,20 +1,28 @@
 <template>
   <div class="contact">
-    <h1>{{ title }}</h1>
+    <h1>contact us</h1>
+    <p>
+      For inquiries about ESCORD or other provided services, you may refer to
+      the provided contact information below to get in touch with the team.
+    </p>
+
+    <p class="contactInfo">E-MAIL ADDRESS: ucc-escord.bscs2019@gmail.com</p>
+    <p class="contactInfo">CONTACT NUMBERS: 0923 435 2346/ 0978 356 8729</p>
+    <p class="contactInfo">LANDLINE: (02) 9332 4355</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: "contact",
   data() {
-    return {
-      title: "Contact"
-    };
-  }
+    return {};
+  },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+p.contactInfo {
+  font-family: "Cuprum", sans-serif;
+  font-size: 20px;
+}
 </style>

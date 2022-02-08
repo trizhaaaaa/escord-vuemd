@@ -27,7 +27,6 @@ img {
   width: 500px;
 }
 div#landing-content h1 {
-  font-family: "Cuprum", sans-serif;
   font-weight: 100;
 }
 button#learn-more {

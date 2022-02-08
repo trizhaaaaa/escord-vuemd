@@ -3,6 +3,9 @@
     <escord-header />
 
     <escord-landing/>
+    <escord-about/>
+    <escord-guide/>
+    <escord-contact/>
 
     <escord-footer />
   </div>
@@ -13,24 +16,31 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 import Landing from "./components/Landing";
+import About from "./components/About";
+import Guide from "./components/Guide";
+import Contact from "./components/Contact";
 
 export default {
   components: {
     "escord-header": Header,
     "escord-footer": Footer,
 
-    "escord-landing": Landing
+    "escord-landing": Landing,
+    "escord-about": About,
+    "escord-guide": Guide,
+    "escord-contact": Contact
   },
 
   name: "App",
 
   data() {
-    return {};
+    return {
+    };
   },
 };
 </script>
 
-<style scoped>
+<style>
 @import url('https://fonts.googleapis.com/css2?family=Cuprum&display=swap');
 
 #app {
@@ -40,5 +50,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+h1{
+  font-family: "Cuprum", sans-serif;
+}
+div.home, div.about, div.guide, div.contact{
+  padding: 30px 5px 10px 5px;
 }
 </style>
