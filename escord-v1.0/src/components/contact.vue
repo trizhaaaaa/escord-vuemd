@@ -1,6 +1,6 @@
 <template>
-  <div class="contact">
-    <h1>contact us</h1>
+  <div id="contact">
+    <h1 class="landing-page-title">contact us</h1>
     <p>
       For inquiries about ESCORD or other provided services, you may refer to
       the provided contact information below to get in touch with the team.

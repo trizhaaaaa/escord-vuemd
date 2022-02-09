@@ -1,13 +1,22 @@
 <template>
-  <div class="home">
-    <div id="landing-img">
-      <img src="../assets/landing-img.svg" />
-    </div>
-    <div id="landing-content">
-      <h1>A web-based scholastic record management system.</h1>
-      <p>Grading, evaluation, and managing in <b>one</b>.</p>
-    </div>
-    <button id="learn-more">Learn More →</button>
+  <div id="landing">
+    <table>
+      <tr>
+        <td>
+          <div id="landing-img">
+            <img src="../assets/landing-img.svg" />
+          </div>
+        </td>
+
+        <td>
+          <div id="landing-content">
+            <h1>A web-based scholastic record management system.</h1>
+            <p>Grading, evaluation, and managing in <b>one</b>.</p>
+          </div>
+          <button id="learn-more">Learn More →</button>
+        </td>
+      </tr>
+    </table>
   </div>
 </template>
 
