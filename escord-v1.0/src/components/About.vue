@@ -27,12 +27,12 @@
 
     <!-- TEAM MEMBERS LIST -->
     <div id="about-team">
-      <h1 class="landing-page-title">the team</h1>
+      <h1 class="about-esc-team">the team</h1>
       <ul>
-        <li v-for="member in team" :key="member.team">
+        <li v-for="member in team" :key="member.team" class="esc-team-member">
           <img class="member-pic" v-bind:src="member.pic" />
-          <p>{{ member.name }}</p>
-          <p>{{ member.position }}</p>
+          <p class="member-name">{{ member.name }}</p>
+          <p class="member-position">{{ member.position }}</p>
         </li>
       </ul>
     </div>
@@ -204,14 +204,37 @@ h3.esc-feature-longdesctitle {
 p.esc-feature-longdesc {
   text-align: justify;
 }
+div#about-team {
+  background: linear-gradient(#fff, #545454);
+}
+li.esc-team-member {
+  padding-bottom: 15px;
+}
 img.member-pic {
   width: 100px;
   border: 4px solid #ff9807;
   border-radius: 50%;
+  box-shadow: 0px 0px 8px #000000;
+}
+p.member-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0px 0px 4px #545454;
+  letter-spacing: 1px;
+}
+p.member-position {
+  font-size: 16px;
+  text-shadow: 0px 2px 3px #ff9807;
+  color: #fff;
 }
 div#about-escord {
   background: #545454;
   color: #fff;
+}
+h1.about-esc-team {
+  text-shadow: 0px 1px 1px #ff9807;
+  text-align: left;
 }
 img.about-img {
   width: 300px;

@@ -40,7 +40,7 @@ img.logo-max {
   padding: 20px 20px 10px;
 }
 img.logo-max:hover {
-  filter: drop-shadow(-3px 8px 1px #f8be003b);
+  filter: drop-shadow(0px 0px 4px #242424);
 }
 nav {
   margin-right: 5%;
@@ -53,6 +53,7 @@ a.hdr-a {
 }
 a.hdr-a:hover {
   color: #ff9807;
+  font-weight: bold;
 }
 button.btn-login {
   font-family: Century Gothic;
