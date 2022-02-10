@@ -5,13 +5,27 @@
     /></a>
 
     <nav>
+      <!--USER CATEGORIES, show: false (initial value)-->
+      <select name="userCategory" id="userCategory" v-show="showCategoryList">
+        <option value="blank"></option>
+        <option value="faculty">FACULTY</option>
+        <option value="coordinator">COORDINATOR</option>
+        <option value="mis-staff">MIS STAFF</option>
+        <option value="mis-manager">MIS MANAGER</option>
+      </select>
+
       <a href="/about" class="hdr-a">ABOUT</a>
 
       <a href="/guide" class="hdr-a">GUIDE</a>
 
       <a href="/contact" class="hdr-a">CONTACT</a>
 
-      <button class="btn-login" v-on:click="login">LOG IN</button>
+      <button
+        v-bind:class="{ loggedIn: loggedIn, loggedOut: loggedOut }"
+        v-on:click="login"
+      >
+        {{ btnText }}
+      </button>
     </nav>
   </header>
 </template>
@@ -19,7 +33,25 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      showCategoryList: false,
+      btnText: "LOG IN",
+      loggedIn: false,
+      loggedOut: true,
+    };
+  },
+  methods: {
+    login: function () {
+      this.loggedIn = !this.loggedIn;
+      this.loggedOut = !this.loggedOut;
+      this.showCategoryList = !this.showCategoryList;
+
+      if (this.showCategoryList === true) {
+        this.btnText = "LOG OUT";
+      } else {
+        this.btnText = "LOG IN";
+      }
+    },
   },
 };
 </script>
@@ -45,26 +77,55 @@ img.logo-max:hover {
 nav {
   margin-right: 5%;
 }
+select {
+  border: none;
+  font-family: "Cuprum", sans-serif;
+  background: #545454;
+  box-shadow: 0px -2px 6px #2d2d2d;
+  outline: 0px;
+  border-radius: 5px;
+  padding: 2px;
+  width: 150px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+select,
 a.hdr-a {
-  padding-right: 60px;
-  text-decoration: none;
-  color: #ffffff;
+  margin-right: 60px;
   font-size: 18px;
+  color: #ffffff;
+}
+a.hdr-a {
+  text-decoration: none;
 }
 a.hdr-a:hover {
   color: #ff9807;
-  font-weight: bold;
+  text-shadow: 0px 0px 4px #242424;
 }
-button.btn-login {
+button.loggedIn,
+button.loggedOut {
   font-family: Century Gothic;
-  color: white;
   font-weight: bold;
   font-size: 18px;
   border: 2px solid #ff9807;
   border-radius: 25px;
-  background-color: transparent;
 }
-button.btn-login:hover {
+button.loggedOut {
+  color: white;
+  background-color: #545454;
+}
+button.loggedOut:hover {
   background-color: #ff9807;
+  color: #545454;
+  box-shadow: 0px 0px 6px #242424;
+}
+button.loggedIn {
+  background: #ff9807;
+  color: #545454;
+  box-shadow: 0px 0px 6px #242424;
+}
+button.loggedIn:hover {
+  background-color: #545454;
+  color: white;
 }
 </style>
