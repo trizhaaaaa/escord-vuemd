@@ -26,7 +26,7 @@
           <li><a href="/guide" class="hdr-a">GUIDE</a></li>
           <li><a href="/contact" class="hdr-a">CONTACT</a></li>
           <li>
-            <button
+            <button id="btn-login"
               v-bind:class="{ loggedIn: loggedIn, loggedOut: !loggedIn }"
               v-on:click="login"
             >
@@ -97,13 +97,11 @@ select {
   width: 170px;
   text-align: center;
   letter-spacing: 2px;
-}
-select,
-a.hdr-a {
-  padding: 0.9em 0.7em;
+  padding: 0.2em;
   font-size: 18px;
   color: #ffffff;
 }
+
 /* NAVIGATION BAR */
 nav {
   margin-right: 5%;
@@ -123,6 +121,9 @@ nav ul li {
   padding-left: 20px;
 }
 a.hdr-a {
+  padding: 0.9em 0.7em;
+  font-size: 18px;
+  color: #ffffff;
   text-decoration: none;
   display: inline-block;
 }
@@ -138,6 +139,7 @@ button.loggedOut {
   font-weight: bold;
   font-size: 18px;
   border: 2px solid #ff9807;
+  padding: 5px 10px;
   border-radius: 25px;
 }
 button.loggedOut {
@@ -188,7 +190,19 @@ button.btn-toggleMenu:hover {
   nav ul li {
     display: block;
     list-style: none;
+    text-align: right;
+    padding-bottom: 1em;
+    font-weight: bold;
   }
+  a.hdr-a, button#btn-login{
+    font-size: 2em;
+  }
+  button#btn-login{
+    border: none;
+    margin-right: 0.8em;
+  }
+
+
   div.cont-toggleMenu {
     width: 100%;
     overflow: hidden;
