@@ -1,24 +1,13 @@
 <template>
   <div id="landing">
-    <center>
-      <table>
-        <tr>
-          <td>
-            <div id="landing-img">
-              <img src="../assets/landing-img.svg" />
-            </div>
-          </td>
-
-          <td>
-            <div id="landing-content">
-              <h1>A web-based scholastic<br />record management system.</h1>
-              <p>Grading, evaluation, and managing in <b>one</b>.</p>
-            </div>
-            <button id="learn-more">Learn More →</button>
-          </td>
-        </tr>
-      </table>
-    </center>
+    <div id="landing-img">
+      <img src="../assets/landing-img.svg" />
+    </div>
+    <div id="landing-content">
+      <h1>A web-based scholastic<br />record management system.</h1>
+      <p>Grading, evaluation, and managing in <b>one</b>.</p>
+    </div>
+    <button id="learn-more">Learn More →</button>
   </div>
 </template>
 
@@ -35,7 +24,7 @@ div.home {
   padding: 30px 5px 10px 5px;
 }
 img {
-  width: 500px;
+  width: 20em;
 }
 div#landing-content h1 {
   font-weight: 100;

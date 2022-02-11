@@ -1,39 +1,44 @@
 <template>
   <header id="vue-hdr">
-    <a href="/"
-      ><img src="@/assets/logo-max.svg" alt="logo-max" class="logo-max"
-    /></a>
-
-    <button class="btn-toggleMenu">
-      <i class="fa-solid fa-bars toggleMenu"></i>
-    </button>
-
     <nav>
-      <!--USER CATEGORIES, show: false (initial value)-->
-      <div class="userDropdown">
+      <div class="navbar">
+        <a href="/"
+          ><img src="@/assets/logo-max.svg" alt="logo-max" class="logo-max"
+        /></a>
+        <button class="toggle-collapse">
+          <i class="fas fa-home"></i>
+        </button>
+
+        <!--USER CATEGORIES, show: false (initial value)-->
         <select name="userCategory" id="userCategory" v-show="showCategoryList">
-          <option disabled selected value="blank">Select Category</option>
+          <option value="blank"></option>
           <option value="faculty">FACULTY</option>
           <option value="coordinator">COORDINATOR</option>
           <option value="mis-staff">MIS STAFF</option>
           <option value="mis-manager">MIS MANAGER</option>
         </select>
-      </div>
 
-      <div class="cont-toggleMenu">
-        <ul>
-          <li><a href="/about" class="hdr-a">ABOUT</a></li>
-          <li><a href="/guide" class="hdr-a">GUIDE</a></li>
-          <li><a href="/contact" class="hdr-a">CONTACT</a></li>
-          <li>
-            <button
-              v-bind:class="{ loggedIn: loggedIn, loggedOut: !loggedIn }"
-              v-on:click="login"
-            >
-              {{ btnText }}
-            </button>
-          </li>
-        </ul>
+        <div class="navbar-collapse">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="/about" class="hdr-a">ABOUT</a>
+            </li>
+            <li class="nav-item">
+              <a href="/guide" class="hdr-a">GUIDE</a>
+            </li>
+            <li class="nav-item">
+              <a href="/contact" class="hdr-a">CONTACT</a>
+            </li>
+            <li class="nav-item">
+              <button
+                v-bind:class="{ loggedIn: loggedIn, loggedOut: loggedOut }"
+                v-on:click="login"
+              >
+                {{ btnText }}
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
   </header>
@@ -46,11 +51,13 @@ export default {
       showCategoryList: false,
       btnText: "LOG IN",
       loggedIn: false,
+      loggedOut: true,
     };
   },
   methods: {
     login: function () {
       this.loggedIn = !this.loggedIn;
+      this.loggedOut = !this.loggedOut;
       this.showCategoryList = !this.showCategoryList;
 
       if (this.showCategoryList === true) {
@@ -64,16 +71,10 @@ export default {
 </script>
 
 <style scoped>
-header {
-  background-color: #545454;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
+body {
+  margin: 0%;
+  padding: 0%;
 }
-/* LOGO */
 img.logo-max {
   max-width: 120px;
   padding: 20px 20px 10px;
@@ -82,9 +83,17 @@ img.logo-max {
 img.logo-max:hover {
   filter: drop-shadow(0px 0px 4px #242424);
 }
-/* DROPDOWN-USER CATEGORY */
-div.userDropdown{
-  display: inline-block;
+div.navbar {
+  width: 100vw;
+  background-color: #130404;
+  color: white;
+}
+ul.navbar-nav {
+  margin: 0%;
+}
+div.navbar ul.navbar-nav li.nav-item {
+  display: inline;
+  list-style: none;
 }
 select {
   border: none;
@@ -93,8 +102,8 @@ select {
   box-shadow: 0px -2px 6px #2d2d2d;
   outline: 0px;
   border-radius: 5px;
-  margin: 0.7em 0.2em;
-  width: 170px;
+  padding: 2px;
+  width: 150px;
   text-align: center;
   letter-spacing: 2px;
 }
@@ -104,24 +113,6 @@ a.hdr-a {
   font-size: 18px;
   color: #ffffff;
 }
-/* NAVIGATION BAR */
-nav {
-  margin-right: 5%;
-}
-/* NAVIGATION BAR - LINKS */
-div.cont-toggleMenu {
-  float:right;
-  margin-top: 0.2em;
-}
-ul {
-  margin: 0%;
-}
-nav ul li {
-  list-style: none;
-  display: inline;
-  padding-right: 10px;
-  padding-left: 20px;
-}
 a.hdr-a {
   text-decoration: none;
   display: inline-block;
@@ -130,8 +121,6 @@ a.hdr-a:hover {
   color: #ff9807;
   text-shadow: 0px 0px 4px #242424;
 }
-
-/* LOGIN BUTTON */
 button.loggedIn,
 button.loggedOut {
   font-family: Century Gothic;
@@ -158,44 +147,45 @@ button.loggedIn:hover {
   background-color: #545454;
   color: white;
 }
-/* TOGGLE BUTTON */
-button.btn-toggleMenu {
+button.toggle-collapse {
   float: right;
-  width: 3em;
-  height: 3em;
-  margin-top: 0.5em;
-  margin-right: 1.5em;
+  width: 3.5em;
+  margin: 0.4em 2em;
   background-color: transparent;
-  color: #ff9807;
-  border: 2px solid #ff9807;
+  color: rgba(153, 35, 35, 0.7);
+  border: 1px solid rgba(255, 25, 236, 0.3);
+  border-radius: 3px;
   cursor: pointer;
-  border-radius: 5px;
   display: none;
 }
-button.btn-toggleMenu:hover {
-  color: #545454;
-  background-color: #ff9807;
+button.toggle-collapse:hover {
+  color: rgb(232, 232, 232);
 }
 
-@media screen and (max-width: 976px) {
-  button.btn-toggleMenu {
+@media screen and (max-width: 456px) {
+  img.logo-max {
+    display: inline-block;
+    float: none;
+  }
+  button.toggle-collapse {
     display: inline-block;
   }
-  ul{
-    padding:0%;
+  ul.navbar-nav {
     color: white;
+    padding: 0%;
   }
-  nav ul li {
+  div.navbar ul.navbar-nav li.nav-item {
     display: block;
     list-style: none;
   }
-  div.cont-toggleMenu {
+  div.navbar-collapse {
     width: 100%;
     overflow: hidden;
     text-align: center;
     height: 0vh;
     transition: all 499ms ease;
   }
+
   div.collapse {
     height: 100vh;
   }

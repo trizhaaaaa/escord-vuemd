@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v6.0.0/css/all.css">
     <escord-header />
 
     <escord-landing />
@@ -12,6 +13,7 @@
 </template>
 
 <script>
+
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 
@@ -42,6 +44,11 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Cuprum&display=swap");
 
+html,
+body {
+  padding: 0px;
+  margin: 0px;
+}
 div#app {
   font-family: Century Gothic;
   -webkit-font-smoothing: antialiased;

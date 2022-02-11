@@ -11,3 +11,19 @@ new Vue({
   el: '#app',
   render: h => h(App)
 })
+
+/* header-2 js
+
+  $(document).ready(function () {
+  $('button.toggle-collapse').click(function () {
+    $('.navbar-collapse').toggleClass("collapse");
+  })
+}) 
+
+*/
+
+$(document).ready(function () {
+  $('button.btn-toggleMenu').click(function () {
+    $('.cont-toggleMenu').toggleClass("collapse");
+  })
+})
