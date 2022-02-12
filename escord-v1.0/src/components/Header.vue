@@ -26,7 +26,8 @@
           <li><a href="/guide" class="hdr-a">GUIDE</a></li>
           <li><a href="/contact" class="hdr-a">CONTACT</a></li>
           <li>
-            <button id="btn-login"
+            <button
+              id="btn-login"
               v-bind:class="{ loggedIn: loggedIn, loggedOut: !loggedIn }"
               v-on:click="login"
             >
@@ -83,7 +84,7 @@ img.logo-max:hover {
   filter: drop-shadow(0px 0px 4px #242424);
 }
 /* DROPDOWN-USER CATEGORY */
-div.userDropdown{
+div.userDropdown {
   display: inline-block;
 }
 select {
@@ -108,7 +109,7 @@ nav {
 }
 /* NAVIGATION BAR - LINKS */
 div.cont-toggleMenu {
-  float:right;
+  float: right;
   margin-top: 0.2em;
 }
 ul {
@@ -139,7 +140,7 @@ button.loggedOut {
   font-weight: bold;
   font-size: 18px;
   border: 2px solid #ff9807;
-  padding: 5px 10px;
+  padding: 5px 15px;
   border-radius: 25px;
 }
 button.loggedOut {
@@ -183,8 +184,8 @@ button.btn-toggleMenu:hover {
   button.btn-toggleMenu {
     display: inline-block;
   }
-  ul{
-    padding:0%;
+  ul {
+    padding: 0%;
     color: white;
   }
   nav ul li {
@@ -194,15 +195,31 @@ button.btn-toggleMenu:hover {
     padding-bottom: 1em;
     font-weight: bold;
   }
-  a.hdr-a, button#btn-login{
+  a.hdr-a{
     font-size: 2em;
   }
-  button#btn-login{
+  button#btn-login {
     border: none;
-    margin-right: 0.8em;
+    color: #ff9807;
+    margin-right: 0.7em;
+    padding: 5px 0px;
+    font-size: 2.5em;
   }
-
-
+  button.loggedOut:hover {
+    box-shadow: none;
+    background: none;
+    text-shadow: 0px 0px 6px #242424;
+  }
+  button.loggedIn {
+    box-shadow: none;
+    background: none;
+    color: #545454;
+    text-shadow: 0px 0px 6px #242424;
+  }
+  button.loggedIn:hover {
+    background-color: #545454;
+    color: white;
+  }
   div.cont-toggleMenu {
     width: 100%;
     overflow: hidden;

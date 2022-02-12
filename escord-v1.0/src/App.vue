@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <link rel="stylesheet" href="//use.fontawesome.com/releases/v6.0.0/css/all.css">
+    <link
+      rel="stylesheet"
+      href="//use.fontawesome.com/releases/v6.0.0/css/all.css"
+    />
     <escord-header />
-
+   
     <escord-landing />
     <escord-about />
     <escord-guide />
@@ -13,7 +16,6 @@
 </template>
 
 <script>
-
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 
@@ -55,7 +57,8 @@ div#app {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2d2d2d;
-  margin-top: 60px;
+  padding: 0px;
+  margin: 60px 0 0 0;
   display: flex;
   flex-wrap: wrap;
 }
@@ -76,7 +79,6 @@ div#about,
 div#guide,
 div#contact {
   width: 100%;
-  max-width: 1200px;
   margin: 40px auto;
   box-sizing: border-box;
 }

@@ -19,6 +19,7 @@ export default {
 footer {
   padding: 1px;
   width: 100vw;
+  background: #5454541e;
 }
 p {
   color: #545454;
