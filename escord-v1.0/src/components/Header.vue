@@ -110,7 +110,7 @@ nav {
 /* NAVIGATION BAR - LINKS */
 div.cont-toggleMenu {
   float: right;
-  margin-top: 0.2em;
+  margin: 0.2em -3em 0em 0em;
 }
 ul {
   margin: 0%;
@@ -195,7 +195,7 @@ button.btn-toggleMenu:hover {
     padding-bottom: 1em;
     font-weight: bold;
   }
-  a.hdr-a{
+  a.hdr-a {
     font-size: 2em;
   }
   button#btn-login {

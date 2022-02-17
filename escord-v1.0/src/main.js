@@ -9,10 +9,24 @@ Vue.config.productionTip = false
 
 
 /* eslint-disable no-new */
+
 new Vue({
   el: '#app',
-  render: h => h(App)
+  Router,
+  components: { App },
+  template: '<App/>'
 })
+$(document).ready(function () {
+  $('button.btn-toggleMenu').click(function () {
+    $('.cont-toggleMenu').toggleClass("collapse");
+  })
+})
+
+
+/* new Vue({
+  el: '#app',
+  render: h => h(App)
+}) */
 
 /* header-2 js
 
@@ -23,9 +37,3 @@ new Vue({
 }) 
 
 */
-
-$(document).ready(function () {
-  $('button.btn-toggleMenu').click(function () {
-    $('.cont-toggleMenu').toggleClass("collapse");
-  })
-})

@@ -3,16 +3,18 @@
     <div id="landing-img">
       <img src="../assets/landing-img.svg" />
     </div>
+
     <div id="landing-content">
       <h1>A web-based scholastic<br />record management system.</h1>
       <p>Grading, evaluation, and managing in <b>one</b>.</p>
+      <button id="learn-more">Learn More →</button>
     </div>
-    <button id="learn-more">Learn More →</button>
   </div>
 </template>
 
 <script>
 export default {
+  name: "Landing",
   data() {
     return {};
   },
@@ -20,11 +22,10 @@ export default {
 </script>
 
 <style scoped>
-div.home {
-  padding: 30px 5px 10px 5px;
-}
-img {
-  width: 20em;
+div#landing {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
 }
 div#landing-content h1 {
   font-weight: 100;
@@ -45,5 +46,41 @@ button#learn-more:hover {
   background-color: #545454;
   border-radius: 10px;
   padding: 5px 10px;
+}
+img {
+  width: 90%;
+  height: auto;
+  transform: translate(-30%, 0%);
+  transition: all 300ms ease;
+}
+div#landing-content {
+  position: absolute;
+  right: 5%;
+  top: 30%;
+}
+@media screen and (max-width: 976px) {
+  div#landing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  div#landing-img {
+    filter: blur(4px);
+  }
+  img {
+    padding-top: 5%;
+    min-width: 800px;
+    transform: translate(0%, 0%);
+    transition: all 300ms ease;
+  }
+  div#landing-content {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 25px;
+    width: 350px;
+    height: 250px;
+    background-color: #ffffff80;
+  }
 }
 </style>

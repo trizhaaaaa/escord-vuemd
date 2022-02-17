@@ -3,7 +3,7 @@
     <p class="disclaimer">
       This website is created for academic purposes only.
     </p>
-    <p class="copyright"> © 2022 | ESCORD </p>
+    <p class="copyright">© 2022 | ESCORD</p>
   </footer>
 </template>
 
@@ -11,15 +11,18 @@
 export default {
   data() {
     return {};
-  }
+  },
 };
 </script>
 
 <style scoped>
 footer {
-  padding: 1px;
-  width: 100vw;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   background: #5454541e;
+  height: 80px;
 }
 p {
   color: #545454;

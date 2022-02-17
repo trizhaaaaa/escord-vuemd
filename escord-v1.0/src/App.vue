@@ -7,9 +7,9 @@
     <escord-header />
    
     <escord-landing />
-    <escord-about />
+    <!-- <escord-about />
     <escord-guide />
-    <escord-contact />
+    <escord-contact /> -->
 
     <escord-footer />
   </div>
@@ -79,7 +79,7 @@ div#about,
 div#guide,
 div#contact {
   width: 100%;
-  margin: 40px auto;
+  margin: 0;
   box-sizing: border-box;
 }
 </style>
