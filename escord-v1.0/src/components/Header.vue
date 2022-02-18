@@ -73,6 +73,7 @@ header {
   width: 100%;
   align-items: center;
   justify-content: space-between;
+  z-index: 99;
 }
 /* LOGO */
 img.logo-max {
