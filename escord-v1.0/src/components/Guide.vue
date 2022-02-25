@@ -1,10 +1,15 @@
 <template>
-  <v-card>
-    <v-card-title class="text-center justify-center py-6">
-      <h1 class="font-weight-bold text-h2 basil--text">guide</h1>
-    </v-card-title>
-
-    <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
+<v-container fluid style="margin:0px; padding: 20px; width:100%" fill height>
+  <h1 class="font-weight-bold text-h2 leftPadding">guide</h1>
+  <br>
+  <v-card class="mt-auto">
+   
+    <v-tabs 
+    v-model="tab" 
+    background-color="transparent" 
+    color="basil" 
+    grow
+    class="tabTitle basil--text">
       <v-tab v-for="userType in guideList" :key="userType.tab">
         {{ userType.category }}
       </v-tab>
@@ -14,17 +19,23 @@
       <v-tab-item v-for="userType in guideList" :key="userType.tab">
         <v-card color="basil" flat>
           <v-card-text
-          v-for="guideItem in userType.guide"
-          :key="guideItem.text">
-          {{ guideItem.img}}
-          <v-spacer></v-spacer>
-          {{ guideItem.text }}
-          <v-divider></v-divider>
+            v-for="guideItem in userType.guide"
+            :key="guideItem.text"
+          >
+            <v-img
+              :aspect-ratio="300 / 70"
+              :width="width"
+              v-bind:src="guideItem.img"
+            ></v-img>
+            <v-spacer></v-spacer>
+            {{ guideItem.text }}
+            <v-divider></v-divider>
           </v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
   </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -37,8 +48,8 @@ export default {
         {
           category: "Faculty",
           guide: [
-            { img: "fd", text: "faculty1" },
-            { img: "fd", text: "faculty2" },
+            { img: require("../assets/sample.jpg"), text: "faculty1" },
+            { img: '', text: "faculty2" },
           ],
         },
         {
@@ -62,12 +73,26 @@ export default {
             { img: "", text: "manager2" },
           ],
         },
-      ]
+      ],
     };
   },
 };
 </script>
 
 <style scoped>
-/* Helper classes */
+.basil {
+  background-color: #FFFBE6 !important;
+}
+.basil2 {
+  background-color: #545454 !important;
+}
+.basil--text {
+  color: #ff9807 !important;
+  size: 20px;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.493);
+}
+.leftPadding{
+   text-shadow: 0px 1px 1px #ff9807;
+  text-align: left;
+}
 </style>

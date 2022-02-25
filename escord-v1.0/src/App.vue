@@ -6,12 +6,12 @@
     /> 
 
     <escord-header />
-    
+    <escord-about />
     <escord-guide />
    <!-- 
    
     <escord-landing />
-    <escord-about />
+    
     
     <escord-contact /> -->
 
@@ -70,7 +70,8 @@ h1,
 h4.esc-feature-shortdesc,
 h3.esc-feature-longdesctitle,
 p.member-name,
-div#about-escord {
+div#about-escord,
+.tabTitle {
   font-family: "Cuprum", sans-serif;
 }
 h1.landing-page-title {

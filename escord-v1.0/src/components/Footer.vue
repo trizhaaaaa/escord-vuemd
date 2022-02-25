@@ -25,11 +25,13 @@ footer {
   height: 80px;
 }
 p {
+  
   color: #545454;
   text-align: center;
   text-shadow: 0px 3px 2px #5454547c;
 }
 p.disclaimer {
   font-weight: bold;
+  padding: 10px;
 }
 </style>
