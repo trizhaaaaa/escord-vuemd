@@ -1,32 +1,30 @@
 <template>
-  <v-app>
-    
-    <v-card width="400" class="mx-auto mt-10">
-    <v-card-title>
-    <h1 class="display-1">
-    Login</h1>
+  <v-card>
+    <v-card-title class="text-center justify-center py-6">
+      <h1 class="font-weight-bold text-h2 basil--text">guide</h1>
     </v-card-title>
-    <v-card-text>
-      <v-form>
-        <v-text-field 
-        label="Username"
-        prepend-icon="mdi-account-circle"/>
-        <v-text-field
-        v-bind:type="showPassword ? 'text' : 'password'" 
-        label="Password"
-        prepend-icon="mdi-lock"
-        v-bind:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-        v-on:click:append="showPassword = !showPassword "/>
-      </v-form>
-    </v-card-text>
-    <v-divider></v-divider>
-    <v-card-actions>
-      <v-btn color="success">Register</v-btn>
-      <v-spacer></v-spacer>
-      <v-btn color="info">Login</v-btn>
-    </v-card-actions>
-    </v-card>
-  </v-app>
+
+    <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
+      <v-tab v-for="userType in guideList" :key="userType.tab">
+        {{ userType.category }}
+      </v-tab>
+    </v-tabs>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item v-for="userType in guideList" :key="userType.tab">
+        <v-card color="basil" flat>
+          <v-card-text
+          v-for="guideItem in userType.guide"
+          :key="guideItem.text">
+          {{ guideItem.img}}
+          <v-spacer></v-spacer>
+          {{ guideItem.text }}
+          <v-divider></v-divider>
+          </v-card-text>
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
+  </v-card>
 </template>
 
 <script>
@@ -34,11 +32,42 @@ export default {
   name: "Guide",
   data() {
     return {
-      showPassword: false
+      tab: null,
+      guideList: [
+        {
+          category: "Faculty",
+          guide: [
+            { img: "fd", text: "faculty1" },
+            { img: "fd", text: "faculty2" },
+          ],
+        },
+        {
+          category: "Coordinator",
+          guide: [
+            { img: "", text: "coor1" },
+            { img: "", text: "coor2" },
+          ],
+        },
+        {
+          category: "Staff",
+          guide: [
+            { img: "", text: "staff1" },
+            { img: "", text: "staff2" },
+          ],
+        },
+        {
+          category: "Manager",
+          guide: [
+            { img: "", text: "manager1" },
+            { img: "", text: "manager2" },
+          ],
+        },
+      ]
     };
   },
 };
 </script>
 
 <style scoped>
+/* Helper classes */
 </style>
