@@ -3,12 +3,16 @@
     <link
       rel="stylesheet"
       href="//use.fontawesome.com/releases/v6.0.0/css/all.css"
-    />
+    /> 
+
     <escord-header />
+    
+    <escord-guide />
+   <!-- 
    
     <escord-landing />
-    <!--<escord-about />
-     <escord-guide />
+    <escord-about />
+    
     <escord-contact /> -->
 
     <escord-footer />

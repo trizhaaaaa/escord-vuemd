@@ -4,18 +4,21 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
 import Router from './router'
+import vuetify from '@/plugins/vuetify' // path to vuetify export
 
+Vue.use(vuetify)
 Vue.config.productionTip = false
-
 
 /* eslint-disable no-new */
 
 new Vue({
   el: '#app',
+  vuetify,
   Router,
   components: { App },
   template: '<App/>'
-})
+}).$mount('#app')
+
 $(document).ready(function () {
   $('button.btn-toggleMenu').click(function () {
     $('.cont-toggleMenu').toggleClass("collapse");
