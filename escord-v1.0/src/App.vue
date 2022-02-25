@@ -7,8 +7,8 @@
     <escord-header />
    
     <escord-landing />
-    <!-- <escord-about />
-    <escord-guide />
+    <!--<escord-about />
+     <escord-guide />
     <escord-contact /> -->
 
     <escord-footer />

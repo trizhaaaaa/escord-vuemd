@@ -64,43 +64,43 @@ export default {
     return {
       team: [
         {
-          pic: require("../assets/team-pictures/sample.jpg"),
+          pic: require("../assets/team-pictures/maglangit.jpg"),
           name: "TRIZHALYN L. MAGLANGIT",
           position: "Software Engineer",
         },
 
         {
-          pic: require("../assets/team-pictures/sample.jpg"),
+          pic: require("../assets/team-pictures/porral.png"),
           name: "JACQUELINE C. PORRAL",
           position: "Associate Software Engineer",
         },
 
         {
-          pic: require("../assets/team-pictures/sample.jpg"),
+          pic: require("../assets/team-pictures/ba-alan.jpg"),
           name: "NIKKI E. BA-ALAN",
           position: "Research Manager",
         },
 
         {
-          pic: require("../assets/team-pictures/sample.jpg"),
+          pic: require("../assets/team-pictures/jolo.jpg"),
           name: "JERECHO L. JOLO",
           position: "Programmer",
         },
 
         {
-          pic: require("../assets/team-pictures/sample.jpg"),
+          pic: require("../assets/team-pictures/walohan.jpg"),
           name: "JAYMAR M. WALOHAN",
           position: "Programmer",
         },
 
         {
-          pic: require("../assets/team-pictures/sample.jpg"),
+          pic: require("../assets/team-pictures/bulaclac.jpg"),
           name: "JOHN PHILIP N. BULACLAC",
           position: "Graphic Designer",
         },
 
         {
-          pic: require("../assets/team-pictures/sample.jpg"),
+          pic: require("../assets/team-pictures/canino.jpg"),
           name: "ZHYREX L. CANINO",
           position: "Graphic Designer",
         },

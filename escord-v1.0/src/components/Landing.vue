@@ -24,7 +24,7 @@ export default {
 <style scoped>
 div#landing {
   position: relative;
-  height: 500px;
+  height: 100vh;
   overflow: hidden;
 }
 div#landing-content h1 {
