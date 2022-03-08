@@ -7,12 +7,15 @@
 
                     <div class="card-body">
                          Dashboard 
-                      <!--    USER : {{currentUser.faculty_number}} ,
+                       USER : {{currentUser.faculty_number}} ,
                          ROLE : {{currentUser.role}} ,
-                         EMAIL : {{currentUser.email}} , -->
+                         EMAIL : {{currentUser.email}} ,
 
                     </div>
-                     <button>Logging out</button><!-- add attributes @click="logout" to button   -->
+                    <div>
+               <button  type="submit" @click="logout" class="loginbtn mt-5">LOGout</button>
+<!-- add attributes @click="logout" to button   -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -22,11 +25,16 @@
 <script>
 
 
+import axios from 'axios'
+
+axios.defaults.withCredentials = true
+axios.defaults.baseURL = "http://127.0.0.1:8000"
+
 
     export default {
         name:'Dashboard',
 
-     /*    data(){
+    data(){
              return{
                  currentUser:{},
                  token: localStorage.getItem('token'),
@@ -50,10 +58,10 @@
 
         },
         mounted() {
-            window.axios.defaults.headers.common["Authorization"] = `Bearer ${this.token}`
+            axios.defaults.headers.common["Authorization"] = `Bearer ${this.token}`
             axios.get('/api/user').then(response => {
-                   this.currentUser = response.data
+             this.currentUser = response.data
             })
-        } */
+        } 
     }
 </script>

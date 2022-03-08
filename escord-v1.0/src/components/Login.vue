@@ -53,7 +53,7 @@ export default {
    },
      methods : {
       login(){
-       /*  axios.get('/sanctum/csrf-cookie').then(response => {
+        axios.get('/sanctum/csrf-cookie').then(response => {
          axios.post('/api/login', this.formData).then((response)=>{
            localStorage.setItem('isLoggedIn','true');
            localStorage.setItem('token',response.data);
@@ -66,7 +66,7 @@ export default {
           })
 
  
-}); */
+}); 
 console.log('login');
       
       }
