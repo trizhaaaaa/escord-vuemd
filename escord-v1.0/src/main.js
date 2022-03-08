@@ -3,18 +3,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
-import Router from './router'
+import router from './route'
 import vuetify from '@/plugins/vuetify' // path to vuetify export
 
 Vue.use(vuetify)
 Vue.config.productionTip = false
-
+Vue.use(VueRouter);
 /* eslint-disable no-new */
 
 new Vue({
   el: '#app',
   vuetify,
-  Router,
+  router,
   components: { App },
   template: '<App/>'
 }).$mount('#app')
