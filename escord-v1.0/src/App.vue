@@ -6,14 +6,14 @@
     /> 
 
     <escord-header />
-    <escord-about />
     <escord-guide />
+    
    <!-- 
    
     <escord-landing />
+    <escord-about />
     
-    
-    <escord-contact /> -->
+     <escord-contact />-->
 
     <escord-footer />
   </div>
@@ -61,6 +61,7 @@ div#app {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2d2d2d;
+  min-height: 100vh;
   padding: 0px;
   margin: 60px 0 0 0;
   display: flex;

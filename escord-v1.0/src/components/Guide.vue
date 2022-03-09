@@ -7,13 +7,14 @@
   >
     <h1 class="font-weight-bold text-h2 leftPadding">guide</h1>
     <br />
+    <!--START OF TABBED SELECTION-->
     <v-card>
       <v-tabs
         v-model="tab"
         background-color="transparent"
-        color="basil"
+        color="bg-color"
         grow
-        class="tabTitle basil--text"
+        class="tabTitle bg-color--text"
       >
         <v-tab
           v-for="userType in guideList"
@@ -27,21 +28,17 @@
 
       <v-tabs-items v-model="tab">
         <v-tab-item v-for="userType in guideList" :key="userType.tab">
+          <!--START OF CARD LIST-->
           <v-card
             class="card-style"
-            color="basil"
+            color="bg-color"
             flat
             v-for="guideItem in userType.guide"
             :key="guideItem.text"
           >
-            <v-img
-              v-bind:aspect-ratio="guideItem.aspRatio"
-              :width="width"
-              v-bind:src="guideItem.img"
-            ></v-img>
-            <v-spacer></v-spacer>
-
-            <v-card-title
+          <v-row align="start">
+            <v-col>
+              <v-card-title
               style="
                 color: #ff9807;
                 padding: 20px 10px 10px 10px;
@@ -59,11 +56,26 @@
               "
               v-html="guideItem.text"
             ></v-card-text>
+            </v-col>
+            <v-col class="shrink">
+              <!-- v-bind:aspect-ratio="guideItem.aspRatio" -->
+              <v-img
+              v-bind:max-width="guideItem.maxWidth"
+              v-bind:src="guideItem.img"
+              class="guide-img"
+            ></v-img>
+            </v-col>
+          </v-row>
+            
+
+            
             <v-divider></v-divider>
           </v-card>
+          <!--END OF CARD LIST-->
         </v-tab-item>
       </v-tabs-items>
     </v-card>
+    <!--END OF TABBED SELECTION-->
   </v-container>
 </template>
 
@@ -80,25 +92,25 @@ export default {
             {
               title: "#1 DASHBOARD",
               img: require("../assets/sample.jpg"),
-              aspRatio: 300 / 70,
+              maxWidth: 500,
               text: "Shows the overview of the current semester's class loads, as well as a button to view archived gradesheets.",
             },
             {
               title: "#2 CLASS LOADS",
               img: "",
-              aspRatio: 0 / 0,
+              maxWidth: 0,
               text: "Still inside the dashboard, each semester's class loads are organized in a card view manner.<br><br>Each card displays the class's subject code, subject description, year and section of the students, and it's weekly schedule.",
             },
             {
               title: "&nbsp;&nbsp;&nbsp;&nbsp;#2.1 GRADESHEET FORM",
               img: "",
-              aspRatio: 0 / 0,
+              maxWidth: 0 / 0,
               text: "Upon clicking on a card from the dashboard, you will now be redirected to the alloted gradesheet form of the selected class.<br><br>You can now edit, save, download or archive the class's gardesheet from here.",
             },
             {
               title: "&nbsp;&nbsp;&nbsp;&nbsp#2.2 GRADESHEET FORM BUTTONS",
               img: "",
-              aspRatio: 0 / 0,
+              maxWidth: 0 / 0,
               text: "",
             },
           ],
@@ -106,22 +118,22 @@ export default {
         {
           category: "Coordinator",
           guide: [
-            { title: "#1", img: "", aspRatio: 300 / 70, text: "coor1" },
-            { title: "#2", img: "", aspRatio: 300 / 70, text: "coor2" },
+            { title: "#1", img: "", maxWidth: 0 / 0, text: "coor1" },
+            { title: "#2", img: "", maxWidth: 0 / 0, text: "coor2" },
           ],
         },
         {
           category: "Staff",
           guide: [
-            { title: "#1", img: "", aspRatio: 300 / 70, text: "staff1" },
-            { title: "#2", img: "", aspRatio: 300 / 70, text: "staff2" },
+            { title: "#1", img: "", maxWidth: 0 / 0, text: "staff1" },
+            { title: "#2", img: "", maxWidth: 0 / 0, text: "staff2" },
           ],
         },
         {
           category: "Manager",
           guide: [
-            { title: "#1", img: "", aspRatio: 300 / 70, text: "manager1" },
-            { title: "#2", img: "", aspRatio: 300 / 70, text: "manager2" },
+            { title: "#1", img: "", maxWidth: 0 / 0, text: "manager1" },
+            { title: "#2", img: "", maxWidth: 0 / 0, text: "manager2" },
           ],
         },
       ],
@@ -131,14 +143,14 @@ export default {
 </script>
 
 <style scoped>
-.basil {
+.bg-color {
   background-color: #545454 !important;
 }
 .selectedList {
   background-color: #545454 !important;
   font-weight: bold;
 }
-.basil--text {
+.bg-color--text {
   color: #ff9807 !important;
   size: 20px;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.493);
@@ -149,5 +161,8 @@ export default {
 }
 .card-style {
   padding: 20px 20px 0 20px;
+}
+.guide-img{
+  margin-bottom: 20px;
 }
 </style>
