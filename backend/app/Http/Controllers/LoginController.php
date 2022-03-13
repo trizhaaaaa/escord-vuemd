@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 
 class LoginController extends Controller
@@ -23,7 +24,7 @@ class LoginController extends Controller
      
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'faculty_number' => ['The provided credentials are incorrect.'],
+                'faculty_number' => ['Invalid Faculty Number or Password.'],
             ]);
         }
      

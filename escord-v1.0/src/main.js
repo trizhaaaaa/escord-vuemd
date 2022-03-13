@@ -6,6 +6,7 @@ import App from './App'
 import router from './route'
 import vuetify from '@/plugins/vuetify' 
 import store from './store'
+
 // path to vuetify export
 
 Vue.use(vuetify)

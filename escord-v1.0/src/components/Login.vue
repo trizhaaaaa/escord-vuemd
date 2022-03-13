@@ -4,19 +4,21 @@
       
      <div class="mb-3">
 
-
+<p class="text-danger" v-text="errors.faculty_number"></p>
     <label for="exampleInputEmail1" class="form-label">ID NUMBER</label>
     <br> 
-    <p class="text-danger" v-text="errors.faculty_number"></p>
-
+    
+    
     <input type="text" class=" text-line" name="faculty_number"   required aria-describedby="emailHelp"  v-model="formData.faculty_number" placeholder="FAC-001">
-
+<p> <span v-if="v$.formData.faculty_number.$error">{{v$.formData.faculty_number.$errors[0].$message}}</span> </p>
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">PASSWORD</label>
     <br>
       <p class="text-danger" v-text="errors.password"></p>
+    
     <input type="password" class=" text-line" id="exampleInputPassword1"    required="required" v-model="formData.password" placeholder="FacultyPassword">
+   <p> <span v-if="v$.formData.password.$error">{{v$.formData.password.$errors[0].$message}}</span></p>
     
   </div>
   <div class="mb-3 form-check">
@@ -34,6 +36,8 @@
 <script>
 
 import axios from 'axios'
+import useVuelidate from '@vuelidate/core'
+import { required } from '@vuelidate/validators'
 
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = "http://127.0.0.1:8000"
@@ -41,6 +45,7 @@ axios.defaults.baseURL = "http://127.0.0.1:8000"
 
 export default {
     name:'Login',
+      setup: () => ({ v$: useVuelidate() }),
    data(){
         return{
           formData:{
@@ -51,23 +56,44 @@ export default {
           errors:{}
         }
    },
+   validations(){
+     return {
+       formData:{
+       faculty_number:{required},
+       password:{required},
+       }
+     }
+   },
      methods : {
+      
+      
       login(){
-        axios.get('/sanctum/csrf-cookie').then(response => {
-         axios.post('/api/login', this.formData).then((response)=>{
+
+          this.v$.$validate()
+
+            if(!this.v$.$error){
+      axios.get('/sanctum/csrf-cookie').then(response => {
+        axios.post('/api/login', this.formData).then((response)=>{
            localStorage.setItem('isLoggedIn','true');
            localStorage.setItem('token',response.data);
          
           //   this.$router.push({name:'Dashboard'});
-      this.$router.push('Dashboard', () => this.$router.go(0))
+        this.$router.push('Dashboard', () => this.$router.go(0))
 
           }).catch((errors)=>{
-     this.errors = errors.response.data.errors
+       this.errors = errors.response.data.errors
           })
 
- 
-}); 
-console.log('login');
+              }); //end of axios
+
+
+            }else{
+           console.log('there are rquired thing')
+            }
+        //this.v$.$touch();
+   //console.log(this.v$)
+     /*  
+console.log('login'); */
       
       }
     } 
