@@ -31,7 +31,7 @@ class LoginController extends Controller
        return $user->createToken($request->device_name)->plainTextToken;
     
    
-
+            $user = 'asd';
     }
 
     public function logout(){
