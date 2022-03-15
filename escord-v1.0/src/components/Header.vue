@@ -26,13 +26,26 @@
           <li><router-link to="/guide" class="hdr-a">GUIDE</router-link></li>
           <li><router-link to="/contact" class="hdr-a">CONTACT</router-link></li>
           <li>
+                 <span v-if="!isAuthenticated">
             <button
               id="btn-login"
               v-bind:class="{ loggedIn: loggedIn, loggedOut: !loggedIn }"
               v-on:click="login"
             >
-              {{ btnText }}
+             Login
             </button>
+
+                 </span>
+<span v-else>
+                 <button
+              id="btn-login"
+              v-bind:class="{ loggedIn: loggedIn, loggedOut: !loggedIn }"
+              v-on:click="logout"
+            >
+              Logout
+            </button>
+
+</span>
           </li>
         </ul>
       </div>
@@ -43,6 +56,15 @@
 </template>
 
 <script>
+
+
+
+import { mapGetters } from 'vuex';
+import axios from 'axios'
+
+
+
+
 export default {
   name: 'Header',
   data() {
@@ -50,19 +72,46 @@ export default {
       showCategoryList: false,
       btnText: "LOG IN",
       loggedIn: false,
+      
     };
+
+    
+  },
+
+  computed: {
+           ...mapGetters({isAuthenticated : 'isAuthenticated'}),
+
   },
   methods: {
     login: function () {
-      this.loggedIn = !this.loggedIn;
-      this.showCategoryList = !this.showCategoryList;
-
-      if (this.showCategoryList === true) {
+     // this.loggedIn = !this.loggedIn;
+     // this.showCategoryList = !this.showCategoryList;
+   this.$router.push({name:'Login'});
+   /*    if (this.showCategoryList === true) {
         this.btnText = "LOG OUT";
       } else {
         this.btnText = "LOG IN";
-      }
+     
+      } */
+
+
+
     },
+    logout:function(){
+    
+    axios.post('/api/logout').then((response)=>{
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('token');
+       //  this.$router.push('/');
+      this.$router.push('/', () => this.$router.go(0))
+                   
+      }).then(response=>{
+   console.log(response);
+          })
+       
+    },
+
+
   },
 };
 </script>
