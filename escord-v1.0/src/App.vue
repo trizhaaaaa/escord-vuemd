@@ -6,14 +6,15 @@
     /> 
 
     <escord-header />
-    <escord-guide />
-    
+  
    <!-- 
    
     <escord-landing />
     <escord-about />
     
      <escord-contact />-->
+
+    <router-view> </router-view>
 
     <escord-footer />
   </div>
@@ -23,20 +24,10 @@
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 
-import Landing from "./components/Landing.vue";
-import About from "./components/About.vue";
-import Guide from "./components/Guide.vue";
-import Contact from "./components/Contact.vue";
-
 export default {
   components: {
     "escord-header": Header,
     "escord-footer": Footer,
-
-    "escord-landing": Landing,
-    "escord-about": About,
-    "escord-guide": Guide,
-    "escord-contact": Contact,
   },
 
   name: "App",

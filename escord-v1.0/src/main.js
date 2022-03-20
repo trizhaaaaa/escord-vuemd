@@ -3,18 +3,46 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
-import Router from './router'
-import vuetify from '@/plugins/vuetify' // path to vuetify export
+import router from './route'
+import vuetify from '@/plugins/vuetify' 
+import store from './store'
+// path to vuetify export
 
 Vue.use(vuetify)
 Vue.config.productionTip = false
-
+Vue.use(VueRouter);
 /* eslint-disable no-new */
+
+
+/** THIS IS VUE ROUTER META CODES */
+
+function loggedIn(){
+  return localStorage.getItem('token')
+}
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (!loggedIn()) {
+      next({
+        path: '/',
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // make sure to always call next()!
+  }
+})
+/** THIS IS VUE ROUTER META CODES */
+
 
 new Vue({
   el: '#app',
   vuetify,
-  Router,
+  store,
+  router,
   components: { App },
   template: '<App/>'
 }).$mount('#app')

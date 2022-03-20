@@ -22,9 +22,9 @@
 
       <div class="cont-toggleMenu">
         <ul>
-          <li><a href="/about" class="hdr-a">ABOUT</a></li>
-          <li><a href="/guide" class="hdr-a">GUIDE</a></li>
-          <li><a href="/contact" class="hdr-a">CONTACT</a></li>
+          <li><router-link to="/about" class="hdr-a">ABOUT</router-link></li>
+          <li><router-link to="/guide" class="hdr-a">GUIDE</router-link></li>
+          <li><router-link to="/contact" class="hdr-a">CONTACT</router-link></li>
           <li>
             <button
               id="btn-login"
@@ -37,11 +37,14 @@
         </ul>
       </div>
     </nav>
+    
+   
   </header>
 </template>
 
 <script>
 export default {
+  name: 'Header',
   data() {
     return {
       showCategoryList: false,
