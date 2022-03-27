@@ -22,7 +22,7 @@
 
       <div class="cont-toggleMenu">
         <ul>
-          <li><router-link to="/about" class="hdr-a">ABOUT</router-link></li>
+          <li><router-link to="/about" class="hdr-a" >ABOUT</router-link></li>
           <li><router-link to="/guide" class="hdr-a">GUIDE</router-link></li>
           <li><router-link to="/contact" class="hdr-a">CONTACT</router-link></li>
           <li>
@@ -63,6 +63,10 @@ export default {
         this.btnText = "LOG IN";
       }
     },
+
+    onClickLink: function(){
+      $('.cont-toggleMenu collapse').toggleClass("");
+    }
   },
 };
 </script>
@@ -80,7 +84,7 @@ header {
 }
 /* LOGO */
 img.logo-max {
-  max-width: 120px;
+  max-width: 170px;
   padding: 20px 20px 10px;
   float: left;
 }
@@ -114,7 +118,7 @@ nav {
 /* NAVIGATION BAR - LINKS */
 div.cont-toggleMenu {
   float: right;
-  margin: 0.2em -3em 0em 0em;
+  margin: 0.4em -3em 0em 0em;
 }
 ul {
   margin: 0%;
@@ -126,7 +130,7 @@ nav ul li {
   padding-left: 20px;
 }
 a.hdr-a {
-  padding: 0.9em 0.7em;
+  padding: 0.9em 1.5em;
   font-size: 18px;
   color: #ffffff;
   text-decoration: none;
@@ -136,6 +140,7 @@ a.hdr-a:hover {
   color: #ff9807;
   text-shadow: 0px 0px 4px #242424;
 }
+
 
 /* LOGIN BUTTON */
 button.loggedIn,
@@ -169,8 +174,8 @@ button.loggedIn:hover {
 button.btn-toggleMenu {
   float: right;
   width: 3em;
-  height: 3em;
-  margin-top: 0.5em;
+  height: 2.9em;
+  margin-top: 0.6em;
   margin-right: 1.5em;
   background-color: transparent;
   color: #ff9807;
@@ -200,14 +205,14 @@ button.btn-toggleMenu:hover {
     font-weight: bold;
   }
   a.hdr-a {
-    font-size: 2em;
+    font-size: 2.5em;
   }
   button#btn-login {
     border: none;
     color: #ff9807;
     margin-right: 0.7em;
-    padding: 5px 0px;
-    font-size: 2.5em;
+    padding: 5px 0.7em 5px 0;
+    font-size: 3em;
   }
   button.loggedOut:hover {
     box-shadow: none;
