@@ -4,6 +4,7 @@ import Guide from '../../components/Guide.vue'
 import Contact from '../../components/Contact.vue'
 import Login from '../../components/Login.vue'
 import Dashboard from '../../components/Dashboard.vue'
+import AdminLogin from '../../components/AdminLogin.vue'
 
 
 const routes = [
@@ -35,6 +36,13 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+
+  },
+
+  {
+    path: '/admin',
+    name: 'AdminLogin',
+    component: AdminLogin
 
   },
   {

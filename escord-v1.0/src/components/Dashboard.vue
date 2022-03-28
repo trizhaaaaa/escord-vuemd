@@ -7,8 +7,8 @@
 
                     <div class="card-body">
                          Dashboard 
-                       USER : {{currentUser.faculty_number}} ,
-                         ROLE : {{currentUser.role}} ,
+                       USER : {{currentUser.student_number}} ,
+                         ROLE : {{currentUser.user_role}}, {{currentUser.authority}} ,
                          EMAIL : {{currentUser.email}} ,
 
                     </div>
@@ -43,8 +43,10 @@ axios.defaults.baseURL = "http://127.0.0.1:8000"
         methods:{
             logout(){
                    axios.post('/api/logout').then((response)=>{
-                        localStorage.removeItem('isLoggedIn');
+                       
                         localStorage.removeItem('token');
+                         localStorage.removeItem("isadmin");
+                         
                       //  this.$router.push('/');
       this.$router.push('/', () => this.$router.go(0))
                    
@@ -61,6 +63,13 @@ axios.defaults.baseURL = "http://127.0.0.1:8000"
             axios.defaults.headers.common["Authorization"] = `Bearer ${this.token}`
             axios.get('/api/user').then(response => {
              this.currentUser = response.data
+
+                if(response.data.authority){
+                    localStorage.setItem('isadmin','true');
+                }
+                if(response.data.user_role){
+                    localStorage.setItem('isadmin','false');
+                }
             })
         } 
     }
