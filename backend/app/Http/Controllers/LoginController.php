@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Admin;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -20,7 +22,7 @@ class LoginController extends Controller
             'device_name' => 'required',
         ]);
      
-        $user = User::where('faculty_number', $request->faculty_number)->first();
+        $user = User::where('student_number', $request->faculty_number)->first();
      
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([

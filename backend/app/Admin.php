@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
     use HasApiTokens,Notifiable;
 
@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','student_number','role', 'email', 'password',
+        'username','student_number','firstname', 'lastname'.'email', 'password','authority',
     ];
 
     /**

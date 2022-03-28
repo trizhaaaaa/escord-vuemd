@@ -4,20 +4,20 @@
       
      <div class="mb-3">
 
-<p class="text-danger" v-text="errors.faculty_number"></p>
-    <label for="exampleInputEmail1" class="form-label">ID NUMBER</label>
+<p class="text-danger" v-text="errors.email"></p>
+    <label for="exampleInputEmail1" class="form-label">Email</label>
     <br> 
     
     
-    <input type="text" class=" text-line" name="faculty_number"   required aria-describedby="emailHelp"  v-model="formData.faculty_number" placeholder="FAC-001">
-<p> <span v-if="v$.formData.faculty_number.$error">{{v$.formData.faculty_number.$errors[0].$message}}</span> </p>
+    <input type="email" class=" text-line" name="email"   required aria-describedby="emailHelp"  v-model="formData.email" placeholder="name@email.com">
+<p> <span v-if="v$.formData.email.$error">{{v$.formData.email.$errors[0].$message}}</span> </p>
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">PASSWORD</label>
     <br>
       <p class="text-danger" v-text="errors.password"></p>
     
-    <input type="password" class=" text-line" id="exampleInputPassword1"    required="required" v-model="formData.password" placeholder="FacultyPassword">
+    <input type="password" class=" text-line" id="exampleInputPassword1"    required="required" v-model="formData.password" placeholder="Password">
    <p> <span v-if="v$.formData.password.$error">{{v$.formData.password.$errors[0].$message}}</span></p>
     
   </div>
@@ -37,20 +37,20 @@
 
 import axios from 'axios'
 import useVuelidate from '@vuelidate/core'
-import { required } from '@vuelidate/validators'
+import { required, email } from '@vuelidate/validators'
 
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = "http://127.0.0.1:8000"
 
 
 export default {
-    name:'Login',
+    name:'AdminLogin',
       setup: () => ({ v$: useVuelidate() }),
    data(){
         return{
           formData:{
             password:'',
-            faculty_number:'',
+            email:'',
             device_name: 'browser',
          },
           errors:{}
@@ -59,7 +59,7 @@ export default {
    validations(){
      return {
        formData:{
-       faculty_number:{required},
+       email:{required, email},
        password:{required},
        }
      }
@@ -73,8 +73,8 @@ export default {
 
             if(!this.v$.$error){
       axios.get('/sanctum/csrf-cookie').then(response => {
-        axios.post('/api/login', this.formData).then((response)=>{
-           localStorage.setItem('isLoggedIn','true');
+        axios.post('/api/adminlogin', this.formData).then((response)=>{
+        //   localStorage.setItem('isLoggedIn','true');
            localStorage.setItem('token',response.data);
          
           //   this.$router.push({name:'Dashboard'});

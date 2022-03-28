@@ -100,7 +100,7 @@ export default {
     logout:function(){
     
     axios.post('/api/logout').then((response)=>{
-      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('isadmin');
       localStorage.removeItem('token');
        //  this.$router.push('/');
       this.$router.push('/', () => this.$router.go(0))
