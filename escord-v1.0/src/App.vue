@@ -3,16 +3,9 @@
     <link
       rel="stylesheet"
       href="//use.fontawesome.com/releases/v6.0.0/css/all.css"
-    /> 
+    />
 
     <escord-header />
-  
-   <!-- 
-   
-    <escord-landing />
-    
-    
-    <escord-contact /> -->
 
     <router-view> </router-view>
 
@@ -52,8 +45,9 @@ div#app {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2d2d2d;
+  min-height: 100vh;
   padding: 0px;
-  margin: 60px 0 0 0;
+  margin: 5em 0 0 0;
   display: flex;
   flex-wrap: wrap;
 }

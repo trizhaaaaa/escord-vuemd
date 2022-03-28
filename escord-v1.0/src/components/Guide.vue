@@ -1,19 +1,20 @@
 <template>
   <v-container
     fluid
-    style="margin: 0px; padding: 20px; width: 100%"
+    style="margin: 0px; padding: 0 20px 20px 20px; width: 100%"
     fill
     height
   >
     <h1 class="font-weight-bold text-h2 leftPadding">guide</h1>
     <br />
+    <!--START OF TABBED SELECTION-->
     <v-card>
       <v-tabs
         v-model="tab"
         background-color="transparent"
-        color="basil"
+        color="bg-color"
         grow
-        class="tabTitle basil--text"
+        class="tabTitle bg-color--text"
       >
         <v-tab
           v-for="userType in guideList"
@@ -25,22 +26,16 @@
         </v-tab>
       </v-tabs>
 
-      <v-tabs-items v-model="tab">
+      <v-tabs-items v-model="tab" class="tab-color">
         <v-tab-item v-for="userType in guideList" :key="userType.tab">
+          <!--START OF CARD LIST-->
           <v-card
             class="card-style"
-            color="basil"
+            color="bg-color"
             flat
             v-for="guideItem in userType.guide"
             :key="guideItem.text"
           >
-            <v-img
-              v-bind:aspect-ratio="guideItem.aspRatio"
-              :width="width"
-              v-bind:src="guideItem.img"
-            ></v-img>
-            <v-spacer></v-spacer>
-
             <v-card-title
               style="
                 color: #ff9807;
@@ -50,20 +45,15 @@
               "
               v-html="guideItem.title"
             ></v-card-title>
-            <v-card-text
-              style="
-                color: #ffffff;
-                padding: 0 40px 20px 40px;
-                font-size: 20px;
-                text-align: justify;
-              "
-              v-html="guideItem.text"
-            ></v-card-text>
+            <div class="cardDesc" v-html="guideItem.text"></div>
+
             <v-divider></v-divider>
           </v-card>
+          <!--END OF CARD LIST-->
         </v-tab-item>
       </v-tabs-items>
     </v-card>
+    <!--END OF TABBED SELECTION-->
   </v-container>
 </template>
 
@@ -75,53 +65,47 @@ export default {
       tab: null,
       guideList: [
         {
-          category: "Faculty",
+          category: "Student",
           guide: [
             {
-              title: "#1 DASHBOARD",
+              title: "#1 SCHOLASTIC RECORD",
+              img: "",
+              text: '<p>The updated scholastic record form can be viewd on the site or downloaded for offline use. </p><p style=" text-shadow: 0px 1px 1px #ff9807;font-size: 0.7em; margin-top: 10px;">Any concerns about its details or suggested revision shall be forwarded to the authorized personnel.</p>',
+            },
+            {
+              title: "#2 EVALUATION FORM",
+              img: "",
+              text: '<p>The updated evaluation form is displayed only for reviewing purposes.</p><p style=" text-shadow: 0px 1px 1px #ff9807;font-size: 0.7em; margin-top: 10px;">Any concerns about its details or suggested revision shall be forwarded to the authorized personnel.</p>',
+            },
+          ],
+        },
+        {
+          category: "Admin",
+          guide: [
+            {
+              title: "#1 GRADESHEET FORM",
               img: require("../assets/sample.jpg"),
-              aspRatio: 300 / 70,
-              text: "Shows the overview of the current semester's class loads, as well as a button to view archived gradesheets.",
+              text: "<p>Shows the overview of the current semester's class loads, as well as a button to view archived gradesheets.</p><br>&nbsp;&nbsp;&nbsp;<p style=' color: #ff9807;font-size: 20px;font-weight: bold;'>ADD/ VIEW GRADESHEETS</p><br><p>Upon clicking on a card from the dashboard, you will now be redirected to the alloted gradesheet form of the selected class.<br><br>You can now edit, save, download or archive the class's gradesheet from here.</p><br>&nbsp;&nbsp;&nbsp;<p style=' color: #ff9807;font-size: 20px;font-weight: bold;'>BUTTONS</p><br><p><b>SAVE:</b>&nbsp;&nbsp;&nbsp;Overwrites the last saved inputs with the recent changes made by the user.<br><br><b>DOWNLOAD:</b>&nbsp;&nbsp;&nbsp;Downloads the displayed gradesheet in excel format.<br><br><b>ARCHIVE:</b>&nbsp;&nbsp;&nbsp;Archives the displayed gradesheet.<br></p>",
             },
             {
-              title: "#2 CLASS LOADS",
+              title: "#2 EVALUATION FORM",
               img: "",
-              aspRatio: 0 / 0,
-              text: "Still inside the dashboard, each semester's class loads are organized in a card view manner.<br><br>Each card displays the class's subject code, subject description, year and section of the students, and it's weekly schedule.",
+              text: "<p>Still inside the dashboard, each semester's class loads are organized in a card view manner.<br><br>Each card displays the class's subject code, subject description, year and section of the students, and its weekly schedule.</p>",
             },
             {
-              title: "&nbsp;&nbsp;&nbsp;&nbsp;#2.1 GRADESHEET FORM",
+              title: "#3 SCHOLASTIC RECORD MANAGEMENT",
               img: "",
-              aspRatio: 0 / 0,
-              text: "Upon clicking on a card from the dashboard, you will now be redirected to the alloted gradesheet form of the selected class.<br><br>You can now edit, save, download or archive the class's gardesheet from here.",
+              text: "<p>Still inside the dashboard, each semester's class loads are organized in a card view manner.<br><br>Each card displays the class's subject code, subject description, year and section of the students, and its weekly schedule.</p>",
             },
-            {
-              title: "&nbsp;&nbsp;&nbsp;&nbsp#2.2 GRADESHEET FORM BUTTONS",
-              img: "",
-              aspRatio: 0 / 0,
-              text: "",
-            },
+            
           ],
         },
+
         {
-          category: "Coordinator",
+          category: "Superadmin",
           guide: [
-            { title: "#1", img: "", aspRatio: 300 / 70, text: "coor1" },
-            { title: "#2", img: "", aspRatio: 300 / 70, text: "coor2" },
-          ],
-        },
-        {
-          category: "Staff",
-          guide: [
-            { title: "#1", img: "", aspRatio: 300 / 70, text: "staff1" },
-            { title: "#2", img: "", aspRatio: 300 / 70, text: "staff2" },
-          ],
-        },
-        {
-          category: "Manager",
-          guide: [
-            { title: "#1", img: "", aspRatio: 300 / 70, text: "manager1" },
-            { title: "#2", img: "", aspRatio: 300 / 70, text: "manager2" },
+            { title: "#1", img: "", text: "manager1" },
+            { title: "#2", img: "", text: "manager2" },
           ],
         },
       ],
@@ -131,14 +115,21 @@ export default {
 </script>
 
 <style scoped>
-.basil {
-  background-color: #545454 !important;
+/* .tab-color{
+   border: 2px solid #ff9807 !important;
+}  */
+p.note {
+  font-size: 1em;
+  color: #ff9807;
+}
+.bg-color {
+  border: 3px solid #545454 !important;
 }
 .selectedList {
   background-color: #545454 !important;
   font-weight: bold;
 }
-.basil--text {
+.bg-color--text {
   color: #ff9807 !important;
   size: 20px;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.493);
@@ -149,5 +140,15 @@ export default {
 }
 .card-style {
   padding: 20px 20px 0 20px;
+  margin: 10px 15px;
+}
+.guide-img {
+  margin-bottom: 20px;
+}
+div.cardDesc {
+  color: #2d2d2d;
+  padding: 0 40px 20px 40px;
+  font-size: 20px;
+  text-align: left;
 }
 </style>

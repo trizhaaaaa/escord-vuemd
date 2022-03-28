@@ -179,7 +179,7 @@ li {
   text-align: center;
 }
 li.esc-feature {
-  padding: 5px 25px 25px 25px;
+  padding: 5px 25px 20px 25px;
   border: 4px solid #ff9807;
   border-radius: 15px;
   margin: 10px;
@@ -191,6 +191,7 @@ div.feature-details {
 h4.esc-feature-shortdesc {
   background: #fff1de;
   padding: 10px;
+  margin: 10px 0 15px 0;
   border: 2px solid #ff9807;
   border-radius: 10px;
   font-weight: 500;
@@ -199,7 +200,7 @@ h4.esc-feature-shortdesc {
 }
 h3.esc-feature-longdesctitle {
   text-align: right;
-  padding: 3px 10px;
+  padding: 3px 0px 10px 0;
   font-size: 22px;
 }
 p.esc-feature-longdesc {
@@ -236,6 +237,7 @@ div#about-escord {
 h1.about-esc-team {
   text-shadow: 0px 1px 1px #ff9807;
   text-align: left;
+  margin-bottom: 30px;
 }
 img.about-img {
   width: 300px;

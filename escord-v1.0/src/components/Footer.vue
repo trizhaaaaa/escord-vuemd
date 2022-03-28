@@ -25,6 +25,7 @@ footer {
   width: 100%;
   background: #5454541e;
   height: 80px;
+  z-index: 199;
 }
 p {
   
