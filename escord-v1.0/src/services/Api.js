@@ -1,8 +1,28 @@
-import axios from 'axios';
+/* import axios from 'axios';
 
-const apiClient = axios.create({
+export default axios.create({
     baseURL: process.env.VUE_APP_API_URL,
     withCredentials: true,
+    headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        }
+  
 });
 
-export default apiClient;
+ */
+import axios from "axios";
+
+const VUE_APP_API_URL = process.env["VUE_APP_API_URL"];
+
+export default {
+  install(Vue) {
+    Vue.prototype.$axios = axios.create({
+      baseURL: VUE_APP_API_URL,
+      timeout: 10000,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  }
+};

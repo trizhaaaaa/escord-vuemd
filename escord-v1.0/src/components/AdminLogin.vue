@@ -4,7 +4,7 @@
       
      <div class="mb-3">
 
-<p class="text-danger" v-text="errors.email"></p>
+<p class="text-danger" v-text="geterror.email"></p>
     <label for="exampleInputEmail1" class="form-label">Email</label>
     <br> 
     
@@ -38,9 +38,11 @@
 import axios from 'axios'
 import useVuelidate from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
+import { mapActions, mapGetters } from 'vuex';
 
-axios.defaults.withCredentials = true
-axios.defaults.baseURL = "http://127.0.0.1:8000"
+
+/* axios.defaults.withCredentials = true
+axios.defaults.baseURL = "http://127.0.0.1:8000" */
 
 
 export default {
@@ -64,15 +66,24 @@ export default {
        }
      }
    },
+      computed:{
+     ...mapGetters({geterror : 'geterror'}),
+    },
+   
      methods : {
-       
+        ...mapActions({loginUser: "loginUser"}),
       
-      login(){
+     login(){
 
           this.v$.$validate()
 
             if(!this.v$.$error){
-      axios.get('/sanctum/csrf-cookie').then(response => {
+               this.loginUser(this.formData);
+         
+            //
+          
+      
+     /*  axios.get('/sanctum/csrf-cookie').then(response => {
         axios.post('/api/adminlogin', this.formData).then((response)=>{
         //   localStorage.setItem('isLoggedIn','true');
            localStorage.setItem('token',response.data);
@@ -85,7 +96,7 @@ export default {
           })
 
               }); //end of axios
-
+ */
 
             }else{
            console.log('there are rquired thing')

@@ -46,13 +46,10 @@ class AdminController extends Controller
             } 
         }
      
-      
-
      
-     
-       return $user->createToken($request->device_name)->plainTextToken;
+      //  return response()->json(Auth::user(),200);
+     return $user->createToken($request->device_name)->plainTextToken;
     
-   
           
     }
 

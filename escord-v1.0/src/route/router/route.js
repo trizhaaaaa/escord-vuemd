@@ -5,6 +5,8 @@ import Contact from '../../components/Contact.vue'
 import Login from '../../components/Login.vue'
 import Dashboard from '../../components/Dashboard.vue'
 import AdminLogin from '../../components/AdminLogin.vue'
+import Dashboard_stud from '../../components/Dashboard_stud.vue'
+import Dashboard_admin from '../../components/Dashboard_admin.vue'
 
 
 const routes = [
@@ -45,11 +47,26 @@ const routes = [
     component: AdminLogin
 
   },
+
+  {
+    path: '/StudentDashboard',
+    name: 'StudentDashboard',
+    component:Dashboard_stud,
+    meta: { requiresAuth: true, authorize: 'student' }
+  },
+
+  {
+    path: '/AdminDashboard',
+    name: 'AdminDashboard',
+    component: Dashboard_admin,
+    meta: { requiresAuth: true, authorize: 'admin' }
+  },
+  
   {
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true,  authorize: 'superadmin'  }
   },
   
 
