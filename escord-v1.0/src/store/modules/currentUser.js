@@ -68,9 +68,9 @@ const actions = {
                 localStorage.setItem('role', response.data.user_role);
 
                 
-                  if(response.data.user_role === "student"){
+                  if(response.data.user_role === "admin"){
                     //    router.push({path:'/About'});
-                    router.push('/StudentDashboard', () => router.go(0))
+                    router.push('/AdminDashboard', () => router.go(0))
                 
                         
                   }else if (response.data.user_role === "superadmin"){
@@ -81,7 +81,8 @@ const actions = {
                     
                   }else{
                  //   router.push({path:'/AdminDashboard'});
-                    router.push('/AdminDashboard', () => router.go(0))
+                 router.push('/StudentDashboard', () => router.go(0))
+                  
                   }
    
                }).catch(()=>{

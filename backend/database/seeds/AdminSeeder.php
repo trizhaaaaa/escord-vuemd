@@ -21,7 +21,7 @@ class AdminSeeder extends Seeder
             'lastname'=>'porral',
             'password'=>Hash::make('password123'),
             'student_number' => '20190344',
-            'authority' => 'superadmin',]);
+            'user_role' => 'admin',]);
          
     }
 }
