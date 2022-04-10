@@ -1,89 +1,121 @@
 <template>
-  <div>
-  <div class="container mt-5">
-      
-     <div class="mb-3">
+  <div id="login-form">
+    <center>
+      <div class="l-form">
+        <form action="" class="form">
+          <h1 class="form__title _title">ESCORD Log In</h1>
 
-<p class="text-danger" v-text="geterror.email"></p>
-    <label for="exampleInputEmail1" class="form-label">Email</label>
-    <br> 
-    
-    
-    <input type="email" class=" text-line" name="email"   required aria-describedby="emailHelp"  v-model="formData.email" placeholder="name@email.com">
-<p> <span v-if="v$.formData.email.$error">{{v$.formData.email.$errors[0].$message}}</span> </p>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">PASSWORD</label>
-    <br>
-      <p class="text-danger" v-text="errors.password"></p>
-    
-    <input type="password" class=" text-line" id="exampleInputPassword1"    required="required" v-model="formData.password" placeholder="Password">
-   <p> <span v-if="v$.formData.password.$error">{{v$.formData.password.$errors[0].$message}}</span></p>
-    
-  </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input checkbox-circle" id="exampleCheck1" >
-    <label class="form-check-label" for="exampleCheck1">Remember my password</label>
-  </div>
-   <button  type="submit" @click="login" class="loginbtn mt-5">LOG IN</button>
+          <!--EMAIL INPUT-->
+          <div class="form__div">
+            <p class="text-danger" v-text="geterror.email"></p>
+            <input
+              type="email"
+              name="email"
+              class="form__input-text"
+              required
+              aria-describedby="emailHelp"
+              v-model="formData.email"
+              placeholder=" "
+            />
+            <label for="exampleInputEmail1" class="form__label">Email</label>
+            <p>
+              <span v-if="v$.formData.email.$error">{{
+                v$.formData.email.$errors[0].$message
+              }}</span>
+            </p>
+          </div>
 
+          <!--PASSWORD INPUT-->
+          <div class="form__div">
+            <p class="text-danger" v-text="errors.password"></p>
+            <input
+              type="password"
+              id="exampleInputPassword1"
+              class="form__input-text"
+              required
+              v-model="formData.password"
+              placeholder=" "
+            />
+            <label for="exampleInputPassword1" class="form__label"
+              >Password</label
+            >
+            <p>
+              <span v-if="v$.formData.password.$error">{{
+                v$.formData.password.$errors[0].$message
+              }}</span>
+            </p>
+          </div>
 
+          <!--CHECKBOX-->
+          <div class="form__div">
+            <input
+              type="checkbox"
+              id="exampleCheck1"
+              class="form__input-checkbox checkbox-circle"
+            />
+            <label for="exampleCheck1" class="form__label-checkbox"
+              >Remember my password</label
+            >
+          </div>
 
+          <input
+            type="submit"
+            class="form__button"
+            value="Log In"
+            v-on:click="login"
+          />
+        </form>
       </div>
-</div>
+    </center>
+  </div>
 </template>
 
 <script>
-
-import axios from 'axios'
-import useVuelidate from '@vuelidate/core'
-import { required, email } from '@vuelidate/validators'
-import { mapActions, mapGetters } from 'vuex';
-
+import axios from "axios";
+import useVuelidate from "@vuelidate/core";
+import { required, email } from "@vuelidate/validators";
+import { mapActions, mapGetters } from "vuex";
 
 /* axios.defaults.withCredentials = true
 axios.defaults.baseURL = "http://127.0.0.1:8000" */
 
-
 export default {
-    name:'AdminLogin',
-      setup: () => ({ v$: useVuelidate() }),
-   data(){
-        return{
-          formData:{
-            password:'',
-            email:'',
-            device_name: 'browser',
-         },
-          errors:{}
-        }
-   },
-   validations(){
-     return {
-       formData:{
-       email:{required, email},
-       password:{required},
-       }
-     }
-   },
-      computed:{
-     ...mapGetters({geterror : 'geterror'}),
-    },
-   
-     methods : {
-        ...mapActions({loginUser: "loginUser"}),
-      
-     login(){
+  name: "AdminLogin",
+  setup: () => ({ v$: useVuelidate() }),
+  data() {
+    return {
+      formData: {
+        password: "",
+        email: "",
+        device_name: "browser",
+      },
+      errors: {},
+    };
+  },
+  validations() {
+    return {
+      formData: {
+        email: { required, email },
+        password: { required },
+      },
+    };
+  },
+  computed: {
+    ...mapGetters({ geterror: "geterror" }),
+  },
 
-          this.v$.$validate()
+  methods: {
+    ...mapActions({ loginUser: "loginUser" }),
 
-            if(!this.v$.$error){
-               this.loginUser(this.formData);
-         
-            //
-          
-      
-     /*  axios.get('/sanctum/csrf-cookie').then(response => {
+    login() {
+      this.v$.$validate();
+
+      if (!this.v$.$error) {
+        this.loginUser(this.formData);
+
+        //
+
+        /*  axios.get('/sanctum/csrf-cookie').then(response => {
         axios.post('/api/adminlogin', this.formData).then((response)=>{
         //   localStorage.setItem('isLoggedIn','true');
            localStorage.setItem('token',response.data);
@@ -97,66 +129,137 @@ export default {
 
               }); //end of axios
  */
-
-            }else{
-           console.log('there are rquired thing')
-            }
-        //this.v$.$touch();
-   //console.log(this.v$)
-     /*  
-console.log('login'); */
-      
+      } else {
+        console.log("There are required inputs.");
       }
-    } 
-}
+      //this.v$.$touch();
+      //console.log(this.v$)
+      /*  
+console.log('login'); */
+    },
+  },
+};
 </script>
 
 
-<style>
-
-
-
-.text-line {
-    background-color: transparent;
-    color: #000000;
-    outline: none;
-    outline-style: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: solid black 1px;
-    padding: 3px 10px;
+<style scoped>
+#login-form {
+  width: 100vw;
+  height: 530px;
+}
+._title {
+  margin: 0;
 }
 
-.form-check-input {
-  border: 1px solid #ff9807;
+.l-form {
+  padding: 25px;
+  width: 360px;
+  height: 350px;
+  margin: 20px 0;
 }
 
-.form-label {
-  font-family: Century Gothic;
-  font-weight: 1000;
-  color:black;
-
-}
-.loginbtn{
-     border-radius:15px;
-	border:solid #ff9807;
-  background: #ff9807;
-	display:inline-block;
-	cursor:pointer;
-	color: #545454;
-	font-family:Century Gothic;
-	font-size:17px;
-	padding:16px 100px;
-  font-weight: 1000;
-	
-}
-.form-check-label{
-  font-family: Century Gothic;
-  font-size: 15px;
+.form {
+  width: 360px;
+  padding: 2rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(92, 99, 105, 0.2);
 }
 
+.form__title {
+  font-weight: 400;
+  margin-bottom: 3rem;
+}
 
+.form__div {
+  position: relative;
+  height: 48px;
+  margin-bottom: 1.5rem;
+}
 
+.form__input-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  border-bottom: 1px solid #dadce0;
+  outline: none;
+  padding: 1rem;
+  background: none;
+  z-index: 1;
+}
 
+.form__label {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0 0.25rem;
+  background-color: #fff;
+  color: #80868b;
+  border-radius: 0.2rem;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.form__button {
+  display: block;
+  margin: auto;
+  padding: 0.75rem 5rem;
+  outline: none;
+  border: none;
+  background-color: #ff980790;
+  color: #545454;
+  font-family: "Cuprum", sans-serif;
+  font-size: 20px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form__button:hover {
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.15);
+  background-color: #ff9807;
+  font-weight: bold;
+}
+
+.form__input-text:focus + .form__label {
+  top: -0.5rem;
+  left: 0.8rem;
+  color: #ff9807;
+  font-size: 0.75rem;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.form__input-text:not(:placeholder-shown).form__input-text:not(:focus)
+  + .form__label {
+  top: -0.5rem;
+  left: 0.8rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.form__input-text:focus {
+  border-bottom: 1.5px solid #ff9807;
+}
+
+.form__input-checkbox {
+  accent-color: #ff9807;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 555px) {
+  .l-form {
+    left: 100%;
+    top: 100%;
+    transform: translate(-9%, 0%);
+    width: 290px;
+  }
+
+  .form {
+    width: 290px;
+  }
+}
 </style>

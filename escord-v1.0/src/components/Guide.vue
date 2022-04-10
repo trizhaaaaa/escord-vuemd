@@ -97,15 +97,6 @@ export default {
               img: "",
               text: "<p>Still inside the dashboard, each semester's class loads are organized in a card view manner.<br><br>Each card displays the class's subject code, subject description, year and section of the students, and its weekly schedule.</p>",
             },
-            
-          ],
-        },
-
-        {
-          category: "Superadmin",
-          guide: [
-            { title: "#1", img: "", text: "manager1" },
-            { title: "#2", img: "", text: "manager2" },
           ],
         },
       ],
