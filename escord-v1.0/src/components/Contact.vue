@@ -52,6 +52,9 @@ export default {
 </script>
 
 <style scoped>
+div#contact{
+  height:500px
+}
 h1{
   margin-bottom: 40px;
 }

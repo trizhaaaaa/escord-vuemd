@@ -45,7 +45,7 @@ div#app {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2d2d2d;
-  min-height: 100vh;
+  max-height: 100vh;
   padding: 0px;
   margin: 5em 0 0 0;
   display: flex;
