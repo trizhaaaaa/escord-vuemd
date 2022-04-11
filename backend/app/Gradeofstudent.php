@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class GradesStudent extends Model
+class Gradeofstudent extends Model
 {
     //
 
@@ -14,4 +14,5 @@ class GradesStudent extends Model
   
   
       protected $primaryKey = 'gradesheetid';
+      public $timestamps = false;
 }

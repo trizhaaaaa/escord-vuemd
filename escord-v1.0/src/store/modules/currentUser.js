@@ -8,7 +8,7 @@ const state = {
     isAuthenticated: !!localStorage.getItem('token'),
     currentUser: {},
     role: localStorage.getItem('role'),
-    storingerror : {},
+    storingerror : "",
 
 }
 const getters = {
@@ -52,8 +52,8 @@ const actions = {
         //   window.location.replace("home");
                   }).catch((errors)=>{
         //   
-                 commit("setError",errors.response.data.errors);
-              //   console.log(errors.response.data.errors);
+               commit("setError",errors.response.data.errors.email[0]);
+          //       console.log(errors.response.data.errors.email[0]);
                   })
         
                 }); //end of axios

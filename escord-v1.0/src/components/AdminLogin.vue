@@ -2,12 +2,13 @@
   <div id="login-form">
     <center>
       <div class="l-form">
-        <form action="" class="form">
-          <h1 class="form__title _title">ESCORD Log In</h1>
+        <div class="form">
+          <h1 class="form__title _title">ESCORD Log In </h1>
+    <p class="text-danger" v-text="geterror"></p>
 
           <!--EMAIL INPUT-->
           <div class="form__div">
-            <p class="text-danger" v-text="geterror.email"></p>
+            
             <input
               type="email"
               name="email"
@@ -62,9 +63,11 @@
             type="submit"
             class="form__button"
             value="Log In"
-            v-on:click="login"
+          v-on:click="login"
+      
           />
-        </form>
+          
+        </div>
       </div>
     </center>
   </div>
@@ -89,7 +92,7 @@ export default {
         email: "",
         device_name: "browser",
       },
-      errors: {},
+      errors: "",
     };
   },
   validations() {
@@ -106,8 +109,8 @@ export default {
 
   methods: {
     ...mapActions({ loginUser: "loginUser" }),
-
-    login() {
+login()
+ {
       this.v$.$validate();
 
       if (!this.v$.$error) {
@@ -130,7 +133,7 @@ export default {
               }); //end of axios
  */
       } else {
-        console.log("There are required inputs.");
+          console.log('there are needed data');
       }
       //this.v$.$touch();
       //console.log(this.v$)

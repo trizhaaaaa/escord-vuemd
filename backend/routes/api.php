@@ -21,8 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  Route::group(['middleware' => 'auth:sanctum'], function() {
   
     Route::post('/logout','AdminController@logout');
+
   });
 
+    Route::post('/gradesheetstudent','GradesheetController@addGradesheetstudent');
  
 Route::post('/login','LoginController@login');
 Route::post('/adminlogin','AdminController@adminlogin');
