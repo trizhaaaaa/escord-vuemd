@@ -2,14 +2,19 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class Admin extends Authenticatable
+class Manager  extends Authenticatable
 {
+    //
+
+
     use HasApiTokens,Notifiable;
 
     /**
@@ -18,7 +23,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username','student_number','firstname', 'lastname'.'email', 'password','user_role',
+        'user_role','name','email', 'password',
     ];
 
     /**

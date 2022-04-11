@@ -86,7 +86,7 @@ export default {
     login: function () {
      // this.loggedIn = !this.loggedIn;
      // this.showCategoryList = !this.showCategoryList;
-   this.$router.push({name:'Login'});
+   this.$router.push({name:'AdminLogin'});
    /*    if (this.showCategoryList === true) {
         this.btnText = "LOG OUT";
       } else {
@@ -100,8 +100,9 @@ export default {
     logout:function(){
     
     axios.post('/api/logout').then((response)=>{
-      localStorage.removeItem('isadmin');
+      localStorage.removeItem('role');
       localStorage.removeItem('token');
+      
        //  this.$router.push('/');
       this.$router.push('/', () => this.$router.go(0))
                    
@@ -111,13 +112,10 @@ export default {
        
     },
 
-<<<<<<< HEAD
 
-=======
     onClickLink: function(){
       $('.cont-toggleMenu collapse').toggleClass("");
     }
->>>>>>> origin/w-vuetify
   },
 };
 </script>

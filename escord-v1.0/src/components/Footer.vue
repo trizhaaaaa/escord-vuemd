@@ -1,4 +1,5 @@
 <template>
+
   <footer id="vue-ftr">
     <p class="disclaimer">
       This website is created for academic purposes only.
@@ -22,10 +23,10 @@ footer {
   position: relative;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   background: #5454541e;
   height: 80px;
-  z-index: 199;
+  /* z-index: 199; */
 }
 p {
   
@@ -37,4 +38,5 @@ p.disclaimer {
   font-weight: bold;
   padding: 10px;
 }
+
 </style>

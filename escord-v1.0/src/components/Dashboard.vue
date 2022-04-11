@@ -3,13 +3,11 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">[PROTECTED] Component</div>
+                    <div class="card-header">[SUPERADMIN] Component</div>
 
                     <div class="card-body">
                          Dashboard 
-                       USER : {{currentUser.student_number}} ,
-                         ROLE : {{currentUser.user_role}}, {{currentUser.authority}} ,
-                         EMAIL : {{currentUser.email}} ,
+                            {{getCurrentUser.email}}
 
                     </div>
                     <div>
@@ -26,21 +24,28 @@
 
 
 import axios from 'axios'
+import { mapGetters, mapActions } from 'vuex';
 
-axios.defaults.withCredentials = true
+/* axios.defaults.withCredentials = true
 axios.defaults.baseURL = "http://127.0.0.1:8000"
-
+ */
 
     export default {
         name:'Dashboard',
 
     data(){
              return{
-                 currentUser:{},
+               
                  token: localStorage.getItem('token'),
              }
         },
+     //    ...mapActions({currentUserLog : ' currentUserLog'}),
+          //...mapGetters({getCurrentUser : 'getCurrentUser'}),
+    computed:{
+     ...mapGetters({getCurrentUser : 'getCurrentUser'}),
+    },
         methods:{
+         // ...mapActions({currentUserLog : ' currentUserLog'}),
             logout(){
                    axios.post('/api/logout').then((response)=>{
                        
@@ -60,8 +65,14 @@ axios.defaults.baseURL = "http://127.0.0.1:8000"
 
         },
         mounted() {
-            axios.defaults.headers.common["Authorization"] = `Bearer ${this.token}`
-            axios.get('/api/user').then(response => {
+
+          this.$store.dispatch('displayuser');
+              
+      
+   
+            //   this.currentUser = this.$store.getters.getCurrentUser;
+         //   axios.defaults.headers.common["Authorization"] = `Bearer ${this.token}`
+          /*   axios.get('/api/user').then(response => {
              this.currentUser = response.data
 
                 if(response.data.authority){
@@ -70,7 +81,7 @@ axios.defaults.baseURL = "http://127.0.0.1:8000"
                 if(response.data.user_role){
                     localStorage.setItem('isadmin','false');
                 }
-            })
+            }) */
         } 
     }
 </script>

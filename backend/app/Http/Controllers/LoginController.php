@@ -29,15 +29,13 @@ class LoginController extends Controller
                 'faculty_number' => ['Invalid Faculty Number or Password.'],
             ]);
         }
-     
-       return $user->createToken($request->device_name)->plainTextToken;
+       
+        
+      return $user->createToken($request->device_name)->plainTextToken;
     
    
           
     }
 
-    public function logout(){
-
-        Auth::guard('web')->logout();
-    }
+   
 }

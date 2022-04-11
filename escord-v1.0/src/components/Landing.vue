@@ -81,7 +81,7 @@ img {
   }
   div#landing-content {
     left: 50%;
-    top: 50%;
+    top: 40%;
     transform: translate(-50%, -50%);
     padding: 25px;
     width: 350px;
