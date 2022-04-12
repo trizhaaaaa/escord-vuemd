@@ -24,7 +24,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
   });
 
-    Route::post('/gradesheetstudent','GradesheetController@addGradesheetstudent');
+    Route::post('/gradesheetstudent','GradesheetController@addgradestudent');
+    Route::post('/gradesheetinfo','GradesheetController@addgradesheetinfo');
+    Route::get('/showgs','GradesheetController@showgradesheet');
+    Route::get('/showgs/{gradesheetid}','GradesheetController@showgsbyid');
+    Route::put('/updategs/{gradesheetid}','GradesheetController@updategradesheetinfo');
+   
+
+
+    
+   
+   
  
 Route::post('/login','LoginController@login');
 Route::post('/adminlogin','AdminController@adminlogin');

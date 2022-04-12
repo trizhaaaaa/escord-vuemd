@@ -14,5 +14,9 @@ class Gradeofstudent extends Model
   
   
       protected $primaryKey = 'gradesheetid';
+     
+     
       public $timestamps = false;
+
+      protected $table = 'gradeofstudents';
 }

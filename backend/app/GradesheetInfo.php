@@ -12,5 +12,13 @@ class GradesheetInfo extends Model
       'gradesheetid', 'course','subjectcode','subjectdesc','semester','sem_startyear','sem_endyear'
       ,'units','time','day','year','professor','facultyrank'
       ,'course_short','course_year','course_section'];
+
+
+      protected $table = 'gradsheetinfo';
+
+
+      
+      public $timestamps = false;
+    
    
 }
