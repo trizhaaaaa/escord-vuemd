@@ -28,6 +28,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::post('/gradesheetinfo','GradesheetController@addgradesheetinfo');
     Route::get('/showgs','GradesheetController@showgradesheet');
     Route::get('/showgs/{gradesheetid}','GradesheetController@showgsbyid');
+
+    //this is for multirows
+    Route::post('/addgs','GradesheetController@addgs');
+
+    //update 
     Route::put('/updategs/{gradesheetid}','GradesheetController@updategradesheetinfo');
    
 

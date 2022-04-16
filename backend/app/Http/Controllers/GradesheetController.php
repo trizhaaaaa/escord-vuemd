@@ -136,4 +136,60 @@ class GradesheetController extends Controller
 
 
     }
+
+    public function addgs(Request $request)
+    {
+
+        $this->validate($request,[
+            'student_number.*' => 'required',
+            'studentname.*' => 'required',
+            'midterm.*' => 'required',
+            'finalterm.*' => 'required',
+            'finalgrade.*' => 'required',
+            'gradesheetid.*' => 'required',
+
+        ]);
+  
+
+        $requestData = $request->all();
+
+  /* foreach( $requestData as $key=>$datainside){
+
+          /*   $data = new Gradeofstudent;
+            $data->student_number  = $datainside->student_number;
+            $data->gradesheetid =  $datainside->$gradesheetid;
+            $data->studentname  = $datainside->studentname;
+            $data->midterm  = $datainside->midterm;
+            $data->finalterm  = $datainside->finalterm;
+            $data->finalgrade  = $datainside->finalgrade;
+            $data-save();
+
+            } 
+ */
+
+  
+
+              Gradeofstudent::insert($requestData);
+ 
+              return response()->json(['message'=>'grade added successfully']);
+        
+
+              /*   foreach ($requestData as $key => $data) {
+                Gradeofstudent::create([
+                'gradesheetid'       =>  $data->gradesheetid,
+                'student_number'       =>  $data->student_number,
+                'midterm'      =>  $data->midterm,
+                'finalterm'         =>  $data->finalterm,
+                'finalgrade' =>  $data->finalgrade,
+                'studentname'     =>  $data->studentname
+                ]);
+            } */
+
+        //return response()->json(['message'=>'grade added successfully']);
+
+     }
+
+
+  
+
 }

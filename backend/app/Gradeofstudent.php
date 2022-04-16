@@ -19,4 +19,11 @@ class Gradeofstudent extends Model
       public $timestamps = false;
 
       protected $table = 'gradeofstudents';
+
+
+      public function operador(){
+    
+        return $this->belongsTo('\App\Scholstudent');
+        
+    }
 }
