@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
     //update 
     Route::put('/updategs/{gradesheetid}','GradesheetController@updategradesheetinfo');
-   
+    Route::put('/archievegs/{gradesheetid}','GradesheetController@archievegradesheet');
 
 
     

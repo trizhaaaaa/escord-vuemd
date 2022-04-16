@@ -108,14 +108,70 @@ class GradesheetController extends Controller
     }
 
 
+    public function archievegradesheet(Request $request, $gradesheetid){
+
+        $status_archieve = $request->status_archieve;
+
+        $gradetable = DB::table('gradsheetinfo')->where('gradesheetid', $gradesheetid)->limit(1)->update([
+            'archieve' => $status_archieve,
+
+        ]);
+
+        $grades = DB::table('gradsheetinfo')->where('gradesheetid', $gradesheetid)->limit(1)->get();
+
+        if ($gradetable) {
+            return response()->json([
+                'success' => true,
+                'grades' =>$grades
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, cook could not be updated',
+            ], 500);
+        }
+
+
+    }
+
+
     public function updategradesheetinfo(Request $request,$gradesheetid){
 
 
-        $gradetable = DB::table('gradsheetinfo')->where('gradesheetid', $gradesheetid)->get();
+  
 
+                $grades = GradesheetInfo::where('gradesheetid', '=', $gradesheetid)->firstOrFail();   
 
-   
-        $gradetable->subjectcode  = $request->input('subjectcode');
+                $updated = $grades->update($request->all());
+
+                if ($updated) {
+                    return response()->json([
+                        'success' => true,
+                        'grades' => $grades
+                    ]);
+                } else {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Sorry, cook could not be updated',
+                    ], 500);
+                }
+
+           /*  GradesheetInfo::where('gradesheetid', $gradesheetid)->update([
+                'subjectcode' =>$request->$subjectcode,
+                'subjectdesc' =>$request->$subjectdesc,
+                'semester' =>$request->$semester,
+                'sem_startyear' =>$request->$sem_startyear,
+                'sem_endyear' =>$request->$sem_endyear,
+                'units' =>$request->$units,
+                'time' =>$request->$time,
+                'day' =>$request->$day,
+                'course_short' =>$request->$course_short,
+                'course_year' =>$request->$course_year,
+                'course_section' =>$request->$course_section,
+                'professor' =>$request->$professor,
+                'facultyrank' =>$request->$facultyrank
+            ]); */
+     /*    $gradetable->subjectcode  = $request->input('subjectcode');
         $gradetable->subjectdesc  = $request->input('subjectdesc');
         $gradetable->semester  = $request->input('semester');
         $gradetable->sem_startyear  = $request->input('sem_startyear');
@@ -129,10 +185,27 @@ class GradesheetController extends Controller
         $gradetable->professor  = $request->input('professor');
        $gradetable->facultyrank  = $request->input('facultyrank');
 
-       $gradetable->save();
+       $gradetable->save(); */
+
+          /*    $gradetable = DB::table('gradsheetinfo')->where('gradesheetid', $gradesheetid)->limit(1)->update([
+            'subjectcode' =>$request->$subjectcode,
+            'subjectdesc' =>$request->$subjectdesc,
+            'semester' =>$request->$semester,
+            'sem_startyear' =>$request->$sem_startyear,
+            'sem_endyear' =>$request->$sem_endyear,
+            'units' =>$request->$units,
+            'time' =>$request->$time,
+            'day' =>$request->$day,
+            'course_short' =>$request->$course_short,
+            'course_year' =>$request->$course_year,
+            'course_section' =>$request->$course_section,
+            'professor' =>$request->$professor,
+            'facultyrank' =>$request->$facultyrank
+         ]);
+ */         
 
 
-       return response()->json($gradetable);
+     //  return response()->json($gradetable);
 
 
     }
@@ -187,6 +260,8 @@ class GradesheetController extends Controller
 
         //return response()->json(['message'=>'grade added successfully']);
 
+
+        
      }
 
 
