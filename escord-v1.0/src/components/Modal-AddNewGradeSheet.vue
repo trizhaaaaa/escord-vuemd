@@ -15,7 +15,54 @@
 
       <!-- Body -->
       <section class="modal-body">
-        This is a default body :))
+        <table>
+          <tr>
+            <td class="input__label" colspan="1"><label for="gs-id">Grade Sheet ID</label></td>
+            <td colspan="3"><p class="p__text">This is a gradesheet ID.</p></td>
+          </tr>
+
+          <tr>
+            <td class="input__label" colspan="1"><label for="subjCode">Subject Code</label></td>
+            <td class="input__text" colspan="1"><input type="text" name="subjCode" id="subjCode"></td>
+
+            <td class="input__label" colspan="1"><label for="subjUnit">Units</label></td>
+            <td class="input__text" colspan="1"><input type="text" name="subjUnit" id="subjUnit"></td>
+          </tr>
+
+          <tr>
+            <td class="input__label" colspan="1"><label for="subjDesc">Subject Description</label></td>
+            <td class="input__text" colspan="3"><input type="text" name="subjDesc" id="subjDesc"></td>
+          </tr>
+
+          <tr>
+            <td class="input__label" colspan="1">Schedule</td>
+            <td class="input__text" colspan="2"><input type="text" name="subjTime" id="subjTime" placeholder="Time"></td>
+            <td class="input__text" colspan="2"><input type="text" name="subjDay" id="subjDay" placeholder="Day"></td>
+          </tr>
+
+          <tr>
+            <td class="input__label" colspan="1"><label for="subjProf">Instructor</label></td>
+            <td class="input__text" colspan="3"><input type="text" name="subjProf" id="subjProf"></td>
+          </tr>
+
+          <tr class="classInfo">
+            <td class="input__label" colspan="1">Class Information</td>
+
+            <td class="input__text" colspan="3"><input type="text" name="classProg" id="classProg" placeholder="Program"></td> <!-- make this a dropdown list -->
+          </tr>
+
+          <tr>
+            <td class="space" colspan="1"> </td>
+            <td class="input__text" colspan="2"><input type="text" name="classYr" id="classYr" placeholder="Year"></td>
+            <td class="input__text" colspan="2"><input type="text" name="classSec" id="classSec" placeholder="Section"></td>
+          </tr>
+
+          <tr>
+            <td class="space" colspan="1"> </td>
+            <td class="input__text" colspan="2"><input type="text" name="classSem" id="classSem" placeholder="Semester"></td>
+            <td class="input__text" colspan="2"><input type="text" name="classSY" id="classSY" placeholder="Academic Year"></td>
+          </tr>
+        </table>
       </section>
       
       <!-- Footer -->
@@ -33,7 +80,7 @@
             <button
             type="button"
             class="btn-footer"
-            @click="close"
+            @click="add"
             >
             Add Grade Sheet
             </button>
@@ -58,6 +105,27 @@ export default {
 </script>
 
 <style scoped>
+  table{
+    width: 100%;
+  }
+  
+  .input__label{
+    float: left;
+    font-weight: 700;
+  }
+
+  input{
+    width: 90%;
+    margin: 0 0 0 10px;
+    float: left;
+  }
+
+  .p__text{
+    float: left;
+    margin-left: 5px;
+  }
+
+
   .modal-backdrop {
     position: fixed;
     top: 0;
@@ -76,7 +144,7 @@ export default {
     overflow-x: auto;
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: fit-content;
     border-radius: 10px;
   }
 
