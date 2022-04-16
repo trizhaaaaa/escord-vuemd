@@ -17,15 +17,51 @@
 
         <!--Adding Gradesheet-->
         <div class="btn-addGS">
-        <button type="button" class="button">
+        <button type="button" 
+        class="button"
+        @click="showModal">
         <span class="button__text">Add Grade Sheet</span>
         </button>
         </div>
 
-       
+      <!-- <button
+      type="button"
+      class="btn"
+      @click="showModal"
+    >
+      Open Modal!
+    </button> -->
+
+    <Modal
+      v-show="isModalVisible"
+      @close="closeModal"
+    />
         
     </div>
 </template>
+
+<script>
+import Modal from "./Modal-AddNewGradeSheet.vue"
+
+export default {
+  components: {
+    Modal
+  }, 
+  data(){
+    return{
+      isModalVisible: false
+    };
+  },
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    }
+  }
+}
+</script>
 
 <style scoped>
 div#gs-mainmenu{

@@ -7,9 +7,8 @@
 
     <escord-header />
     
-    <!--<gs-main-menu/>-->
-    <router-view> </router-view>
-
+    <gs-main-menu/>
+    <!-- <router-view> </router-view> -->
     <escord-footer />
   </div>
 </template>
@@ -18,13 +17,13 @@
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 
-//import GradesheetMainMenu from "./components/GradesheetMainMenu.vue";
+import GradesheetMainMenu from "./components/GradesheetMainMenu.vue";
 
 export default {
   components: {
     "escord-header": Header,
     "escord-footer": Footer,
-    //"gs-main-menu": GradesheetMainMenu,
+    "gs-main-menu": GradesheetMainMenu,
   },
 
   name: "App",
