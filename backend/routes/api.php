@@ -21,10 +21,26 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  Route::group(['middleware' => 'auth:sanctum'], function() {
   
     Route::post('/logout','AdminController@logout');
+   
 
   });
 
-    Route::post('/gradesheetstudent','GradesheetController@addGradesheetstudent');
+    Route::post('/gradesheetstudent','GradesheetController@addgradestudent');
+    Route::post('/gradesheetinfo','GradesheetController@addgradesheetinfo');
+    
+    Route::get('/showgs/{gradesheetid}','GradesheetController@showgsbyid');
+    Route::get('/showgs','GradesheetController@showgradesheet');
+    //this is for multirows
+    Route::post('/addgs','GradesheetController@addgs');
+
+    //update 
+    Route::put('/updategs/{gradesheetid}','GradesheetController@updategradesheetinfo');
+    Route::put('/archievegs/{gradesheetid}','GradesheetController@archievegradesheet');
+
+
+    
+   
+   
  
 Route::post('/login','LoginController@login');
 Route::post('/adminlogin','AdminController@adminlogin');

@@ -1,22 +1,117 @@
 <template>
+
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">[SUPERADMIN] Component</div>
+   
 
-                    <div class="card-body">
-                         Dashboard 
-                            {{getCurrentUser.email}}
-
-                    </div>
-                    <div>
-               <button  type="submit" @click="logout" class="loginbtn mt-5">LOGout</button>
-<!-- add attributes @click="logout" to button   -->
-                    </div>
-                </div>
-            </div>
+        <div class="dashrole">
+          <h1 class="landing-page-title"> {{getCurrentUser.email}}</h1>
+        
+            <h1 class="landing-page-title"> {{getCurrentUser.user_role}}</h1>
         </div>
+    
+        
+       <v-row justify="center">
+           <div class="centerdiv">
+   <v-container fill-height fluid>
+    <v-row align="center"
+      justify="center">
+      <v-col cols="3" class="flex-grow-0 flex-shrink-0">
+    
+    <v-card
+    class="mx-auto"
+    max-width="344"
+
+  >
+     <v-img
+    v-bind:src="pic"
+      height="200px"
+    ></v-img>
+
+    <v-card-title class="text-center">
+   GRADESHEET
+    </v-card-title>
+
+  
+    <v-card-actions>
+     <v-btn
+        color="orange lighten-2"
+        text
+      >
+        VISIT
+      </v-btn>
+    </v-card-actions>
+
+  </v-card>
+
+      </v-col>
+
+         <v-col cols="3" class="flex-grow-0 flex-shrink-0">
+    
+    <v-card
+    class="mx-auto"
+  
+  >
+     <v-img
+    v-bind:src="pic"
+      height="200px"
+    ></v-img>
+
+    <v-card-title>
+   EVALUATION FORM
+    </v-card-title>
+
+   
+
+    <v-card-actions>
+      <v-btn
+        color="orange lighten-2"
+        text
+      >
+        VISIT
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+
+      </v-col>
+         <v-col cols="3" class="flex-grow-0 flex-shrink-0">
+    
+    <v-card
+    class="mx-auto"
+   
+  >
+    <v-img
+    v-bind:src="pic"
+      height="200px"
+    ></v-img>
+
+    <v-card-title>
+    SCHOLASTIC RECORDS
+    </v-card-title>
+
+  
+
+    <v-card-actions>
+      <v-btn
+        color="orange lighten-2"
+        text
+      >
+        VISIT
+      </v-btn>
+
+
+    </v-card-actions>
+  </v-card>
+
+      </v-col>
+    
+    </v-row>
+    
+  </v-container>
+   </div>
+
+  </v-row>
+
+   
     </div>
 </template>
 
@@ -35,7 +130,7 @@ axios.defaults.baseURL = "http://127.0.0.1:8000"
 
     data(){
              return{
-               
+                 pic: require("../assets/sample.jpg"),
                  token: localStorage.getItem('token'),
              }
         },
@@ -85,3 +180,29 @@ axios.defaults.baseURL = "http://127.0.0.1:8000"
         } 
     }
 </script>
+
+
+<style scoped>
+
+.centerdiv{
+
+
+    margin-top: 100px;
+    margin-bottom: 300px;
+     margin-left:300px;
+
+   
+ 
+  
+}
+
+.dashrole{
+    float: right;
+  
+    margin-right: 100px;
+
+
+}
+
+
+</style>
