@@ -44,6 +44,7 @@
 import Modal from "./Modal-AddNewGradeSheet.vue"
 
 export default {
+  name : 'GradesheetMainMenu',
   components: {
     Modal
   }, 

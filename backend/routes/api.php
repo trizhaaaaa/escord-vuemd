@@ -19,14 +19,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
    
  });
  Route::group(['middleware' => 'auth:sanctum'], function() {
-  
+    //logout session
     Route::post('/logout','AdminController@logout');
-   
+     //addgradesheetinfo
+     Route::post('/gradesheetinfo','GradesheetController@addgradesheetinfo');
 
   });
 
+ 
     Route::post('/gradesheetstudent','GradesheetController@addgradestudent');
-    Route::post('/gradesheetinfo','GradesheetController@addgradesheetinfo');
+  
     
     Route::get('/showgs/{gradesheetid}','GradesheetController@showgsbyid');
     Route::get('/showgs','GradesheetController@showgradesheet');

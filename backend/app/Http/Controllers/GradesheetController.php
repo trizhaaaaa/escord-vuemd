@@ -82,7 +82,20 @@ class GradesheetController extends Controller
 
         $gradetable->save();
 
-        return response()->json(['message'=>'grade added successfully']);
+        if ($gradetable) {
+            return response()->json(['message'=>'grade added successfully']);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, grades could not be updated',
+            ], 500);
+        }
+
+    
+    
+
+
+    //    return response()->json(['message'=>'grade added successfully']);
 
     }
 
