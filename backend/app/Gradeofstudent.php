@@ -14,5 +14,16 @@ class Gradeofstudent extends Model
   
   
       protected $primaryKey = 'gradesheetid';
+     
+     
       public $timestamps = false;
+
+      protected $table = 'gradeofstudents';
+
+
+      public function operador(){
+    
+        return $this->belongsTo('\App\Scholstudent');
+        
+    }
 }
