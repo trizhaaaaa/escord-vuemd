@@ -7,7 +7,7 @@
 
     <escord-header />
     
-    <gs-main-menu/>
+    <!-- <gs-main-menu/> -->
     <router-view> </router-view>
     <escord-footer />
   </div>
