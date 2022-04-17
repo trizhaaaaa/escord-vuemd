@@ -8,7 +8,7 @@
     <escord-header />
     
     <gs-main-menu/>
-    <!-- <router-view> </router-view> -->
+    <router-view> </router-view>
     <escord-footer />
   </div>
 </template>
