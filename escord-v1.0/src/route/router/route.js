@@ -9,6 +9,8 @@ import Dashboard_stud from '../../components/Dashboard_stud.vue'
 import Dashboard_admin from '../../components/Dashboard_admin.vue'
 
 
+
+
 const routes = [
   {
     path: '/',
@@ -16,12 +18,16 @@ const routes = [
     component: Landing
 
   },
+
+  ///
   {
     path: '/about',
     name: 'About',
     component: About
 
   },
+
+  ///
   {
     path: '/guide',
     name: 'Guide',
@@ -59,7 +65,7 @@ const routes = [
     path: '/AdminDashboard',
     name: 'AdminDashboard',
     component: Dashboard_admin,
-    meta: { requiresAuth: true, authorize: 'admin' }
+     meta: { requiresAuth: true, authorize: 'admin' }
   },
   
   {

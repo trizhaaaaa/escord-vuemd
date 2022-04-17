@@ -13,12 +13,15 @@
          ></button> -->
       </header>
 
+     
+
       <!-- Body -->
       <section class="modal-body">
+           <p class="text-danger"> <span v-if="error.message"> {{error.message}}</span></p>
         <table>
           <tr>
             <td class="input__label" colspan="1"><label for="gs-id">Grade Sheet ID</label></td>
-            <td colspan="3"><p class="p__text">This is a unique and randomized gradesheet ID.<br>EXAMPLE--> GS-{{gradesheetID}}</p></td>
+            <td colspan="3"><p class="p__text">This is a unique and randomized gradesheet ID.<br>EXAMPLE-->{{formData.gradesheetid}}</p></td>
           </tr>
 
           <tr class="hr">
@@ -27,26 +30,36 @@
 
           <tr>
             <td class="input__label" colspan="1"><label for="subjCode">Subject Code</label></td>
-            <td class="input__text" colspan="1"><input type="text" name="subjCode" id="subjCode" required></td>
+            <td class="input__text" colspan="1"><input type="text" name="subjCode" id="subjCode" required v-model="formData.subjectcode"></td>
 
             <td class="input__label" colspan="1"><label for="subjUnit">Units</label></td>
-            <td class="input__text" colspan="1"><input type="text" name="subjUnit" id="subjUnit" required></td>
+            <td class="input__text" colspan="1"><input type="text" name="subjUnit" id="subjUnit" v-model="formData.units" required></td>
           </tr>
 
           <tr>
             <td class="input__label" colspan="1"><label for="subjDesc">Subject Description</label></td>
-            <td class="fullLine" colspan="3"><input type="text" name="subjDesc" id="subjDesc" required></td>
+            <td class="fullLine" colspan="3"><input type="text" name="subjDesc" id="subjDesc" v-model="formData.subjectdesc" required></td>
           </tr>
 
           <tr>
             <td class="input__label" colspan="1">Schedule</td>
-            <td class="input__text" colspan="2"><input type="text" name="subjTime" id="subjTime" placeholder="Time" required></td>
-            <td class="input__text" colspan="2"><input type="text" name="subjDay" id="subjDay" placeholder="Day" required></td>
+            <td class="input__text" colspan="2"><input type="text" name="subjTime" id="subjTime" placeholder="Time" v-model="formData.time" required></td>
+            <td class="input__text" colspan="2"><input type="text" name="subjDay" id="subjDay" placeholder="Day" v-model="formData.day" required></td>
           </tr>
 
           <tr>
             <td class="input__label" colspan="1"><label for="subjProf">Instructor</label></td>
-            <td class="fullLine" colspan="3"><input type="text" name="subjProf" id="subjProf" required></td>
+            <td class="fullLine" colspan="3"><input type="text" name="subjProf" id="subjProf" placeholder="Professor" v-model="formData.professor" required></td>
+           
+          </tr>
+             <tr>
+            <td class="input__label" colspan="1"></td>
+               <p> <span v-if="v$.formData.facultyrank.$error">{{ v$.formData.facultyrank.$errors[0].$message  }}</span> <!--THIS IS THE ERROR MESSAGE NEED TO DESIGN -->
+
+            
+            </p>
+            <td class="fullLine" colspan="3"><input type="text" name="subjProf" id="subjProf" placeholder="faculty rank" v-model="formData.facultyrank" required></td>
+           
           </tr>
 
           <tr class="hr">
@@ -56,20 +69,26 @@
           <tr>
             <td class="input__label" colspan="1">Class Information</td>
 
-            <td class="fullLine" colspan="3"><input type="text" name="classProg" id="classProg" placeholder="Program" required></td> <!-- make this a dropdown list -->
+            <td class="fullLine" colspan="3"><input type="text" name="classProg" id="classProg" placeholder="Program" v-model="formData.course_short"  required></td> <!-- make this a dropdown list -->
           </tr>
 
           <tr>
             <td class="space" colspan="1"> </td>
-            <td class="input__text" colspan="2"><input type="text" name="classYr" id="classYr" placeholder="Year" required></td>
-            <td class="input__text" colspan="2"><input type="text" name="classSec" id="classSec" placeholder="Section"></td>
+            <td class="input__text" colspan="2"><input type="text" name="classYr" id="classYr" placeholder="Year" v-model="formData.course_year"  required></td>
+            <td class="input__text" colspan="2"><input type="text" name="classSec" id="classSec" placeholder="Section" v-model="formData.course_section" ></td>
           </tr>
 
           <tr>
             <td class="space" colspan="1"> </td>
-            <td class="input__text" colspan="2"><input type="text" name="classSem" id="classSem" placeholder="Semester" required></td>
-            <td class="input__text" colspan="2"><input type="text" name="classSY" id="classSY" placeholder="Academic Year" required></td>
+            <td class="input__text" colspan="2"><input type="text" name="classSem" id="classSem" placeholder="Semester" v-model="formData.semester"  required></td>
+          
           </tr>
+            <tr>
+            <td class="space" colspan="1"> </td>
+              <td class="input__text" colspan="2"><input type="text" name="classSY" id="classSY" placeholder="Start Acad Year" v-model="formData.sem_startyear" required></td>
+              <td class="input__text" colspan="2"><input type="text" name="classSY" id="classSY" placeholder="End Acad Year"  v-model="formData.sem_endyear" required></td>
+          </tr>
+
 
         </table>
       </section>
@@ -89,7 +108,7 @@
             <button
             type="submit"
             class="btn-footer-add"
-            @click="add"
+            @click="addgs"
             >
             Add Grade Sheet
             </button>
@@ -103,18 +122,82 @@
 
 <script>
 
+
+import useVuelidate from '@vuelidate/core'
+import { required } from '@vuelidate/validators'
+import { mapActions} from "vuex";
+
+
+
 export default {
   name: 'Modal',
-  methods:{
-    close(){
-      this.$emit('close');
-    }
-  },
+setup: () => ({ v$: useVuelidate() }),
   data(){
     return{
-      gradesheetID: Math.ceil(Math.random()*10000000)
+      formData:{
+      gradesheetid: 'GS-' + Math.ceil(Math.random()*10000000),
+      subjectcode : '',
+      units:'',
+      subjectdesc:'',
+      time:'',
+      day:'',
+      professor:'',
+      course_short:'',
+      course_year:'',
+      course_section:'',
+      semester:'',
+      sem_startyear:'',
+      sem_endyear:'',
+      facultyrank:'',
+        },
+        error:{
+        }
     }
-  }
+  },
+
+  validations(){
+ return {
+      formData:{
+      gradesheetid: {required},
+      subjectcode :{required} ,
+      units:{required},
+      subjectdesc:{required},
+      time:{required},
+      day:{required},
+      professor:{required},
+      course_short:{required},
+      course_year:{required},
+      course_section:{required},
+      semester:{required},
+      sem_startyear:{required},
+      sem_endyear:{required},
+      facultyrank:{required},
+       }
+    }
+  },
+
+   methods:{
+       ...mapActions({ addgsinfo: "addgsinfo" }),
+     addgs(){
+            this.v$.$validate()
+
+            if(!this.v$.$error){
+
+              
+      this.addgsinfo(this.formData);
+
+            }else{
+              console.log(this.v$);
+            }
+
+     },
+    close(){
+      this.$emit('close');
+    
+      }
+    },
+
+ 
 }
 </script>
 

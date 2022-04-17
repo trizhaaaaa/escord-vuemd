@@ -7,7 +7,7 @@
 
                     <div class="card-body">
                          Dashboard 
-                   
+                    <GradesheetMainMenu/>
 
                     </div>
                     <div>
@@ -21,8 +21,14 @@
 </template>
 
 <script>
+
+import GradesheetMainMenu from "./GradesheetMainMenu.vue"
   export default {
       name : 'AdminDashboard',
+       components: {
+    GradesheetMainMenu
+  }, 
+
     data: () => ({
       links: [
         'ADMIN Dashboard',
