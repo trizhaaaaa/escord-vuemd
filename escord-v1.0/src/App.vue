@@ -7,7 +7,7 @@
 
     <escord-header />
 
-
+    <!-- <gs-menu/> -->
     <router-view> </router-view>
     <escord-footer />
   </div>
@@ -17,11 +17,13 @@
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 
+import GSMenu from "./components/GradesheetMainMenu.vue"
 
 export default {
   components: {
     "escord-header": Header,
     "escord-footer": Footer,
+    "gs-menu": GSMenu,
   },
 
   name: "App",
