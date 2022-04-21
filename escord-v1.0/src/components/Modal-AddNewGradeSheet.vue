@@ -16,9 +16,16 @@
      
 
       <!-- Body -->
+      <form @submit.prevent="addgs">
       <section class="modal-body">
            <p class="text-danger"> <span v-if="error.message"> {{error.message}}</span></p>
+              <p>
+              <span v-if="v$.formData.subjectcode.$error">{{
+                v$.formData.subjectcode.$errors[0].$message
+              }}</span>
+            </p>
         <table>
+     
           <tr>
             <td class="input__label" colspan="1"><label for="gs-id">Grade Sheet ID</label></td>
             <td colspan="3"><p class="p__text">This is a unique and randomized gradesheet ID.<br>EXAMPLE-->{{formData.gradesheetid}}</p></td>
@@ -30,34 +37,39 @@
 
           <tr>
             <td class="input__label" colspan="1"><label for="subjCode">Subject Code</label></td>
-            <td class="input__text" colspan="1"><input type="text" name="subjCode" id="subjCode" required v-model="formData.subjectcode"></td>
-
+            <td class="input__text" colspan="1"><input type="text" ref="subjectcode" name="subjCode" id="subjCode" required v-model="formData.subjectcode"></td>
+           
             <td class="input__label" colspan="1"><label for="subjUnit">Units</label></td>
             <td class="input__text" colspan="1"><input type="text" name="subjUnit" id="subjUnit" v-model="formData.units" required></td>
+      
           </tr>
 
           <tr>
             <td class="input__label" colspan="1"><label for="subjDesc">Subject Description</label></td>
             <td class="fullLine" colspan="3"><input type="text" name="subjDesc" id="subjDesc" v-model="formData.subjectdesc" required></td>
+         
+
           </tr>
 
           <tr>
             <td class="input__label" colspan="1">Schedule</td>
             <td class="input__text" colspan="2"><input type="text" name="subjTime" id="subjTime" placeholder="Time" v-model="formData.time" required></td>
+          
+
             <td class="input__text" colspan="2"><input type="text" name="subjDay" id="subjDay" placeholder="Day" v-model="formData.day" required></td>
+       
+
           </tr>
 
           <tr>
             <td class="input__label" colspan="1"><label for="subjProf">Instructor</label></td>
             <td class="fullLine" colspan="3"><input type="text" name="subjProf" id="subjProf" placeholder="Professor" v-model="formData.professor" required></td>
+            
            
           </tr>
              <tr>
             <td class="input__label" colspan="1"></td>
-               <p> <span v-if="v$.formData.facultyrank.$error">{{ v$.formData.facultyrank.$errors[0].$message  }}</span> <!--THIS IS THE ERROR MESSAGE NEED TO DESIGN -->
-
-            
-            </p>
+      
             <td class="fullLine" colspan="3"><input type="text" name="subjProf" id="subjProf" placeholder="faculty rank" v-model="formData.facultyrank" required></td>
            
           </tr>
@@ -108,13 +120,14 @@
             <button
             type="submit"
             class="btn-footer-add"
-            @click="addgs"
+            
             >
             Add Grade Sheet
             </button>
           </div>
+      
       </footer>
-
+         </form>
     </div>
   </div>
 </transition>
@@ -126,6 +139,7 @@
 import useVuelidate from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 import { mapActions} from "vuex";
+import axios from "axios"
 
 
 
@@ -135,20 +149,19 @@ setup: () => ({ v$: useVuelidate() }),
   data(){
     return{
       formData:{
-      gradesheetid: 'GS-' + Math.ceil(Math.random()*10000000),
-      subjectcode : '',
-      units:'',
-      subjectdesc:'',
-      time:'',
-      day:'',
-      professor:'',
-      course_short:'',
-      course_year:'',
-      course_section:'',
-      semester:'',
-      sem_startyear:'',
-      sem_endyear:'',
-      facultyrank:'',
+      subjectcode : null,
+      units:null,
+      subjectdesc:null,
+      time:null,
+      day:null,
+      professor:null,
+      course_short:null,
+      course_year:null,
+      course_section:null,
+      semester:null,
+      sem_startyear:null,
+      sem_endyear:null,
+      facultyrank:null,
         },
         error:{
         }
@@ -158,7 +171,6 @@ setup: () => ({ v$: useVuelidate() }),
   validations(){
  return {
       formData:{
-      gradesheetid: {required},
       subjectcode :{required} ,
       units:{required},
       subjectdesc:{required},
@@ -177,14 +189,53 @@ setup: () => ({ v$: useVuelidate() }),
   },
 
    methods:{
-       ...mapActions({ addgsinfo: "addgsinfo" }),
+
+     clearinginputfields(){
+         var elements = document.getElementsByTagName("input");
+            for (var ii=0; ii < elements.length; ii++) {
+              if (elements[ii].type == "text") {
+                elements[ii].value = null;
+              }
+            } 
+     },
+     
      addgs(){
             this.v$.$validate()
 
             if(!this.v$.$error){
 
-              
-      this.addgsinfo(this.formData);
+        axios.post('/api/gradesheetinfo', this.formData).then((response)=>{
+        
+       
+            console.log('adding successful' , response.data);
+         
+         
+          this.clearinginputfields()
+            
+   /*   this.formData = {
+        subjectcode :null ,
+      units:null,
+      subjectdesc:null,
+      time:null,
+      day:null,
+      professor:null,
+      course_short:null,
+      course_year:null,
+      course_section:null,
+      semester:null,
+      sem_startyear:null,
+      sem_endyear:null,
+      facultyrank:null,
+    }; */
+
+}).catch((errors)=>{
+       //   this.errors = errors.response.data.errors
+            // this.error =  errors.response.data;
+             console.log('error in adding');
+             })
+
+    
+           
 
             }else{
               console.log(this.v$);
@@ -193,7 +244,7 @@ setup: () => ({ v$: useVuelidate() }),
      },
     close(){
       this.$emit('close');
-    
+        this.clearinginputfields()
       }
     },
 

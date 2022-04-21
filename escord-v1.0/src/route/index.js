@@ -56,7 +56,8 @@ function loggedIn(){
             if(currentUser === 'superadmin'){
             return next({ path: '/dashboard' });
           }
-          if(currentUser === 'admin'){
+          if(currentUser === 'staff'){
+
             return next({ path: '/admindashboard' });
           }
           if(currentUser === 'student'){

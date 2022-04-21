@@ -68,7 +68,7 @@ const actions = {
                 localStorage.setItem('role', response.data.user_role);
 
                 
-                  if(response.data.user_role === "admin"){
+                  if(response.data.user_role === "staff"){
                     //    router.push({path:'/About'});
                     router.push('/AdminDashboard', () => router.go(0))
                 

@@ -22,10 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     //logout session
     Route::post('/logout','AdminController@logout');
      //addgradesheetinfo
-     Route::post('/gradesheetinfo','GradesheetController@addgradesheetinfo');
+ 
 
   });
-
+  Route::post('/gradesheetinfo','GradesheetController@addgradesheetinfo');
  
     Route::post('/gradesheetstudent','GradesheetController@addgradestudent');
   
@@ -40,8 +40,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::put('/archievegs/{gradesheetid}','GradesheetController@archievegradesheet');
 
 
-    
    
+    Route::get('/archievegs','ArchieveController@archievegradesheet');
    
  
 Route::post('/login','LoginController@login');

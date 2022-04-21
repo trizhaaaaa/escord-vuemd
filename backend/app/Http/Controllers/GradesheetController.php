@@ -8,6 +8,7 @@ use App\Gradeofstudent;
 use App\GradesheetInfo;
 use Illuminate\Support\Facades\DB;
 
+
 use Validator;
 
 
@@ -45,9 +46,9 @@ class GradesheetController extends Controller
 
 
     public function addgradesheetinfo(Request $request){
-
+     
+  
         $request->validate([
-            'gradesheetid' => 'required',
             'subjectcode' => 'required',
             'subjectdesc' => 'required',
             'semester' => 'required',
@@ -62,25 +63,30 @@ class GradesheetController extends Controller
             'professor' => 'required',
             'facultyrank' => 'required',
 
-        ]);
+        ]); 
+
+        $gradesheetid = Str::uuid();
 
         $gradetable = new GradesheetInfo;
-        $gradetable->gradesheetid  = $request->gradesheetid;
-        $gradetable->subjectcode  = $request->subjectcode;
-        $gradetable->subjectdesc  = $request->subjectdesc;
-        $gradetable->semester  = $request->semester;
-        $gradetable->sem_startyear  = $request->sem_startyear;
-        $gradetable->sem_endyear  = $request->sem_endyear;
-        $gradetable->units  = $request->units;
-        $gradetable->time  = $request->time;
-        $gradetable->day  = $request->day;
-        $gradetable->course_short  = $request->course_short;
-        $gradetable->course_year  = $request->course_year;
-        $gradetable->course_section  = $request->course_section;
-        $gradetable->professor  = $request->professor;
-        $gradetable->facultyrank  = $request->facultyrank;
+        $gradetable->gradesheetid  =Str::upper($gradesheetid);
+        $gradetable->subjectcode  =  Str::upper($request->subjectcode);
+        $gradetable->subjectdesc  = Str::upper($request->subjectdesc);
+        $gradetable->semester  = Str::upper($request->semester);
+        $gradetable->sem_startyear  = Str::upper($request->sem_startyear);
+        $gradetable->sem_endyear  = Str::upper($request->sem_endyear);
+        $gradetable->units  = Str::upper($request->units);
+        $gradetable->time  = Str::upper($request->time);
+        $gradetable->day  = Str::upper($request->day);
+        $gradetable->course_short  =Str::upper($request->course_short);
+        $gradetable->course_year  = Str::upper($request->course_year);
+        $gradetable->course_section  = Str::upper($request->course_section);
+        $gradetable->professor  = Str::upper($request->professor);
+        $gradetable->facultyrank  = Str::upper($request->facultyrank);
 
         $gradetable->save();
+
+
+    
 
         if ($gradetable) {
             return response()->json(['message'=>'grade added successfully']);
@@ -90,13 +96,7 @@ class GradesheetController extends Controller
                 'message' => 'Sorry, grades could not be updated',
             ], 500);
         }
-
-    
-    
-
-
-    //    return response()->json(['message'=>'grade added successfully']);
-
+ 
     }
 
 
@@ -168,57 +168,6 @@ class GradesheetController extends Controller
                         'message' => 'Sorry, cook could not be updated',
                     ], 500);
                 }
-
-           /*  GradesheetInfo::where('gradesheetid', $gradesheetid)->update([
-                'subjectcode' =>$request->$subjectcode,
-                'subjectdesc' =>$request->$subjectdesc,
-                'semester' =>$request->$semester,
-                'sem_startyear' =>$request->$sem_startyear,
-                'sem_endyear' =>$request->$sem_endyear,
-                'units' =>$request->$units,
-                'time' =>$request->$time,
-                'day' =>$request->$day,
-                'course_short' =>$request->$course_short,
-                'course_year' =>$request->$course_year,
-                'course_section' =>$request->$course_section,
-                'professor' =>$request->$professor,
-                'facultyrank' =>$request->$facultyrank
-            ]); */
-     /*    $gradetable->subjectcode  = $request->input('subjectcode');
-        $gradetable->subjectdesc  = $request->input('subjectdesc');
-        $gradetable->semester  = $request->input('semester');
-        $gradetable->sem_startyear  = $request->input('sem_startyear');
-        $gradetable->sem_endyear  = $request->input('sem_endyear');
-        $gradetable->units  = $request->input('units');   
-        $gradetable->time  = $request->input('time');
-        $gradetable->day  = $request->input('day');
-          $gradetable->course_short  = $request->input('course_short');
-        $gradetable->course_year  = $request->input('course_year');
-        $gradetable->course_section  = $request->input('course_section');
-        $gradetable->professor  = $request->input('professor');
-       $gradetable->facultyrank  = $request->input('facultyrank');
-
-       $gradetable->save(); */
-
-          /*    $gradetable = DB::table('gradsheetinfo')->where('gradesheetid', $gradesheetid)->limit(1)->update([
-            'subjectcode' =>$request->$subjectcode,
-            'subjectdesc' =>$request->$subjectdesc,
-            'semester' =>$request->$semester,
-            'sem_startyear' =>$request->$sem_startyear,
-            'sem_endyear' =>$request->$sem_endyear,
-            'units' =>$request->$units,
-            'time' =>$request->$time,
-            'day' =>$request->$day,
-            'course_short' =>$request->$course_short,
-            'course_year' =>$request->$course_year,
-            'course_section' =>$request->$course_section,
-            'professor' =>$request->$professor,
-            'facultyrank' =>$request->$facultyrank
-         ]);
- */         
-
-
-     //  return response()->json($gradetable);
 
 
     }

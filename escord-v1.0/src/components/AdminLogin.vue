@@ -7,6 +7,7 @@
     <p class="text-danger" v-text="geterror"></p>
 
           <!--EMAIL INPUT-->
+           <form @submit.prevent="login">
           <div class="form__div">
             
             <input
@@ -63,10 +64,10 @@
             type="submit"
             class="form__button"
             value="Log In"
-          v-on:click="login"
+         
       
           />
-          
+          </form>
         </div>
       </div>
     </center>
