@@ -7,6 +7,7 @@ import router from './route'
 import vuetify from '@/plugins/vuetify' 
 import store from './store'
 import axios from 'axios';
+import Toasted from 'vue-toasted'
 
 
 // path to vuetify export
@@ -20,6 +21,7 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 Vue.use(vuetify)
 Vue.config.productionTip = false
 Vue.use(VueRouter);
+Vue.use(Toasted,{duration:1500,position:'top-center',theme:'outline',iconPack:'material'})
 /* eslint-disable no-new */
 
 

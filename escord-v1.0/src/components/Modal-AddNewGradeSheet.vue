@@ -191,6 +191,7 @@ setup: () => ({ v$: useVuelidate() }),
    methods:{
 
      clearinginputfields(){
+       
          var elements = document.getElementsByTagName("input");
             for (var ii=0; ii < elements.length; ii++) {
               if (elements[ii].type == "text") {
@@ -208,10 +209,10 @@ setup: () => ({ v$: useVuelidate() }),
         
        
             console.log('adding successful' , response.data);
-         
-         
-          this.clearinginputfields()
-            
+      
+       
+       this.clearinginputfields()
+               this.$toasted.show('adding successful');
    /*   this.formData = {
         subjectcode :null ,
       units:null,
