@@ -6,8 +6,8 @@
     />
 
     <escord-header />
-    
-   
+
+
     <router-view> </router-view>
     <escord-footer />
   </div>

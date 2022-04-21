@@ -22,7 +22,7 @@ class CreateAdminsTable extends Migration
             $table->string('lastname')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('user_role');
+            $table->string('authority');
             $table->rememberToken();
             $table->timestamps();
         });
