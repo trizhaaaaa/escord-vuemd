@@ -4,6 +4,7 @@ import Guide from '../../components/Guide.vue'
 import Contact from '../../components/Contact.vue'
 import Login from '../../components/Login.vue'
 import Dashboard from '../../components/Dashboard.vue'
+import Admin_Dashboard from '../../components/Staff-Dashboard.vue'
 
 
 const routes = [
@@ -42,6 +43,12 @@ const routes = [
     name: 'Dashboard',
     component: Dashboard,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/Staff-Dashboard',
+    name: 'Staff',
+    component: Admin_Dashboard
+
   },
   
 

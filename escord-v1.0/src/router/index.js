@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Landing from '../components/Landing.vue'
+import Landing from '../components/Landing.vue';
 import About from '../components/About.vue'
 import Guide from '../components/Guide.vue'
 import Contact from '../components/Contact.vue'
