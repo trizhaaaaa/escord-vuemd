@@ -17,37 +17,35 @@
 
         <!--Adding Gradesheet-->
         <div class="btn-addGS">
-        <button type="button" 
+        <button type="button"
         class="button"
         @click="showModal">
-        <span class="button__text">Add Grade Sheet</span>
+        <span class="button__text">Add New Grade Sheet</span>
         </button>
         </div>
 
-      <!-- <button
+     <!-- <button
       type="button"
       class="btn"
       @click="showModal"
     >
-      Open Modal!
-    </button> -->
+      <!--Open Modal!-->
+  <!-- </button>
 
     <Modal
       v-show="isModalVisible"
-      @close="closeModal"
-    />
-        
+      @close="closeModal"/>-->
     </div>
 </template>
 
-<script>
+<!--<script>
 import Modal from "./Modal-AddNewGradeSheet.vue"
 
 export default {
   name : 'GradesheetMainMenu',
   components: {
     Modal
-  }, 
+  },
   data(){
     return{
       isModalVisible: false
@@ -62,14 +60,37 @@ export default {
     }
   }
 }
-</script>
+</script>-->
 
 <style scoped>
 div#gs-mainmenu{
     height: 500px;
 }
-div.btn-returnMain, div.search-bar, div.btn-addGS{
-  display: flex;  
+div.btn-returnMain{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #e26d5c;
+  margin: 20px;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: white;
+  box-shadow: 0.25rem 0.25rem 0rem #f0b2a8;
+}
+div.search-bar{
+  display: flex;
+  align-items: right;
+  align-content: right;
+  justify-content: space-between;
+  background: #e26d5c;
+  margin: 20px;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: white;
+  box-shadow: 0.25rem 0.25rem 0rem #f0b2a8;
+}
+div.btn-addGS{
+  display: flex;
   align-items: center;
   justify-content: space-between;
   background: #e26d5c;
@@ -131,4 +152,5 @@ input {
   font-size: 1.5em;
   background: rgba(0, 0, 0, 0.08);
 }
+
 </style>
