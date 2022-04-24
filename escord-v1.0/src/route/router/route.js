@@ -4,17 +4,13 @@ import Guide from '../../components/Guide.vue'
 import Contact from '../../components/Contact.vue'
 import Login from '../../components/Login.vue'
 import Dashboard from '../../components/Dashboard.vue'
-<<<<<<< HEAD
 import AdminLogin from '../../components/AdminLogin.vue'
 import Dashboard_stud from '../../components/Dashboard_stud.vue'
 import Dashboard_admin from '../../components/Dashboard_admin.vue'
 import AdminCreation from '../../components/AdminCreation.vue'
 
 
-
-=======
 import Admin_Dashboard from '../../components/Staff-Dashboard.vue'
->>>>>>> origin/vuetify_component
 
 
 const routes = [
