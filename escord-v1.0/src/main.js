@@ -18,68 +18,16 @@ axios.defaults.withCredentials = true
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 
+
+
+
 Vue.use(vuetify)
 Vue.config.productionTip = false
 Vue.use(VueRouter);
-Vue.use(Toasted,{duration:1500,position:'top-center',theme:'outline',iconPack:'material'})
+Vue.use(Toasted,{duration:1500,position:'top-right',theme:'bubble',iconPack:'fontawesome'})
 /* eslint-disable no-new */
 
 
-/** THIS IS VUE ROUTER META CODES */
-
-function loggedIn(){
-  return localStorage.getItem('token')
-
-
-}
-
-
- /* router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
-
-   
-    if (!loggedIn()) {
-      next({
-        path: '/',
-      })
-    } else {
-      next()
-    }
-  } else {
-    next() // make sure to always call next()!
-  } 
-})
- */
-
-/* router.beforeEach((to, from, next) => { // This way, you don't need to write hook for each route
-  // get where user being stored ex:
- const user = store.getters. getCurrentUser;// assume user have a role with `user.role`
-   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!loggedIn() || !user) {
-      next({
-        path: '/',
-      })
-    }else{
-      if (to.meta.adminAuth) {
-        if (user.user_role === "student") {
-         next()
-        }else{
-          next({
-            path: '/',
-          })
-        }
-      } else {
-        next('/404-page')
-      }
-    }
-
-   } else {
-      next()
-  }
-}) */
-/** THIS IS VUE ROUTER META CODES */
 
 
 new Vue({

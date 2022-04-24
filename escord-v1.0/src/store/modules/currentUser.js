@@ -33,11 +33,11 @@ const actions = {
 
           axios.get('/sanctum/csrf-cookie').then(response => {
                 axios.post('/api/adminlogin',User).then((response)=>{
-                //   localStorage.setItem('isLoggedIn','true');
-                   localStorage.setItem('token',response.data);
+                // localStorage.setItem('isLoggedIn','true');
+                 localStorage.setItem('token',response.data);
                     
-                   axios.defaults.headers.common["Authorization"] = `Bearer ${response.data}`;
-                  //   this.$router.push({name:'Dashboard'});
+              axios.defaults.headers.common["Authorization"] = `Bearer ${response.data}`;
+                
                
                 return dispatch('currentUserLog').then(() => {
                  
@@ -70,18 +70,18 @@ const actions = {
                 
                   if(response.data.user_role === "staff"){
                     //    router.push({path:'/About'});
-                    router.push('/AdminDashboard', () => router.go(0))
+                    router.push('/AdminDashboard', () => router.go(0)).catch(err => {})
                 
                         
                   }else if (response.data.user_role === "superadmin"){
                 //    router.push({path:'/Dashboard'});
                
-                    router.push('/Dashboard',() => router.go(0));
+                    router.push('/Dashboard',() => router.go(0)).catch(err => {})
                
                     
                   }else{
                  //   router.push({path:'/AdminDashboard'});
-                 router.push('/StudentDashboard', () => router.go(0))
+                 router.push('/StudentDashboard', () => router.go(0)).catch(err => {})
                   
                   }
    

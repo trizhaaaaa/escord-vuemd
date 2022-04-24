@@ -7,6 +7,8 @@ import Dashboard from '../../components/Dashboard.vue'
 import AdminLogin from '../../components/AdminLogin.vue'
 import Dashboard_stud from '../../components/Dashboard_stud.vue'
 import Dashboard_admin from '../../components/Dashboard_admin.vue'
+import AdminCreation from '../../components/AdminCreation.vue'
+
 
 
 
@@ -19,6 +21,12 @@ const routes = [
 
   },
 
+  {
+    path: '/creation',
+    name: 'AdminCreation',
+    component: AdminCreation
+
+  },
   ///
   {
     path: '/about',
@@ -65,7 +73,7 @@ const routes = [
     path: '/AdminDashboard',
     name: 'AdminDashboard',
     component: Dashboard_admin,
-   meta: { requiresAuth: true, authorize: 'staff' }
+    meta: { requiresAuth: true, authorize: 'staff' }
   },
   
   {

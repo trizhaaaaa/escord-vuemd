@@ -43,10 +43,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
    
     Route::get('/archievegs','ArchieveController@archievegradesheet');
    
- 
-Route::post('/login','LoginController@login');
+
+
+
+
+
+//login of all account
 Route::post('/adminlogin','AdminController@adminlogin');
 
+
+//Manager{{SuperAdmin API}}
+
+//showing ng account
+Route::get('/showuseraccount','AdminController@showuseraccount');
+Route::get('/showadminaccount','AdminController@showadminaccount');
+
+//creation of account
+Route::post('/createaccadm','LoginController@createaccountAdmin');
+Route::post('/createaccstud','LoginController@createaccountStudent');
  
-    
+//update of account 
+//konting edit nalang
+Route::put('/updateAdmin/{id}','AdminController@updateAccountAdmin');   
+Route::put('/updateStudent/{id}','AdminController@updateAccountUser');   
 

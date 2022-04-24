@@ -86,7 +86,7 @@ export default {
     login: function () {
      // this.loggedIn = !this.loggedIn;
      // this.showCategoryList = !this.showCategoryList;
-   this.$router.push({name:'AdminLogin'});
+   this.$router.push({name:'AdminLogin'}).catch(err => {});
    /*    if (this.showCategoryList === true) {
         this.btnText = "LOG OUT";
       } else {

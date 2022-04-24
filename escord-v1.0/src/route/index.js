@@ -12,26 +12,10 @@ export default router;
 
 function loggedIn(){
     return localStorage.getItem('token')
-  
-  
+   
+   
   }
 
-/* router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-      // this route requires auth, check if logged in
-      // if not, redirect to login page
-        console.log(store.getters.getrole);
-      if (!loggedIn() ) {
-        next({
-          path: '/',
-        })
-      } else {
-         next()
-      }
-    } else {
-      next() // make sure to always call next()!
-    } 
-  }) */
 
 
 
@@ -39,11 +23,11 @@ function loggedIn(){
 
  router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
-    const { authorize } = to.meta;
+    const { authorize, requiresAuth } = to.meta;
    // const currentUser = authenticationService.currentUserValue;
 
   const currentUser = localStorage.getItem('role');
-    if (authorize) {
+    if (requiresAuth) {
         if (!loggedIn()) {
             // not logged in so redirect to login page with the return url
             return next({ path: '/'});

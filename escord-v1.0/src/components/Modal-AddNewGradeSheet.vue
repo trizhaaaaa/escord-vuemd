@@ -132,7 +132,7 @@
 
 
 import useVuelidate from '@vuelidate/core'
-import { required } from '@vuelidate/validators'
+import { required,numeric } from '@vuelidate/validators'
 import { mapActions} from "vuex";
 import axios from "axios"
 
@@ -167,7 +167,7 @@ setup: () => ({ v$: useVuelidate() }),
  return {
       formData:{
       subjectcode :{required} ,
-      units:{required},
+      units:{required, numeric},
       subjectdesc:{required},
       time:{required},
       day:{required},
@@ -175,7 +175,7 @@ setup: () => ({ v$: useVuelidate() }),
       course_short:{required},
       course_year:{required},
       course_section:{required},
-      semester:{required},
+      semester:{required,numeric},
       sem_startyear:{required},
       sem_endyear:{required},
       facultyrank:{required},
@@ -186,13 +186,28 @@ setup: () => ({ v$: useVuelidate() }),
    methods:{
 
      clearinginputfields(){
+      this.formData = {
+      subjectcode :'' ,
+      units:'',
+      subjectdesc:'',
+      time:'',
+      day:'',
+      professor:'',
+      course_short:'',
+      course_year:'',
+      course_section:'',
+      semester:'',
+      sem_startyear:'',
+      sem_endyear:'',
+      facultyrank:'',
+    }; 
        
-         var elements = document.getElementsByTagName("input");
+        /*  var elements = document.getElementsByTagName("input");
             for (var ii=0; ii < elements.length; ii++) {
               if (elements[ii].type == "text") {
                 elements[ii].value = null;
               }
-            } 
+            }  */
      },
      
      addgs(){
@@ -207,27 +222,16 @@ setup: () => ({ v$: useVuelidate() }),
       
        
        this.clearinginputfields()
-               this.$toasted.show('adding successful');
-   /*   this.formData = {
-        subjectcode :null ,
-      units:null,
-      subjectdesc:null,
-      time:null,
-      day:null,
-      professor:null,
-      course_short:null,
-      course_year:null,
-      course_section:null,
-      semester:null,
-      sem_startyear:null,
-      sem_endyear:null,
-      facultyrank:null,
-    }; */
+               this.$toasted.success('adding successful');
+   
 
 }).catch((errors)=>{
        //   this.errors = errors.response.data.errors
             // this.error =  errors.response.data;
              console.log('error in adding');
+
+       this.$toasted.error('error in adding');
+   
              })
 
     
