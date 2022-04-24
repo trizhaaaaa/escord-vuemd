@@ -65,9 +65,18 @@
                     <Td class="mid name">{{student.studFN}}</Td>
                     <Td class="name">{{student.studMN}}</Td>
 
-                    <Td v-html="student.studMidterm" class="midterm"></Td>
-                    <Td v-html="student.studFinalTerm" class="finalterm"></Td>
-                    <Td v-html="student.studRemarks" class="remarks"></Td>
+                    <Td>
+                        <input type="text" class="grade" v-bind:value="student.studMTG" maxlength="4" size="7" required>
+                    </Td>
+
+                    <Td>
+                        <input type="text" class="grade" v-bind:value="student.studFTG" maxlength="4" size="7" required>
+                    </Td>
+
+                    <Td>
+                        <input type="text" v-bind:value="student.studRMRK">
+                    </Td>
+                    
 
                 </Tr>
             </Table>
@@ -93,12 +102,9 @@ export default {
                     studLN: 'DELA CRUZ',
                     studFN: 'JUAN',
                     studMN: 'L',
-
-                    studMidterm:'<input type="text" class="grade" value="0" maxlength="4" size="7" required></input>',
-
-                    studFinalTerm: '<input type="text" class="grade" value="0" maxlength="4" size="7" required></input>',
-
-                    studRemarks:'<input type="text"></input>'
+                    studMTG: '0',
+                    studFTG: '0',
+                    studRMRK: '',
                 },
 
                 {
@@ -106,12 +112,9 @@ export default {
                     studLN: 'DELA CRUZ',
                     studFN: 'JUAN',
                     studMN: 'G',
-
-                    studMidterm:'<input type="text" class="grade" value="0" maxlength="4" size="7" required></input>',
-
-                    studFinalTerm: '<input type="text" class="grade" value="0" maxlength="4" size="7" required></input>',
-                    
-                    studRemarks:'<input type="text"></input>'
+                    studMTG: '0',
+                    studFTG: '0',
+                    studRMRK: '',
                 },
 
                 {
@@ -119,12 +122,9 @@ export default {
                     studLN: 'DELA CRUZ',
                     studFN: 'JUAN',
                     studMN: 'S',
-                    
-                   studMidterm:'<input type="text" class="grade" value="0" maxlength="4" size="7" required></input>',
-
-                    studFinalTerm: '<input type="text" class="grade" value="0" maxlength="4" size="7" required></input>',
-                    
-                    studRemarks:'<input type="text"></input>'
+                    studMTG: '0',
+                    studFTG: '0',
+                    studRMRK: '',
                 }
             ]
         }
