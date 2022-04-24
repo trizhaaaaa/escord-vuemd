@@ -8,10 +8,23 @@
             </div>
             
             <div class="btn-grp">
-                <input type="button" value="Add">
-                <input type="button" value="Save">
-                <input type="button" value="Archive">
-                <input type="button" value="Download">
+
+                <button type="button">
+                     <i class="fa-solid fa-user-plus" title="Add Student to Gradesheet"></i>
+                </button>
+
+                <button type="button">
+                     <i class="fa-solid fa-floppy-disk" title="Update Gradesheet"></i>
+                </button>
+
+                <button type="button" title="Archive Gradesheet">
+                     <i class="fa-solid fa-box-archive"></i>
+                </button>
+
+                <button type="button" title="Preview and Download Gradesheet">
+                     <i class="fa-solid fa-download"></i>
+                </button>
+
             </div>
         </div>
 
@@ -81,9 +94,9 @@ export default {
                     studFN: 'JUAN',
                     studMN: 'L',
 
-                    studMidterm:'<input type="text" placeholder="0" class="grade"></input>',
+                    studMidterm:'<input type="text" class="grade" value="0" maxlength="4" size="7" required></input>',
 
-                    studFinalTerm: '<input type="text" placeholder="0" class="grade"></input>',
+                    studFinalTerm: '<input type="text" class="grade" value="0" maxlength="4" size="7" required></input>',
 
                     studRemarks:'<input type="text"></input>'
                 },
@@ -94,9 +107,9 @@ export default {
                     studFN: 'JUAN',
                     studMN: 'G',
 
-                    studMidterm:'<input type="text" placeholder="0" class="grade"></input>',
+                    studMidterm:'<input type="text" class="grade" value="0" maxlength="4" size="7" required></input>',
 
-                    studFinalTerm: '<input type="text" placeholder="0" class="grade"></input>',
+                    studFinalTerm: '<input type="text" class="grade" value="0" maxlength="4" size="7" required></input>',
                     
                     studRemarks:'<input type="text"></input>'
                 },
@@ -107,9 +120,9 @@ export default {
                     studFN: 'JUAN',
                     studMN: 'S',
                     
-                   studMidterm:'<input type="text" placeholder="0" class="grade"></input>',
+                   studMidterm:'<input type="text" class="grade" value="0" maxlength="4" size="7" required></input>',
 
-                    studFinalTerm: '<input type="text" placeholder="0" class="grade"></input>',
+                    studFinalTerm: '<input type="text" class="grade" value="0" maxlength="4" size="7" required></input>',
                     
                     studRemarks:'<input type="text"></input>'
                 }
@@ -134,8 +147,12 @@ export default {
     display: flex;
 }
 
-.top-menu input[type=button]{
-    padding: 0.5rem;
+.top-menu input[type=button]{ 
+    padding: 0.75rem;
+}
+
+.top-menu input[type=button], .top-menu button{
+    border-radius: 0.5rem;
 }
 
 .btn-return{
@@ -144,7 +161,12 @@ export default {
 
 .btn-return input[type=button]{
     background: #ff9807;
+    letter-spacing: 0.01rem;
 }
+
+.btn-return input:hover{
+    box-shadow: 2px 2px 5px 1px #ccccccaa;
+    }
 
 .btn-grp{
     margin: 0 0 0 0.5rem;
@@ -153,8 +175,22 @@ export default {
 
 }
 
-.btn-grp input[type=button]{
+.btn-grp button{
+    margin: 0 0.25rem;
+    padding: 0.75rem;
+    color: #545454;
     background: #ff9807aa;
+}
+
+.btn-grp button:hover{
+    box-shadow: 2px 2px 5px 1px #ccccccaa;
+    color: #ff9807;
+    background: #545454;
+}
+
+i{
+    font-size: 1.25rem;
+    width: 1.5rem;
 }
 
 /* GRADESHEET INFO */
@@ -179,6 +215,7 @@ export default {
 /* GRADESHEET */
 
 .gradesheet{
+    width: 100%;
     border-top: 2px solid #777777aa;
     padding: 1.25rem;
 }
@@ -193,20 +230,21 @@ tr td{
 }
 
 tr td:not(.first, .mid){
-    padding-right: 0.75rem;
+    padding-right: 1rem;
 }
 
 td input{
-    text-align: center;
+    text-align: justify;
     outline: none;
-    border-bottom: 1px solid #777777aa;
+    border-bottom: 1px solid #7777777a;
+}
+
+td input:focus{
+    border-bottom: 1px solid #777777;
 }
 
 .grade{
-    width: 20%;
+    text-align: center;
 }
-
-
-
 
 </style>
