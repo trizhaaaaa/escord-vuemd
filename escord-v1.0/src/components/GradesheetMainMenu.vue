@@ -29,8 +29,8 @@
       class="btn"
       @click="showModal"
     >
-      <!--Open Modal!-->
-  </button>
+      Open Modal
+      </button>-->
 
     <Modal
       v-show="isModalVisible"

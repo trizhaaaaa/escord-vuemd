@@ -22,20 +22,12 @@
   </div>
 </template>
 
-<!--<script>
+<script>
 export default {
 
-div#SDashboard{
-margin: 0;
-padding: 0;
-display: flex;
-justify-content: center;
-align-items: center;
-min-height: 100vh;
-font-family: 'Poppins', sans-serif;
 }
-}
-</script>-->
+
+</script>
 
 <style scoped>
 .container{
