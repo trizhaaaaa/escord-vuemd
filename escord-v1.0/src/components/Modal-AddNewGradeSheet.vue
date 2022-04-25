@@ -35,7 +35,7 @@
             <td colspan="4"></td>
           </tr>
 
-          <tr>
+          <tr class="subcodeunit">
             <td class="input__label" colspan="1"><label for="subjCode">Subject Code</label></td>
             <td class="input__text" colspan="1"><input type="text" name="subjCode" id="subjCode" required v-model="formData.subjectcode"></td>
 
@@ -44,14 +44,14 @@
       
           </tr>
 
-          <tr>
+          <tr class="subdesc">
             <td class="input__label" colspan="1"><label for="subjDesc">Subject Description</label></td>
             <td class="fullLine" colspan="3"><input type="text" name="subjDesc" id="subjDesc" v-model="formData.subjectdesc" required></td>
          
 
           </tr>
 
-          <tr>
+          <tr class="sched">
             <td class="input__label" colspan="1">Schedule</td>
             <td class="input__text" colspan="1"><input type="text" name="subjTime" id="subjTime" placeholder="Time" v-model="formData.time" required></td>
             <td class="input__text" colspan="1"><input type="text" name="subjDay" id="subjDay" placeholder="Day" v-model="formData.day" required></td>
@@ -59,24 +59,20 @@
 
           <tr>
             <td class="input__label" colspan="1"><label for="subjProf">Instructor</label></td>
-            <td class="fullLine" colspan="2"><input type="text" name="subjProf" id="subjProf" placeholder="Professor" v-model="formData.professor" required></td>
+            <td class="fullLine" colspan="2"><input type="text" name="subjProf" id="subjProfRank" placeholder="Professor" v-model="formData.professor" required></td>
 
-            <td class="input__text" colspan="1"><input type="text" name="subjProf" id="subjProf" placeholder="faculty rank" v-model="formData.facultyrank" required></td>
+            <td class="input__text" colspan="1"><input type="text" name="subjProfRank" id="subjProfRank" placeholder="faculty rank" v-model="formData.facultyrank" required></td>
         
             <!-- <td class="input__label" colspan="0">
                <p> <span v-if="v$.formData.facultyrank.$error">{{ v$.formData.facultyrank.$errors[0].$message  }}</span> <THIS IS THE ERROR MESSAGE NEED TO DESIGN </p></td> -->
 
-          </tr>
-             <tr>
-            
-           
           </tr>
 
           <tr class="hr">
             <td colspan="4"></td>
           </tr>
 
-          <tr>
+          <tr class="class-info">
             <td class="input__label" colspan="1">Class Information</td>
 
             <td class="fullLine" colspan="3"><input type="text" name="classProg" id="classProg" placeholder="Program" v-model="formData.course_short"  required></td> <!-- make this a dropdown list -->
@@ -85,17 +81,16 @@
           <tr class="yrsecsem">
             <td class="space" colspan="1"> </td>
             <td class="input__text" colspan="1"><input type="text" name="classYr" id="classYr" placeholder="Year" v-model="formData.course_year"  required></td>
-            <td class="input__text" colspan="1"><input type="text" name="classSec" id="classSec" placeholder="Section" v-model="formData.course_section" ></td>
+            <td class="input__text" colspan="1"><input type="text" name="classSec" id="classSec" placeholder="Section" v-model="formData.course_section" required></td>
             <td class="input__text" colspan="1"><input type="text" name="classSem" id="classSem" placeholder="Semester" v-model="formData.semester"  required></td>
           </tr>
 
-          <tr>
+          <tr class="sy-startend">
             <td class="space" colspan="1"> </td>
             <td class="input__label-sy" colspan="1">School Year</td>
             <td class="input__text" colspan="1"><input type="text" name="classSY" id="classSY" placeholder="Start" v-model="formData.sem_startyear" required></td>
             <td class="input__text" colspan="1"><input type="text" name="classSY" id="classSY" placeholder="End"  v-model="formData.sem_endyear" required></td>
           </tr>
-
 
         </table>
       </section>
@@ -271,7 +266,6 @@ setup: () => ({ v$: useVuelidate() }),
     float: left;
     text-align: justify;
     text-transform: uppercase;
-    text-shadow: 2px 2px 20px #ff9807;
     font-family: "Cuprum", sans-serif;
     font-size: 1.2rem;
     letter-spacing: 0.1rem;
@@ -280,7 +274,6 @@ setup: () => ({ v$: useVuelidate() }),
   .input__label-sy{
     margin: auto;
     text-transform: uppercase;
-    text-shadow: 2px 2px 25px #ff9807;
     font-family: "Cuprum", sans-serif;
     font-size: 1.2rem;
     letter-spacing: 0.1rem;
@@ -314,11 +307,6 @@ setup: () => ({ v$: useVuelidate() }),
 
   input:focus{    
     border-bottom: 1px solid #ff9807;
-    background-color: #ff980746;
-  }
-
-  input:hover:not(:focus){
-    background-color: #ff98071a;
   }
 
   ::placeholder{
