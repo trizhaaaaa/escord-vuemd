@@ -15,7 +15,7 @@ class CreateGradestudentData extends Migration
     {
         Schema::create('gradeofstudents', function (Blueprint $table) {
             $table->string('gradesheetid');
-            $table->string('student_number')->unique();
+            $table->string('student_number');
             $table->string('studentname');
             $table->double('midterm');
             $table->double('finalterm');

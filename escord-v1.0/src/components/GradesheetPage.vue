@@ -9,15 +9,15 @@
             
             <div class="btn-grp">
 
-                <button type="button">
+                <button type="button" >
                      <i class="fa-solid fa-user-plus" title="Add Student to Gradesheet"></i>
                 </button>
 
-                <button type="button">
+                <button type="button" >
                      <i class="fa-solid fa-floppy-disk" title="Update Gradesheet"></i>
                 </button>
 
-                <button type="button" title="Archive Gradesheet">
+                <button type="button" @click="archievebtn" title="Archive Gradesheet">
                      <i class="fa-solid fa-box-archive"></i>
                 </button>
 
@@ -31,17 +31,17 @@
         <!-- GRADESHEET INFO -->
         <div class="gradesheet-info">
             <div class="subj">
-                <p class="subjInfo subjCode">  {{subjCode}}  </p>
-                <p class="subjInfo">  {{subjDesc}}  </p>
+                <p class="subjInfo subjCode"> {{getGS.subjectcode}}  </p>
+                <p class="subjInfo">  {{getGS.subjectdesc}} </p>
             </div>
 
             <div class="class">
-                <p class="classInfo profName">  {{profName}} </p>
+                <p class="classInfo profName"> {{getGS.professor}}   </p>
                 
                 <div class="sched">
-                    <p class="classInfo">  {{schedTime}} </p> 
+                    <p class="classInfo">  {{getGS.time}} </p> 
                     <b> | </b>
-                     <p class="classInfo">  {{schedDay}} </p>
+                     <p class="classInfo"> {{getGS.day}} </p>
                 </div>
             </div>
         </div>
@@ -58,23 +58,23 @@
                     </Tr>
                 </Thead>
 
-                <Tr v-for="student in tableContents" :key="student">
+                <Tr v-for="row in getrow" :key="row.student_number">
 
-                    <Td class="studNum">{{student.studNum}}</Td>
-                    <Td class="first name">{{student.studLN}}, </Td>
-                    <Td class="mid name">{{student.studFN}}</Td>
-                    <Td class="name">{{student.studMN}}</Td>
+                    <Td class="studNum">{{row.student_number}}</Td>
+                    <Td class="first name">{{row.studentname}}, </Td>
+                    <Td class="mid name"></Td>
+                    <Td class="name"></Td>
 
                     <Td>
-                        <input type="text" class="grade" v-bind:value="student.studMTG" maxlength="4" size="7" required>
+                        <input type="text" class="grade" v-bind:value="row.midterm" maxlength="4" size="7" required>
                     </Td>
 
                     <Td>
-                        <input type="text" class="grade" v-bind:value="student.studFTG" maxlength="4" size="7" required>
+                        <input type="text" class="grade" v-bind:value="row.finalterm" maxlength="4" size="7" required>
                     </Td>
 
                     <Td>
-                        <input type="text" v-bind:value="student.studRMRK">
+                        <input type="text" v-bind:value="row.finalgrade">
                     </Td>
                     
 
@@ -87,14 +87,22 @@
 </template>
 
 <script>
+
+import axios from "axios"
+import { mapGetters } from 'vuex';
+
+
 export default {
     data(){
         return{
-            subjCode: 'GEC 006',
+        
+         /*    subjCode: 'GEC 006',
             subjDesc: 'PHILIPPINE HISTORY',
             profName: 'JUAN DELA CRUZ',
             schedTime: '10:00-1:00/ 3:00-5:00',
-            schedDay: 'MONDAY/ SATURDAY',
+            schedDay: 'MONDAY/ SATURDAY', */
+            status_archieve: 1,
+         
 
             tableContents: [
                 {
@@ -128,7 +136,48 @@ export default {
                 }
             ]
         }
-    }
+    },
+     computed:{
+     ...mapGetters({getGS : 'getGS'}),
+
+        ...mapGetters({getrow : 'getrow'}),
+    },
+
+      mounted() {
+
+          this.$store.dispatch('showgsinfo',{ route: this.$route.params.id });
+
+      },
+
+    methods: 
+       
+       {
+           archievebtn(){
+         
+   
+
+                axios.put('api/archievegs/'+ this.$route.params.id,{ 
+		status_archieve: '1', }).then((response)=>{
+      
+       console.log('success', this.status_archieve);
+               this.$toasted.success('archieve successfull');
+   
+
+}).catch((errors)=>{
+       //   this.errors = errors.response.data.errors
+            // this.error =  errors.response.data;
+             console.log('error in archeiveing');
+
+       this.$toasted.error('error in archeiveing');
+   
+             })
+
+	
+
+           }
+           
+       
+         }
 }
 </script>
 

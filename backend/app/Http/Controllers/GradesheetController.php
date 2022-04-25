@@ -110,39 +110,34 @@ class GradesheetController extends Controller
 
     }
 
-    public function showgsbyid($gradesheetid){
+    public function showgsbyid(Request $request,$gradesheetid){
       
        // $gradesheet = GradesheetInfo::find($gradesheetid);
         $gradesheet = DB::table('gradsheetinfo')->where('gradesheetid', $gradesheetid)->get();
         return response()->json($gradesheet);
       
-     
+     //WAG KALIMUTAN LAGYAN NG REQUEST PARA MAKUHA YUNG SHEET
 
     }
 
 
     public function archievegradesheet(Request $request, $gradesheetid){
 
-        $status_archieve = $request->status_archieve;
+
 
         $gradetable = DB::table('gradsheetinfo')->where('gradesheetid', $gradesheetid)->limit(1)->update([
-            'archieve' => $status_archieve,
+            'archieve' => $request->status_archieve,
 
         ]);
 
-        $grades = DB::table('gradsheetinfo')->where('gradesheetid', $gradesheetid)->limit(1)->get();
+      //  $grades = DB::table('gradsheetinfo')->where('gradesheetid', $gradesheetid)->limit(1)->get();
 
-        if ($gradetable) {
+     
             return response()->json([
                 'success' => true,
-                'grades' =>$grades
+                'grades' =>$gradetable
             ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Sorry, cook could not be updated',
-            ], 500);
-        }
+      
 
 
     }
@@ -224,6 +219,16 @@ class GradesheetController extends Controller
 
 
         
+     }
+
+     public function showspecgradesheet(Request $request,$gradesheetid){
+
+        $gradesheet= DB::table('gradeofstudents')->where('gradesheetid', $gradesheetid)->get();
+
+        return response()->json($gradesheet);
+
+
+
      }
 
 

@@ -12,6 +12,8 @@ import Staff from '../../components/Staff.vue'
 
 import Admin_Dashboard from '../../components/Staff-Dashboard.vue'
 import Pagenotfound from '../../components/Pagenotfound.vue'
+import GradesheetPage from '../../components/GradesheetPage.vue'
+
 
 
 
@@ -64,6 +66,13 @@ const routes = [
     component: AdminLogin
 
   },
+  {
+    path: '/gradesheetpage/:id',
+    name: 'gradesheetpage',
+    component: GradesheetPage
+
+  },
+
 
   {
     path: '/StudentDashboard',

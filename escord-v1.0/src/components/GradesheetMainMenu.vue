@@ -24,21 +24,21 @@
         </button>
         </div>
 
-     <!-- <button
+   <button
       type="button"
       class="btn"
       @click="showModal"
     >
       <!--Open Modal!-->
-  <!-- </button>
+  </button>
 
     <Modal
       v-show="isModalVisible"
-      @close="closeModal"/>-->
+      @close="closeModal"/>
     </div>
 </template>
 
-<!--<script>
+<script>
 import Modal from "./Modal-AddNewGradeSheet.vue"
 
 export default {
@@ -60,7 +60,7 @@ export default {
     }
   }
 }
-</script>-->
+</script>
 
 <style scoped>
 div#gs-mainmenu{

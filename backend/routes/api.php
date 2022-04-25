@@ -31,17 +31,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
   
     
     Route::get('/showgs/{gradesheetid}','GradesheetController@showgsbyid');
+
+
     Route::get('/showgs','GradesheetController@showgradesheet');
+
+    Route::get('/displaygrade/{gradesheetid}','GradesheetController@showspecgradesheet');
+
+
+
     //this is for multirows
     Route::post('/addgs','GradesheetController@addgs');
 
-    //update 
+    //update  GRADESHEET
     Route::put('/updategs/{gradesheetid}','GradesheetController@updategradesheetinfo');
+
+    //ARRCHIIEVE NG GRADESHEET PER ID
     Route::put('/archievegs/{gradesheetid}','GradesheetController@archievegradesheet');
 
 
-   
+   //SHOW NG ARCHEIVE NG GRADESHEET
     Route::get('/archievegs','ArchieveController@archievegradesheet');
+
    
 
 
