@@ -58,7 +58,7 @@
                     </Tr>
                 </Thead>
 
-                <Tr v-for="student in tableContents" :key="student">
+                <Tr v-for="student in tableContents" :key="student.studNum">
 
                     <Td class="studNum">{{student.studNum}}</Td>
                     <Td class="first name">{{student.studLN}}, </Td>
@@ -102,6 +102,7 @@ export default {
                     studLN: 'DELA CRUZ',
                     studFN: 'JUAN',
                     studMN: 'L',
+                    
                     studMTG: '0',
                     studFTG: '0',
                     studRMRK: '',
@@ -112,6 +113,7 @@ export default {
                     studLN: 'DELA CRUZ',
                     studFN: 'JUAN',
                     studMN: 'G',
+                    
                     studMTG: '0',
                     studFTG: '0',
                     studRMRK: '',
@@ -122,6 +124,7 @@ export default {
                     studLN: 'DELA CRUZ',
                     studFN: 'JUAN',
                     studMN: 'S',
+                    
                     studMTG: '0',
                     studFTG: '0',
                     studRMRK: '',
