@@ -70,7 +70,7 @@ const actions = {
                 
                   if(response.data.user_role === "staff"){
                     //    router.push({path:'/About'});
-                    router.push('/AdminDashboard', () => router.go(0)).catch(err => {})
+                    router.push('/staff', () => router.go(0)).catch(err => {})
                 
                         
                   }else if (response.data.user_role === "superadmin"){

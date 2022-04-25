@@ -42,7 +42,7 @@ function loggedIn(){
           }
           if(currentUser === 'staff'){
 
-            return next({ path: '/admindashboard' });
+            return next({ path: '/staff' });
           }
           if(currentUser === 'student'){
             return next({ path: '/studentdashboard' });

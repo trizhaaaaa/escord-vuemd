@@ -8,9 +8,11 @@ import AdminLogin from '../../components/AdminLogin.vue'
 import Dashboard_stud from '../../components/Dashboard_stud.vue'
 import Dashboard_admin from '../../components/Dashboard_admin.vue'
 import AdminCreation from '../../components/AdminCreation.vue'
-
+import Staff from '../../components/Staff.vue'
 
 import Admin_Dashboard from '../../components/Staff-Dashboard.vue'
+import Pagenotfound from '../../components/Pagenotfound.vue'
+
 
 
 const routes = [
@@ -20,6 +22,7 @@ const routes = [
     component: Landing
 
   },
+  { path: "*", component: Pagenotfound },
 
   {
     path: '/creation',
@@ -70,25 +73,36 @@ const routes = [
   },
 
   {
-    path: '/AdminDashboard',
-    name: 'AdminDashboard',
-    component: Dashboard_admin,
-    meta: { requiresAuth: true, authorize: 'staff' }
+    path: '/staff',
+    redirect: { name: 'staffdash' },
+    component: Staff,
+    children : [
+      {
+      path: 'staffdashboard',
+      name:'staffdash',
+      component: Admin_Dashboard,
+      meta: { requiresAuth: true, authorize: 'staff' },
+    },
+    {
+      path: 'gradesheet',
+      name:'gradesheet',
+      component: Dashboard_admin,
+      meta: { requiresAuth: true, authorize: 'staff' },
+    },
+  
+  ],
+    meta: { requiresAuth: true, authorize: 'staff' },
+   
   },
   
   {
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
-    meta: { requiresAuth: true,  authorize: 'superadmin'  }
+    meta: { requiresAuth: true,  authorize: 'superadmin'  },
+   
   },
-  {
-    path: '/Staff-Dashboard',
-    name: 'Staff',
-    component: Admin_Dashboard
-
-  },
-  
+ 
 
 ]
 

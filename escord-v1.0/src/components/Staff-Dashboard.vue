@@ -1,4 +1,5 @@
 <template>
+
   <v-container class="container">
     <v-row>
       <v-col class="archiveDiv">
@@ -31,7 +32,7 @@
                 size="150"
               >{{option.iconComponent}}</v-icon>
               <br>
-              <v-btn class="cardBtn" outlined>{{ option.btn }}</v-btn>
+              <v-btn class="cardBtn"   outlined>{{ option.btn }}</v-btn>
             </v-card>
           </v-col>
         </v-row>
@@ -42,24 +43,43 @@
 
  <script>
     export default {
+        name:'staffdash',
       data() {
+      
         return {
           options: [
             {
               iconComponent:  'mdi-file-edit-outline',
               btn: "GRADESHEET", 
+              btnid:1,
+           
             },
             {
               iconComponent:  'mdi-form-select',
               btn: "EVALUATION FORM", 
+            btnid:2,
+             
             },
             {
               iconComponent:  'mdi-file-account',
               btn: "SCHOLASTIC RECORD",   
+               btnid:3,
+        
             },  
           ]
         };
       },
+
+      methods : {
+      gradesheet(){
+       
+      
+             
+            
+        
+            
+          }
+      }
     }
 
 </script>
