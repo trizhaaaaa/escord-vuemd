@@ -9,7 +9,7 @@
             
             <div class="btn-grp">
 
-                <button type="button">
+                <button type="button" class="addStud">
                      <i class="fa-solid fa-user-plus" title="Add Student to Gradesheet"></i>
                 </button>
 
@@ -188,6 +188,16 @@ export default {
 .btn-grp button:hover{
     box-shadow: 2px 2px 5px 1px #ccccccaa;
     color: #ff9807;
+    background: #545454;
+    transition: 0.3s;
+}
+
+.btn-grp button.addStud{
+    background: #a3ff7e6e;
+}
+
+.btn-grp button.addStud:hover{
+    color: #a3ff7ee1;
     background: #545454;
 }
 
