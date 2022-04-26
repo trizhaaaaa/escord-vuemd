@@ -21,19 +21,23 @@ class GradesheetController extends Controller
 
         $request->validate([
             'student_number' => 'required',
-            'studentname' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'middlename' => 'required',
             'midterm' => 'required',
             'finalterm' => 'required',
             'finalgrade' => 'required',
             'gradesheetid' => 'required',
 
         ]);
+
+        $studentname = $request->lastname . " ". $request->firstname  . " ". $request->middlename;
   
 
         $gradetable = new Gradeofstudent;
         $gradetable->gradesheetid  = $request->gradesheetid;
         $gradetable->student_number  = $request->student_number;
-        $gradetable->studentname  = $request->studentname;
+        $gradetable->studentname  = Str::upper($studentname);
         $gradetable->midterm  = $request->midterm;
         $gradetable->finalterm  = $request->finalterm;
         $gradetable->finalgrade  = $request->finalgrade;
@@ -199,7 +203,7 @@ class GradesheetController extends Controller
 
   
 
-              Gradeofstudent::insert($requestData);
+              Gradeofstudent::upsert($requestData);
  
               return response()->json(['message'=>'grade added successfully']);
         
@@ -223,7 +227,7 @@ class GradesheetController extends Controller
 
      public function showspecgradesheet(Request $request,$gradesheetid){
 
-        $gradesheet= DB::table('gradeofstudents')->where('gradesheetid', $gradesheetid)->get();
+        $gradesheet= DB::table('gradeofstudents')->where('gradesheetid', $gradesheetid)->orderBy('studentname')->get();
 
         return response()->json($gradesheet);
 

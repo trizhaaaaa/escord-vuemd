@@ -39,8 +39,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-    //this is for multirows
-    Route::post('/addgs','GradesheetController@addgs');
+    //this is for multirows patch method
+    Route::patch('/addgs','GradesheetController@addgs');
 
     //update  GRADESHEET
     Route::put('/updategs/{gradesheetid}','GradesheetController@updategradesheetinfo');
