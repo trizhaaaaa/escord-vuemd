@@ -9,7 +9,10 @@
             
             <div class="btn-grp">
 
-                <button type="button" class="addStud">
+                <button 
+                type="button" 
+                class="addStud"
+                @click="showModal">
                      <i class="fa-solid fa-user-plus" title="Add Student to Gradesheet"></i>
                 </button>
 
@@ -82,14 +85,27 @@
             </Table>
         </div>
 
+        <!-- modal -->
+         <Modal
+            v-show="isModalVisible"
+            @close="closeModal"/>
 
     </div>
 </template>
 
 <script>
+
+import Modal from "./Modal-AddStudent.vue";
+
 export default {
+    components: {
+        Modal
+    },
+
     data(){
         return{
+            isModalVisible: false,
+
             subjCode: 'GEC 006',
             subjDesc: 'PHILIPPINE HISTORY',
             profName: 'JUAN DELA CRUZ',
@@ -130,8 +146,16 @@ export default {
                     studRMRK: '',
                 }
             ]
-        }
+        };
+    },
+    methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
     }
+  }
 }
 </script>
 
