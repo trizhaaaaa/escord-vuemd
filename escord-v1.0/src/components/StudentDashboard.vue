@@ -1,10 +1,28 @@
 <template>
-  <!-- <div id = "SDashboard">-->
-<div class = "container">
-    <!-- <div>Student Name <input type = "text">
-    Student Yr/Sec <input type = "text">
-    Semester <input type = "text">
-    School year <input type = "text"></div>-->
+<div class = "dashboard-student">
+
+    <!-- TEXT DISPLAY -->
+    <div class = "info-display">
+
+        <div class="stud-info">
+            <p>   {{studLN}}, {{studFN}} {{studMN}}  </p>
+            <hr class="divider">
+            <p>   {{studProg}}{{studYrSec}} </p>
+        </div>
+        
+        <div class="middle-display">
+            <h1>YOUR FILES</h1>
+            <div class="class-info">
+                <p>   {{classSem}} Semester  </p>
+                <p>   {{classSY}}  </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CARDS -->
+    <div class = "container">
+
       <div class = "box">
           <div class = "icon">01</div>
           <div class = "content">
@@ -12,29 +30,86 @@
               <p>You can see your Scholastic Record just click the button below </p>
               <a href="#">Click here</a></div>
       </div>
+
         <div class = "box">
           <div class = "icon">02</div>
           <div class = "content">
               <h3>SUMMARY OF GRADES</h3>
                <p>You can see your Summary of Grades just click the button below</p>
               <a href="#">Click here</a></div>
+        </div> 
+
       </div>
-  </div>
+
+</div>
 </template>
 
 <script>
 export default {
+    
+    data(){
+        return{
+
+            studLN: 'DELA CRUZ',
+            studFN: 'JUAN',
+            studMN:'C',
+
+            studProg: 'CS',
+            studYrSec: '3A',
+            classSem: '1st',
+            classSY: '2020-2021'
+
+        }
+    }
 
 }
-
 </script>
 
 <style scoped>
+
+.dashboard-student{
+    margin: 2rem;
+}
+
+.info-display{
+    display: flex;
+}
+
+.stud-info{
+    position: absolute;
+    right: 3rem;
+}
+
+.stud-info p{
+    font-size: 1.25rem;
+}
+
+.middle-display{
+    display: flex;
+    flex-direction: row;
+    margin: 5rem 0 1rem 2rem;
+}
+
+.middle-display h1{
+    margin-right: 2rem;
+    font-size: 2.5rem;
+}
+
+.middle-display p{
+    font-size: 1.15rem;
+}
+
+.container{
+    margin: 5px auto;
+    align-content: center;
+}
+
 .container{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
 .container .box
 {
     justify-content: center;
@@ -48,7 +123,6 @@ export default {
     box-sizing: border-box ;
     overflow: hidden;
     text-align: center;
-
 }
 
 .container .box .icon
@@ -67,34 +141,41 @@ export default {
     font-weight: 700;
     transition: 1s;
 }
+
 .container .box:nth-child(1) .icon
 {
     box-shadow: 0 0 0 0 #e26d5c;
     background: #e26d5c;
 }
+
 .container .box:nth-child(1):hover .icon
 {
     box-shadow: 0 0 0 400px #e26d5c;
 }
+
 .container .box:nth-child(2) .icon
 {
     box-shadow: 0 0 0 0 #854136;
     background: #854136;
 }
+
 .container .box:nth-child(2):hover .icon
 {
     box-shadow: 0 0 0 400px #854136;
 }
+
 .container .box .content
 {
     position: relative;
     z-index: 1;
     transition: 0.5s;
 }
+
 .container .box:hover .content
 {
     color: #fff;
 }
+
 .container .box .content h3
 {
     font-size: 20px;
@@ -106,6 +187,7 @@ export default {
     margin: 0;
     padding: 0;
 }
+
 a{
     display: inline-block;
     padding: 10px 20px;
@@ -117,6 +199,7 @@ a{
     margin-top: 20px;
     box-shadow: 0 2px 5px rgba(0,0,0, .2);
 }
+
 .label
 {
     position: relative;
