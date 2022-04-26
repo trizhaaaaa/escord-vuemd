@@ -36,10 +36,10 @@
              </div>
                 
 
-                <div class="stud-prog">
-                    <label for="studProg" class="input__label">Program</label>
-                    <input type="text" name="studProg" id="studProg" class="input__text" required>
-                </div>
+             <div class="stud-prog">
+                 <label for="studProg" class="input__label">Program</label>
+                 <input type="text" name="studProg" id="studProg" class="input__text" required>
+             </div>
               
               <div class="stud-yrsec">
                 <label for="studYr" class="input__label">Year</label>
@@ -174,6 +174,7 @@ export default {
     width: 95%;
     max-width: 38rem;
     height: 90%;
+    max-height: 31rem;
     border-radius: 10px;
   }
 
