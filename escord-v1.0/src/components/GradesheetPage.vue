@@ -64,7 +64,7 @@
                 <Tr v-for="row in getrow" :key="row.student_number">
 
                     <Td class="studNum">{{row.student_number}}</Td>
-                    <Td class="first name">{{row.studentname}}, </Td>
+                    <Td class="first name">{{row.studentname}} </Td>
                     <Td class="mid name"></Td>
                     <Td class="name"></Td>
 
@@ -109,7 +109,7 @@ export default {
         return{
         
          /*    subjCode: 'GEC 006',
-            isModalVisible: false,
+          
 
             subjCode: 'GEC 006',
             subjDesc: 'PHILIPPINE HISTORY',
@@ -117,6 +117,7 @@ export default {
             schedTime: '10:00-1:00/ 3:00-5:00',
             schedDay: 'MONDAY/ SATURDAY', */
             status_archieve: 1,
+              isModalVisible: false,
          
 
             tableContents: [
@@ -170,9 +171,16 @@ export default {
     methods: 
        
        {
+            showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+
+    },
            archievebtn(){
          
-   
+                
 
                 axios.put('api/archievegs/'+ this.$route.params.id,{ 
 		status_archieve: '1', }).then((response)=>{
@@ -192,20 +200,24 @@ export default {
 
 	
 
+           },
+
+             saveorcreate(){
+         
+   
+                    //patch method for rows
+
+	
+
            }
            
        
          },
 
-          showModal() {
-      this.isModalVisible = true;
-    },
-    closeModal() {
-      this.isModalVisible = false;
-    }
+         
+
         };
-    }
-}
+
 </script>
 
 <style>

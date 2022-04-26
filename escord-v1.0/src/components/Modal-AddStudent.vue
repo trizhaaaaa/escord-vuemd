@@ -11,34 +11,35 @@
      
 
       <!-- Body -->
+            <form @submit.prevent="addstudent">
       <section class="modal-body">
 
           <div class="body-content">
 
               <div class="stud-id">
                   <label for="studID" class="input__label">Student Number</label>
-                  <input type="text" name="studID" id="studID" class="input__text" required>
+                  <input type="text" name="studID" id="studID" class="input__text" v-model="formData.student_number"  required>
               </div>
                   
              <div class="stud-name">
                 <label for="studLN" class="input__label">Last Name</label>
-                <input type="text" name="studLN" id="studLN" size="30" class="input__text" required>
+                <input type="text" name="studLN" id="studLN" size="30" class="input__text" v-model="formData.lastname"  required>
              </div>
 
              <div class="stud-name">
                 <label for="studFN" class="input__label">First Name</label>
-                <input type="text" name="stuFN" id="studFN" size="30" class="input__text" required>
+                <input type="text" name="stuFN" id="studFN" size="30" class="input__text" v-model="formData.firstname"  required>
              </div>
 
              <div class="stud-name">
                 <label for="studMN" class="input__label">Middle Name</label>
-                <input type="text" name="studMN" id="studMN" size="30" class="input__text">
+                <input type="text" name="studMN" id="studMN" size="30" class="input__text" v-model="formData.middlename">
              </div>
                 
 
              <div class="stud-prog">
                  <label for="studProg" class="input__label">Program</label>
-                 <input type="text" name="studProg" id="studProg" class="input__text" required>
+                 <input type="text" name="studProg" id="studProg" class="input__text" >
              </div>
               
               <div class="stud-yrsec">
@@ -68,30 +69,84 @@
             <button
             type="submit"
             class="btn-footer-add"
-            @click="addgs"
+      
             >
             Add Student
             </button>
           </div>
       </footer>
-
+            </form>
     </div>
   </div>
 </transition>
 </template>
 
 <script>
+
+import axios from "axios"
+
 export default {
   
   data(){
     return{
+
+      formData:{
+        student_number:'',
+        lastname:'',
+        firstname:'',
+        middlename:'',
+        midterm:0,
+        finalterm:0,
+        finalgrade:0,
+        gradesheetid: this.$route.params.id,
+
+        
+      }
       
     }
   },
 
    methods:{
+
+       clearinginputfields(){
+      this.formData = {
+        student_number:'',
+        lastname:'',
+        firstname:'',
+        middlename:'',
+        midterm:0,
+        finalterm:0,
+        finalgrade:0,
+        gradesheetid: this.$route.params.id,
+    }; 
+       },
+
+
+       addstudent(){
+
+      axios.post('/api/gradesheetstudent', this.formData).then((response)=>{
+        
+          this.clearinginputfields();
+       
+         this.$toasted.success('added student successful');
+
+        
+         }).catch((errors)=>{
+   //   this.errors = errors.response.data.errors
+         this.error =  errors.response.data;
+  //       console.log('error in adding');
+
+    this.$toasted.error('error in adding student');
+
+
+         })
+
+
+     },
+
     close(){
       this.$emit('close');
+      this.clearinginputfields();
       }
     }
 }

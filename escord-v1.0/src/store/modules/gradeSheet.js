@@ -79,7 +79,9 @@ const actions = {
            console.log("Error in getting the user")
        }) 
    
-     }
+     },
+
+   
 
 }
 
