@@ -171,6 +171,7 @@ class GradesheetController extends Controller
 
     }
 
+    //patch method
     public function addgs(Request $request)
     {
 
