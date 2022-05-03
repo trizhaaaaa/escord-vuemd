@@ -51,6 +51,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
    //SHOW NG ARCHEIVE NG GRADESHEET
     Route::get('/archievegs','ArchieveController@archievegradesheet');
+    Route::get('/archieveschol','ArchieveController@archievescholastic');
+    Route::get('/archieveevalform','ArchieveController@archieveeval');
 
    
 

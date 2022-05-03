@@ -53,6 +53,21 @@ class ArchieveController extends Controller
 
      public function archieveeval(){
 
+        $evalform = DB::table('evaluation_forms')->where('archieve', '1')->get();
+      
+        if ($evalform) {
+            return response()->json([
+                'success' => true,
+                'grades' =>$evalform
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, couldnt get the archieve files',
+            ], 500);
+        } 
+    
+
             //archieve query of evaluation
      }
 }
