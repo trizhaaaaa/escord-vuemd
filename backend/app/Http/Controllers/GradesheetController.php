@@ -53,19 +53,19 @@ class GradesheetController extends Controller
      
   
         $request->validate([
-            'subjectcode' => 'required',
-            'subjectdesc' => 'required',
-            'semester' => 'required',
-            'sem_startyear' => 'required',
-            'sem_endyear' => 'required',
-            'units' => 'required',
-            'time' => 'required',
-            'day' => 'required',
-            'course_short' => 'required',
-            'course_year' => 'required',
-            'course_section' => 'required',
-            'professor' => 'required',
-            'facultyrank' => 'required',
+            'subjCode' => 'required',
+            'subjDesc' => 'required',
+            'subjSem' => 'required',
+            'subjSY_start' => 'required',
+            'subjSY_end' => 'required',
+            'subjUnit' => 'required',
+            'subjTime' => 'required',
+            'subjDay' => 'required',
+            'classProg' => 'required',
+            'classYr' => 'required',
+            'classSec' => 'required',
+            'profName' => 'required',
+            'profRank' => 'required',
 
         ]); 
 
@@ -73,19 +73,19 @@ class GradesheetController extends Controller
 
         $gradetable = new GradesheetInfo;
         $gradetable->gradesheetid  =Str::upper($gradesheetid);
-        $gradetable->subjectcode  =  Str::upper($request->subjectcode);
-        $gradetable->subjectdesc  = Str::upper($request->subjectdesc);
-        $gradetable->semester  = Str::upper($request->semester);
-        $gradetable->sem_startyear  = Str::upper($request->sem_startyear);
-        $gradetable->sem_endyear  = Str::upper($request->sem_endyear);
-        $gradetable->units  = Str::upper($request->units);
-        $gradetable->time  = Str::upper($request->time);
-        $gradetable->day  = Str::upper($request->day);
-        $gradetable->course_short  =Str::upper($request->course_short);
-        $gradetable->course_year  = Str::upper($request->course_year);
-        $gradetable->course_section  = Str::upper($request->course_section);
-        $gradetable->professor  = Str::upper($request->professor);
-        $gradetable->facultyrank  = Str::upper($request->facultyrank);
+        $gradetable->subjectcode  =  Str::upper($request->subjCode);
+        $gradetable->subjectdesc  = Str::upper($request->subjDesc);
+        $gradetable->semester  = Str::upper($request->subjSem);
+        $gradetable->sem_startyear  = Str::upper($request->subjSY_start);
+        $gradetable->sem_endyear  = Str::upper($request->subjSY_end);
+        $gradetable->units  = Str::upper($request->subjUnit);
+        $gradetable->time  = Str::upper($request->subjTime);
+        $gradetable->day  = Str::upper($request->subjDay);
+        $gradetable->course_short  =Str::upper($request->classProg);
+        $gradetable->course_year  = Str::upper($request->classYr);
+        $gradetable->course_section  = Str::upper($request->classSec);
+        $gradetable->professor  = Str::upper($request->profName);
+        $gradetable->facultyrank  = Str::upper($request->profRank);
 
         $gradetable->save();
 

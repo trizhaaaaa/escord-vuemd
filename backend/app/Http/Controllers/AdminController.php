@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Admin;
 use App\User;
 use App\Manager;
+use App\ProfessorAccount;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -84,26 +85,29 @@ public function updateAccountUser(Request $request, $id){
 
 
 //login function
+
+
+
     public function adminlogin(Request $request) {
         $request->validate([
-            'email' => 'required',
-            'password' => 'required',
+            'userEmail' => 'required',
+            'userPassword' => 'required',
             'device_name' => 'required',
         ]);
      
-        $user = Admin::where('email', $request->email)->first();
+        $user = Admin::where('email', $request->userEmail)->first();
 
         if($user){
-            if (! $user || ! Hash::check($request->password, $user->password)) {
+            if (! $user || ! Hash::check($request->userPassword, $user->password)) {
                 throw ValidationException::withMessages([
                     'email' => ['Invalid Account Information.'],
                 ]);
             } 
         }else{
-            $user = User::where('email', $request->email)->first();
+            $user = ProfessorAccount::where('email', $request->userEmail)->first();
     
             if($user){
-                if (! $user || ! Hash::check($request->password, $user->password)) {
+                if (! $user || ! Hash::check($request->userPassword, $user->password)) {
                 throw ValidationException::withMessages([
                     'email' => ['Invalid Account Information.'],
                 ]);
@@ -111,9 +115,9 @@ public function updateAccountUser(Request $request, $id){
 
            }else{
            
-            $user = Manager::where('email', $request->email)->first();
+            $user = Manager::where('email', $request->userEmail)->first();
 
-            if (! $user || ! Hash::check($request->password, $user->password)) {
+            if (! $user || ! Hash::check($request->userPassword, $user->password)) {
                 throw ValidationException::withMessages([
                     'email' => ['Invalid Account Information.'],
                 ]);
