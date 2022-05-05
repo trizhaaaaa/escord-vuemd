@@ -63,6 +63,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //login of all account
 Route::post('/adminlogin','AdminController@adminlogin');
 
+Route::post('/userlogin','LoginController@login');
+
+
 
 //Manager{{SuperAdmin API}}
 

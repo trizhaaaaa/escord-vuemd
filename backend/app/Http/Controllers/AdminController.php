@@ -95,7 +95,7 @@ public function updateAccountUser(Request $request, $id){
             'device_name' => 'required',
         ]);
      
-        $user = Admin::where('email', $request->userEmail)->first();
+        $user = ProfessorAccount::where('email', $request->userEmail)->first();
 
         if($user){
             if (! $user || ! Hash::check($request->userPassword, $user->password)) {
@@ -104,7 +104,7 @@ public function updateAccountUser(Request $request, $id){
                 ]);
             } 
         }else{
-            $user = ProfessorAccount::where('email', $request->userEmail)->first();
+            $user = Manager::where('email', $request->userEmail)->first();
     
             if($user){
                 if (! $user || ! Hash::check($request->userPassword, $user->password)) {
@@ -113,16 +113,7 @@ public function updateAccountUser(Request $request, $id){
                 ]);
             } 
 
-           }else{
-           
-            $user = Manager::where('email', $request->userEmail)->first();
-
-            if (! $user || ! Hash::check($request->userPassword, $user->password)) {
-                throw ValidationException::withMessages([
-                    'email' => ['Invalid Account Information.'],
-                ]);
-            } 
-
+            
             }
         }
      

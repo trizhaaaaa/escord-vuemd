@@ -17,19 +17,29 @@ class LoginController extends Controller
 
     public function login(Request $request) {
         $request->validate([
-            'faculty_number' => 'required',
-            'password' => 'required',
+            'userStudNum' => 'required',
+            'userPassword' => 'required',
             'device_name' => 'required',
         ]);
      
-        $user = User::where('student_number', $request->faculty_number)->first();
+        $user = User::where('student_number', $request->userStudNum)->first();
      
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if($user){
+        if (! $user || ! Hash::check($request->userPassword, $user->password)) {
             throw ValidationException::withMessages([
-                'faculty_number' => ['Invalid Faculty Number or Password.'],
+                'userStudNum' => ['Invalid Faculty Number or Password.'],
             ]);
         }
-       
+    }else{
+
+        $user = Admin::where('student_number', $request->userStudNum)->first();
+
+        if (! $user || ! Hash::check($request->userPassword, $user->password)) {
+            throw ValidationException::withMessages([
+                'userStudNum' => ['Invalid Account Information.'],
+            ]);
+        } 
+    }
         
       return $user->createToken($request->device_name)->plainTextToken;
     
