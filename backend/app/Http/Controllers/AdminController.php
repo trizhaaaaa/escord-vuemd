@@ -95,7 +95,7 @@ public function updateAccountUser(Request $request, $id){
             'device_name' => 'required',
         ]);
      
-        $user = ProfessorAccount::where('email', $request->userEmail)->first();
+$user = ProfessorAccount::where('email', $request->userEmail)->first();
 
         if($user){
             if (! $user || ! Hash::check($request->userPassword, $user->password)) {
@@ -104,22 +104,25 @@ public function updateAccountUser(Request $request, $id){
                 ]);
             } 
         }else{
+          
             $user = Manager::where('email', $request->userEmail)->first();
     
-            if($user){
-                if (! $user || ! Hash::check($request->userPassword, $user->password)) {
-                throw ValidationException::withMessages([
-                    'email' => ['Invalid Account Information.'],
-                ]);
-            } 
-
+          
+            if (! $user || ! Hash::check($request->userPassword, $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['Invalid Account Information.'],
+            ]);
             
-            }
+
         }
-     
-     
-      //  return response()->json(Auth::user(),200);
-     return $user->createToken($request->device_name)->plainTextToken;
+            }
+
+      return $user->createToken($request->device_name)->plainTextToken;
+
+
+      
+   
+    
     
           
     }
