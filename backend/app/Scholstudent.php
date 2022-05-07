@@ -14,4 +14,8 @@ class Scholstudent extends Model
 
 
     protected $table = 'scholstudents';
+
+
+
+    protected $primaryKey = 'srms_id';
 }

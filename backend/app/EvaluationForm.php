@@ -9,11 +9,13 @@ class EvaluationForm extends Model
     //
 
     protected $fillable = [
-        'gradesheetid', 'status_of_ef','archieve',
+        'gradesheetid','srms_id', 'status_of_ef','archieve',
       ];
 
 
-      protected $primaryKey = 'gradesheetid';
+      protected $primaryKey = ['gradesheetid','srms_id'];
+      
+
      
      
   

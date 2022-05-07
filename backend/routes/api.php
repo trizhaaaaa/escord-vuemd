@@ -52,7 +52,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
    //SHOW NG ARCHEIVE NG GRADESHEET
     Route::get('/archievegs','ArchieveController@archievegradesheet');
     Route::get('/archieveschol','ArchieveController@archievescholastic');
-    Route::get('/archieveevalform','ArchieveController@archieveeval');
+
 
    
 
@@ -81,4 +81,15 @@ Route::post('/createaccstud','LoginController@createaccountStudent');
 //konting edit nalang
 Route::put('/updateAdmin/{id}','AdminController@updateAccountAdmin');   
 Route::put('/updateStudent/{id}','AdminController@updateAccountUser');   
+
+//evaluation api
+Route::get('/archieveevalform','ArchieveController@archieveeval');
+Route::get('/evalform','EvaluationFormController@EvalShow');
+
+
+//TRIAL FOR ENROLLMENT DB
+
+Route::get('/enrolldb','EvaluationFormController@enrollmentdb');
+
+
 

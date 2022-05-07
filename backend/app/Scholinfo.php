@@ -12,4 +12,10 @@ class Scholinfo extends Model
         'srms_id', 'student_number','firstname','middlename','surname','address','birthday'
         ,'contact','course','section','elementary','elemyeargrad','highschool'
         ,'hsyeargrad'];
+
+
+        protected $table = 'scholinfos';
+
+
+        protected $primaryKey = 'srms_id';
 }
