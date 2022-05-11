@@ -20,11 +20,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  });
  Route::group(['middleware' => 'auth:sanctum'], function() {
     //logout session
+
+  
     Route::post('/logout','AdminController@logout');
      //addgradesheetinfo
- 
+     
 
   });
+
+
+  
+   
+   Route::get('/edb','EvaluationFormController@enrolldbprof')->middleware('auth:sanctum');
+
+
+
+
+  
+  
+
+
+
   Route::post('/gradesheetinfo','GradesheetController@addgradesheetinfo');
  
     Route::post('/gradesheetstudent','GradesheetController@addgradestudent');
@@ -90,6 +106,5 @@ Route::get('/evalform','EvaluationFormController@EvalShow');
 //TRIAL FOR ENROLLMENT DB
 
 Route::get('/enrolldb','EvaluationFormController@enrollmentdb');
-
 
 

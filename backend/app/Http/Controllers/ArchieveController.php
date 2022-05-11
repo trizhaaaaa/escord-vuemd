@@ -70,4 +70,13 @@ class ArchieveController extends Controller
 
             //archieve query of evaluation
      }
+
+
+     public function pdfconversion($data,Request $request){
+
+        $pdf = PDF::loadView('file.pdf', ['data' => $data]);
+        return $pdf->output();
+
+
+     }
 }

@@ -15,7 +15,8 @@ class ProfessorSeeder extends Seeder
         DB::table('professor_accounts')->insert([
             'email'=>'professor@gmail.com',
             'password'=>Hash::make('password123'),
-            'user_role' => 'professor',]);
+            'user_role' => 'professor',
+            'professorID' => '1001']);
          
         //
     }

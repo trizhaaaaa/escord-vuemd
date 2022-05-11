@@ -44,6 +44,7 @@ class EvaluationFormController extends Controller
         return response()->json($allevalform);
     }
 
+    //creation ng account
     public function enrollmentdb(){
 
         $finalArray = [];
@@ -69,5 +70,55 @@ class EvaluationFormController extends Controller
 
 return response()->json($batch);
 
+    }
+
+
+    public function enrolldbprof(Request $request){
+       $data = $request->user()->professorID;
+
+      // $userID = auth()->user()->email; 
+      $userEmail = auth()->user()->id; 
+
+      $data2 = 22002;
+
+     // $student_detail = DB::connection('mysql2')->table("tblaccounts")->leftjoin('tblprofessors', 'tblaccounts.accountID', '=', 'tblprofessors.accountID')->where('professorID','=',$data)->get();
+
+    $student_detail = DB::connection('mysql2')->table("tblprofessorsubjects")->leftjoin('tblsubjects', 'tblprofessorsubjects.subjectCode', '=', 'tblsubjects.subjectCode')
+    ->leftjoin('tblsubjectschedules', 'tblprofessorsubjects.scheduleID', '=', 'tblsubjectschedules.scheduleID')
+    ->leftjoin('tblcoursedetails', 'tblsubjectschedules.courseID', '=', 'tblcoursedetails.courseID')->where('tblprofessorsubjects.professorID','=',$data)->get();
+
+
+
+    $batch = array();
+    foreach($student_detail as $items){
+        $subjectcode = $items->subjectCode;
+        $subjectdesc = $items->subjectDescription;
+        $semester = $items->semester;
+        $sem_start = $items->schoolYear;
+    //    $sem_end = $items->;
+        $units = $items->subjectUnits;
+        $starttime = $items->startTime;
+        $endtime = $items->endTime;
+
+        $day = $items->day;
+        $course = $items->courseDescription;
+        $course_year = $items->year;
+        $course_section = $items->section;
+     //   $professor = $items->;
+      //  $facultyrank = $items->;
+
+
+
+
+        $batch[] = array('gradesheetid' =>  $gradesheetid = Str::uuid(), 'subjectcode' => $subjectcode, 'subjectdesc' => $subjectdesc,'semester' => $semester,
+        'sem_start' => $sem_start,'units' => $units,'starttime' => $starttime,'endtime' => $endtime,'day' => $day,'course' => $course,'course_year' => $course_year,
+        'course_section' => $course_section);
+
+    }
+
+
+    return response()->json($batch);
+
+        
     }
 }
