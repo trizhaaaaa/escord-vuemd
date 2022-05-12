@@ -86,6 +86,9 @@ class GradesheetController extends Controller
         $gradetable->course_section  = Str::upper($request->classSec);
         $gradetable->professor  = Str::upper($request->profName);
         $gradetable->facultyrank  = Str::upper($request->profRank);
+        $gradetable->professorID  =$request->profID;
+
+        
 
         $gradetable->save();
 
@@ -114,6 +117,8 @@ class GradesheetController extends Controller
 
     }
 
+    //gradesheetpage
+
     public function showgsbyid(Request $request,$gradesheetid){
       
        // $gradesheet = GradesheetInfo::find($gradesheetid);
@@ -124,6 +129,15 @@ class GradesheetController extends Controller
 
     }
 
+    //gradesheetcardper professor
+
+    public function gradesheetcardprof(Request $request, $profid){
+
+        $gradesheetprof = DB::table('gradsheetinfo')->where('professorID', $profid)->get();
+        return response()->json($gradesheetprof);
+
+    }
+    //
 
     public function archievegradesheet(Request $request, $gradesheetid){
 
@@ -139,7 +153,7 @@ class GradesheetController extends Controller
      
             return response()->json([
                 'success' => true,
-                'grades' =>$gradetable
+                'grades' =>$gradesheetid
             ]);
       
 

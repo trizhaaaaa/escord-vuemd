@@ -54,6 +54,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::get('/displaygrade/{gradesheetid}','GradesheetController@showspecgradesheet');
 
 
+    //gradesheet per prof card
+    Route::get('/perprofcard/{gradesheetid}','GradesheetController@gradesheetcardprof');
+
 
     //this is for multirows patch method
     Route::patch('/addgs','GradesheetController@addgs');
