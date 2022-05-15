@@ -20,26 +20,26 @@ class GradesheetController extends Controller
     public function addgradestudent(Request $request){
 
         $request->validate([
-            'student_number' => 'required',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'middlename' => 'required',
-            'midterm' => 'required',
-            'finalterm' => 'required',
+            'studNum' => 'required',
+            'studFN' => 'required',
+            'studLN' => 'required',
+            'studMI' => 'required',
+            'studMG' => 'required',
+            'studFG' => 'required',
             'finalgrade' => 'required',
             'gradesheetid' => 'required',
 
         ]);
 
-        $studentname = $request->lastname . " ". $request->firstname  . " ". $request->middlename;
+        $studentname = $request->studLN . " ". $request->studFN  . " ". $request->studMI;
   
 
         $gradetable = new Gradeofstudent;
         $gradetable->gradesheetid  = $request->gradesheetid;
-        $gradetable->student_number  = $request->student_number;
+        $gradetable->student_number  = $request->studNum;
         $gradetable->studentname  = Str::upper($studentname);
-        $gradetable->midterm  = $request->midterm;
-        $gradetable->finalterm  = $request->finalterm;
+        $gradetable->midterm  = $request->studMG;
+        $gradetable->finalterm  = $request->studFG;
         $gradetable->finalgrade  = $request->finalgrade;
         $gradetable->save();
 
@@ -242,7 +242,7 @@ class GradesheetController extends Controller
 
      public function showspecgradesheet(Request $request,$gradesheetid){
 
-        $gradesheet= DB::table('gradeofstudents')->where('gradesheetid', $gradesheetid)->orderBy('studentname')->get();
+      $gradesheet= DB::table('gradeofstudents')->where('gradesheetid', $gradesheetid)->orderBy('studentname')->get();
 
         return response()->json($gradesheet);
 

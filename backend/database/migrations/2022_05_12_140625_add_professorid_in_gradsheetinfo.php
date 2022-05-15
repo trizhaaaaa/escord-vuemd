@@ -15,7 +15,7 @@ class AddProfessoridInGradsheetinfo extends Migration
     {
         Schema::table('gradsheetinfo', function (Blueprint $table) {
             //
-            $table->integer('professorID');
+        //    $table->integer('professorID');
             
         });
     }
@@ -29,7 +29,7 @@ class AddProfessoridInGradsheetinfo extends Migration
     {
         Schema::table('gradsheetinfo', function (Blueprint $table) {
             //
-            $table->dropColumn('professorID');
+         //   $table->dropColumn('professorID');
             
         });
     }

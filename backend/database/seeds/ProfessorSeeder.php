@@ -16,7 +16,7 @@ class ProfessorSeeder extends Seeder
             'email'=>'professor@gmail.com',
             'password'=>Hash::make('password123'),
             'user_role' => 'professor',
-            'professorID' => '1001']);
+            'professorID' => 1001]);
          
         //
     }

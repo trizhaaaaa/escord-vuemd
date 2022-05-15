@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Admin;
+use App\ProfessorAccount;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -102,6 +103,37 @@ class LoginController extends Controller
  
         return response()->json(['message'=>'User Account Create Success']);
 
+
+    }
+
+    public function createProfessor(Request $request){
+
+
+        $request->validate([
+            'profEmail' => 'required',
+            'profFN' => 'required',
+            'profMI' => 'required',
+            'profLN' => 'required',
+            'profRank' => 'required',
+            'profPassword' => 'required',
+            'profPasswordConfirm' => 'required|same:profPassword|',
+        ]);
+
+     
+      
+    
+        ProfessorAccount::create([
+            'email' =>$request->profEmail,
+            'firstname' => $request->profFN,
+            'middleinitial' => $request->profMI,
+            'lastname' => $request->profLN,
+            'faculty_rank' => $request->profRank,
+            'user_role' =>'professor',
+            'password' => Hash::make($request->profPassword)
+            ]); 
+     
+ 
+        return response()->json(['message'=>'User Account Create Success']);
 
     }
 

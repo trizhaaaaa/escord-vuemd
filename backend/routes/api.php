@@ -40,9 +40,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
   
 
 
-
+//gradesheet dashboard modal
   Route::post('/gradesheetinfo','GradesheetController@addgradesheetinfo');
  
+ // gradesheet page modal
     Route::post('/gradesheetstudent','GradesheetController@addgradestudent');
   
     
@@ -95,7 +96,10 @@ Route::get('/showadminaccount','AdminController@showadminaccount');
 //creation of account
 Route::post('/createaccadm','LoginController@createaccountAdmin');
 Route::post('/createaccstud','LoginController@createaccountStudent');
+Route::post('/createaccprof','LoginController@createProfessor');
  
+
+
 //update of account 
 //konting edit nalang
 Route::put('/updateAdmin/{id}','AdminController@updateAccountAdmin');   
@@ -111,3 +115,14 @@ Route::get('/evalform','EvaluationFormController@EvalShow');
 Route::get('/enrolldb','EvaluationFormController@enrollmentdb');
 
 
+///SCHOLASTIC RECORD 
+
+//mis schol
+Route::get('/perstudentschol/{studentnumber}','ScholasticRecordController@showscholastperStudent');
+
+
+
+Route::get('/showscolmis','ScholasticRecordController@showscolasticMIS');
+
+//student schol
+Route::get('/studentschol/{studentnumber}','ScholasticRecordController@scholstudent');

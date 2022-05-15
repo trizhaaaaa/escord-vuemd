@@ -14,7 +14,8 @@ class ProfessorAccount extends Authenticatable
     use HasApiTokens,Notifiable;
     //
     protected $fillable = [
-        'user_role', 'email', 'password',
+        'user_role', 'email', 'password','firstname',
+        'middleinitial','lastname','faculty_rank'
     ];
 
     /**
