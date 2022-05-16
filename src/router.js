@@ -12,6 +12,7 @@ import escLanding from "./escord-components/esc-LandingPage.vue";
 import escStudDash from "./escord-components/Student/studDashboard.vue";
 import escProfDash from "./escord-components/Prof/profDashboard.vue";
 import escStaffScholasticRecord from "./escord-components/Staff/StaffScholasticRecord.vue";
+import escStaffEvaluationForm from "./escord-components/Staff/staffEvaluationForm.vue";
 
 Vue.use(Router);
 
@@ -73,6 +74,11 @@ export default new Router({
       path: "/Staff-scholastic-record",
       name: "Staff Scholastic-record",
       component: escStaffScholasticRecord
+    },
+    {
+      path: "/staff-evaluation-form",
+      name: "Staff Evaluation form",
+      component: escStaffEvaluationForm
     }
   ],
   scrollBehavior: to => {
