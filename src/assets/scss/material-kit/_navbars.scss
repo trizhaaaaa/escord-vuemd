@@ -156,6 +156,11 @@
     @include dropdown-colors($grey-900);
     @include toolbar-colors($grey-900, $white-color);
   }
+  /* escord */
+  &.md-esc-dark{
+    @include dropdown-colors(#363434);
+    @include toolbar-colors(#363434, $white-color);
+  }
 
   &.navbar-transparent{
       background-color: transparent;

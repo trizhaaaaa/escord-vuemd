@@ -19,12 +19,24 @@ import router from "./router";
 import store from './store'
 import axios from 'axios';
 
-
 import MaterialKit from "./plugins/material-kit";
+
+// Md-Vuelidate
+import MdVuelidated from '@undecaf/vue-material-vuelidate'
+import '@undecaf/vue-material-vuelidate/dist/components.css'
+
+// Vue-Headful (for page title)
+import vueHeadful from 'vue-headful';
+
+/* eslint-disable no-new */
 
 Vue.config.productionTip = false;
 
 Vue.use(MaterialKit);
+
+Vue.use(MdVuelidated)
+
+Vue.component('vue-headful', vueHeadful)
 
 const NavbarStore = {
   showNavbar: false

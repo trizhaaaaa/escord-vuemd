@@ -1,286 +1,176 @@
 <template>
-  <header id="vue-hdr">
-    <a href="/"
-      ><img src="@/assets/img/escord-logo-max.svg" alt="logo-max" class="logo-max"
-    /></a>
-
-    <button class="btn-toggleMenu">
-      <i class="fa-solid fa-bars toggleMenu"></i>
-    </button>
-
-    <nav>
-      <!--USER CATEGORIES, show: false (initial value)-->
-      <div class="userDropdown">
-        <select name="userCategory" id="userCategory" v-show="showCategoryList">
-          <option disabled selected value="blank">Select Category</option>
-          <option value="faculty">FACULTY</option>
-          <option value="coordinator">COORDINATOR</option>
-          <option value="mis-staff">MIS STAFF</option>
-          <option value="mis-manager">MIS MANAGER</option>
-        </select>
+  <md-toolbar
+    id="toolbar"
+    md-elevation="0"
+    class="md-absolute md-esc-dark"
+    :class="extraNavClasses"
+  >
+    <div class="md-toolbar-row md-collapse-lateral">
+      <div class="md-toolbar-section-start">
+        <!-- logo -->
+        <router-link to="/">
+            <div class="__logo md-layout md-alignment-center-center">
+                <img src="../assets/img/escord-logo-max.svg" alt="escLogo" width="150rem"
+                class="logo">
+                <!-- <h3 class="md-title title">ESCORD</h3> -->
+            </div>
+        </router-link>
       </div>
+      <div class="md-toolbar-section-end">
+        <!-- burger button -->
+        <md-button
+          class="md-just-icon md-simple md-toolbar-toggle"
+          :class="{ toggled: toggledClass }"
+          @click="toggleNavbarMobile()"
+        >
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </md-button>
 
-      <div class="cont-toggleMenu">
-        <ul>
-          <li><router-link to="/about" class="hdr-a" >ABOUT</router-link></li>
-          <li><router-link to="/guide" class="hdr-a">GUIDE</router-link></li>
-          <li><router-link to="/contact" class="hdr-a">CONTACT</router-link></li>
-          <li>
-                 <span v-if="!isAuthenticated">
-            <button
-              id="btn-login"
-              v-bind:class="{ loggedIn: loggedIn, loggedOut: !loggedIn }"
-              v-on:click="login"
-            >
-             Login
-            </button>
+        <div class="md-collapse">
+          <div class="md-collapse-wrapper">
+            <mobile-menu nav-mobile-section-start="false">
+              <!-- Here you can add your items from the section-start of your toolbar -->
+            </mobile-menu>
 
-                 </span>
-<span v-else>
-                 <button
-              id="btn-login"
-              v-bind:class="{ loggedIn: loggedIn, loggedOut: !loggedIn }"
-              v-on:click="logout"
-            >
-              Logout
-            </button>
+            <md-list>
 
-</span>
-          </li>
-        </ul>
+              <md-list-item
+                to="/about-escord"
+                v-if="showMenu"
+              >
+                <p>About</p>
+              </md-list-item>
+             
+              <md-list-item
+                to="/contact-escord"
+                v-if="showMenu"
+              >
+                <p>Contact Us</p>
+              </md-list-item>
+
+              <md-list-item
+                to="/login-to-escord"
+                v-if="showMenu"
+              >
+                <p class="__login">Login</p>
+              </md-list-item>
+              
+            </md-list>
+          </div>
+        </div>
       </div>
-    </nav>
-    
-   
-  </header>
+    </div>
+  </md-toolbar>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import axios from 'axios'
+let resizeTimeout;
+function resizeThrottler(actualResizeHandler) {
+  // ignore resize events as long as an actualResizeHandler execution is in the queue
+  if (!resizeTimeout) {
+    resizeTimeout = setTimeout(() => {
+      resizeTimeout = null;
+      actualResizeHandler();
 
+      // The actualResizeHandler will execute at a rate of 15fps
+    }, 66);
+  }
+}
+
+import MobileMenu from "@/layout/MobileMenu";
 export default {
-  name: 'Header',
-  data() {
-    return {
-      showCategoryList: false,
-      btnText: "LOG IN",
-      loggedIn: false,
-      
-    };
-
-    
+  components: {
+    MobileMenu
   },
-
-  computed: {
-           ...mapGetters({isAuthenticated : 'isAuthenticated'}),
-
-  },
-  methods: {
-    login: function () {
-     // this.loggedIn = !this.loggedIn;
-     // this.showCategoryList = !this.showCategoryList;
-   this.$router.push({name:'AdminLogin'});
-   /*    if (this.showCategoryList === true) {
-        this.btnText = "LOG OUT";
-      } else {
-        this.btnText = "LOG IN";
-     
-      } */
-
-
-
-    },
-    logout:function(){
-    
-    axios.post('/api/logout').then((response)=>{
-      localStorage.removeItem('role');
-      localStorage.removeItem('token');
-      
-       //  this.$router.push('/');
-      this.$router.push('/', () => this.$router.go(0))
-                   
-      }).then(response=>{
-   console.log(response);
-          })
-       
-    },
-
-
-    onClickLink: function(){
-      $('.cont-toggleMenu collapse').toggleClass("");
+  props: {
+    type: {
+      type: String,
+      default: "white",
+      validator(value) {
+        return [
+          "white",
+          "default",
+          "primary",
+          "danger",
+          "success",
+          "warning",
+          "info"
+        ].includes(value);
+      }
     }
   },
+  data() {
+    return {
+      extraNavClasses: "",
+      toggledClass: false,
+      showMenu: true
+    };
+  },
+  methods: {
+    bodyClick() {
+      let bodyClick = document.getElementById("bodyClick");
+
+      if (bodyClick === null) {
+        let body = document.querySelector("body");
+        let elem = document.createElement("div");
+        elem.setAttribute("id", "bodyClick");
+        body.appendChild(elem);
+
+        let bodyClick = document.getElementById("bodyClick");
+        bodyClick.addEventListener("click", this.toggleNavbarMobile);
+      } else {
+        bodyClick.remove();
+      }
+    },
+    toggleNavbarMobile() {
+      this.NavbarStore.showNavbar = !this.NavbarStore.showNavbar;
+      this.toggledClass = !this.toggledClass;
+      this.bodyClick();
+    },
+    handleScroll() {
+      let scrollValue =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      let navbarColor = document.getElementById("toolbar");
+      this.currentScrollValue = scrollValue;
+    },
+    scrollListener() {
+      resizeThrottler(this.handleScroll);
+    },
+    scrollToElement() {
+      let element_id = document.getElementById("downloadSection");
+      if (element_id) {
+        element_id.scrollIntoView({ block: "end", behavior: "smooth" });
+      }
+    }
+  },
+  mounted() {
+    document.addEventListener("scroll", this.scrollListener);
+  },
+  beforeDestroy() {
+    document.removeEventListener("scroll", this.scrollListener);
+  }
 };
 </script>
 
-<style scoped>
-header {
-  background-color: #545454;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 99;
-}
-/* LOGO */
-img.logo-max {
-  max-width: 170px;
-  padding: 20px 20px 10px;
-  float: left;
-}
-img.logo-max:hover {
-  filter: drop-shadow(0px 0px 4px #242424);
-}
-/* DROPDOWN-USER CATEGORY */
-div.userDropdown {
-  display: inline-block;
-}
-select {
-  border: none;
-  font-family: "Cuprum", sans-serif;
-  background: #545454;
-  box-shadow: 0px -2px 6px #2d2d2d;
-  outline: 0px;
-  border-radius: 5px;
-  margin: 0.7em 0.2em;
-  width: 170px;
-  text-align: center;
-  letter-spacing: 2px;
-  padding: 0.2em;
-  font-size: 18px;
-  color: #ffffff;
+<style lang="scss" scoped>
+
+.md-title, .logo {
+    margin-left: 1.25rem !important;
 }
 
-/* NAVIGATION BAR */
-nav {
-  margin-right: 5%;
-}
-/* NAVIGATION BAR - LINKS */
-div.cont-toggleMenu {
-  float: right;
-  margin: 0.4em -3em 0em 0em;
-}
-ul {
-  margin: 0%;
-}
-nav ul li {
-  list-style: none;
-  display: inline;
-  padding-right: 10px;
-  padding-left: 20px;
-}
-a.hdr-a {
-  padding: 0.9em 1.5em;
-  font-size: 18px;
-  color: #ffffff;
-  text-decoration: none;
-  display: inline-block;
-}
-a.hdr-a:hover {
-  color: #ff9807;
-  text-shadow: 0px 0px 4px #242424;
+.logo {
+    padding-top: 0.5rem !important;
 }
 
-
-/* LOGIN BUTTON */
-button.loggedIn,
-button.loggedOut {
-  font-family: Century Gothic;
-  font-weight: bold;
-  font-size: 18px;
-  border: 2px solid #ff9807;
-  padding: 5px 15px;
-  border-radius: 25px;
-}
-button.loggedOut {
-  color: white;
-  background-color: #545454;
-}
-button.loggedOut:hover {
-  background-color: #ff9807;
-  color: #545454;
-  box-shadow: 0px 0px 6px #242424;
-}
-button.loggedIn {
-  background: #ff9807;
-  color: #545454;
-  box-shadow: 0px 0px 6px #242424;
-}
-button.loggedIn:hover {
-  background-color: #545454;
-  color: white;
-}
-/* TOGGLE BUTTON */
-button.btn-toggleMenu {
-  float: right;
-  width: 3em;
-  height: 2.9em;
-  margin-top: 0.6em;
-  margin-right: 1.5em;
-  background-color: transparent;
-  color: #ff9807;
-  border: 2px solid #ff9807;
-  cursor: pointer;
-  border-radius: 5px;
-  display: none;
-}
-button.btn-toggleMenu:hover {
-  color: #545454;
-  background-color: #ff9807;
+p {
+  font-size: 0.9rem !important;
 }
 
-@media screen and (max-width: 976px) {
-  button.btn-toggleMenu {
-    display: inline-block;
-  }
-  ul {
-    padding: 0%;
-    color: white;
-  }
-  nav ul li {
-    display: block;
-    list-style: none;
-    text-align: right;
-    padding-bottom: 1em;
-    font-weight: bold;
-  }
-  a.hdr-a {
-    font-size: 2.5em;
-  }
-  button#btn-login {
-    border: none;
-    color: #ff9807;
-    margin-right: 0.7em;
-    padding: 5px 0.7em 5px 0;
-    font-size: 3em;
-  }
-  button.loggedOut:hover {
-    box-shadow: none;
-    background: none;
-    text-shadow: 0px 0px 6px #242424;
-  }
-  button.loggedIn {
-    box-shadow: none;
-    background: none;
-    color: #545454;
-    text-shadow: 0px 0px 6px #242424;
-  }
-  button.loggedIn:hover {
-    background-color: #545454;
-    color: white;
-  }
-  div.cont-toggleMenu {
-    width: 100%;
-    overflow: hidden;
-    text-align: center;
-    height: 0vh;
-    transition: all 499ms ease;
-  }
-  div.collapse {
-    height: 100vh;
-  }
+.__login {
+  color: #ef6c00;
+  font-size: 1rem !important;
+  font-weight: bolder !important;
 }
 </style>

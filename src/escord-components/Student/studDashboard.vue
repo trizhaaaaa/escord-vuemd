@@ -55,6 +55,7 @@
         </div>
       </div>
     </div>
+    <vue-headful title="Dashboard | STUDENT"/>
   </div>
 </template>
 

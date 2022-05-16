@@ -30,6 +30,7 @@
                 <i class="fab fa-google-plus-g"></i>
               </md-button>
               <p slot="description" class="description">Or Be Classical</p>
+              
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>face</md-icon>
                 <label>First Name...</label>

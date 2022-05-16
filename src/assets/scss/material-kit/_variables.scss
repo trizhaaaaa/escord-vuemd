@@ -36,6 +36,11 @@ $brand-warning: $orange !default;
 $brand-info: $cyan !default;
 $brand-rose: $pink !default;
 
+//---ESCORD
+$esc-accent: $orange !default;
+$esc-darkgrey: #363434 !default;
+//----
+
 $border-radius-base: 3px !default;
 $border-radius-small: 2px !default;
 $border-radius-large: 6px !default;
@@ -217,6 +222,12 @@ $table-border-color:            #ddd !default;
 //## For each of Bootstrap's buttons, define text, background and border color.
 
 $btn-font-weight:                normal !default;
+
+//---ESCORD
+$btn-escAccent-color:              #545454 !default;
+$btn-escAccent-bg:                 $esc-accent !default;
+$btn-escAccent-border:             darken($btn-escAccent-bg, 5%) !default;
+//---
 
 $btn-default-color:              #333 !default;
 $btn-default-bg:                 #fff !default;

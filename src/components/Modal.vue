@@ -11,7 +11,7 @@
             <slot name="body"></slot>
           </div>
 
-          <div class="modal-footer">
+          <div class="modal-footer" v-if="hasFooterContent">
             <slot name="footer"></slot>
           </div>
         </div>
@@ -27,6 +27,12 @@ export default {
     closeModal: function() {
       this.$emit("close");
     }
+  },
+
+  computed: {
+     hasFooterContent() {
+                return this.$slots['footer']
+            }
   }
 };
 </script>

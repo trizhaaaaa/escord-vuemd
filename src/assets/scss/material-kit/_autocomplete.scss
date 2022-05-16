@@ -12,8 +12,8 @@
       border-radius: 3px;
 
       &:hover {
-        background-color: $brand-primary !important;
-        @include shadow-big-color($brand-primary);
+        background-color: $esc-darkgrey !important;
+        @include shadow-big-color($esc-darkgrey);
         color: #FFF !important;
       }
 

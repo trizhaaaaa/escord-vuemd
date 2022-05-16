@@ -71,6 +71,14 @@
     &.md-rose{
       @include btn-styles($brand-rose);
     }
+    //---ESCORD--------------------
+    &.md-esc-accent{
+      @include btn-styles($esc-accent);
+    }
+     &.md-esc-darkgrey{
+      @include btn-styles($esc-darkgrey);
+    }
+    //-----------------------------
 
     &:focus,
     &:active,

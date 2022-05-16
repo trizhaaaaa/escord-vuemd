@@ -35,10 +35,10 @@
   }
 
   &.md-checked .md-radio-container{
-    border-color: $brand-primary !important;
+    border-color: $esc-accent !important;
 
     &:after{
-      background-color: $brand-primary !important;
+      background-color: $esc-accent !important;
     }
   }
 

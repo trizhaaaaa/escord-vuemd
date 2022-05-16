@@ -5,7 +5,7 @@
   .md-input,
   .md-textarea{
     height: 36px;
-    padding: 7px 0;
+    padding: 5px 0;
     font-size: 14px !important;
     -webkit-text-fill-color: $black-color !important;
     appearance: none;
@@ -46,6 +46,20 @@
       color: $white-color !important;
     }
   }
+
+  //--------ESCORD--------------------
+  &.has-esc-accent {
+    &:before {
+      background-color: $esc-accent !important;
+    }
+
+    .md-input {
+      font-weight: 500;
+      -webkit-text-fill-color: $esc-darkgrey !important;
+      color: $esc-darkgrey !important;
+    }
+  }
+  //---------------------------------
 
   @include inputs-color('green', $brand-success);
   @include inputs-color('danger', $brand-danger);
@@ -102,7 +116,7 @@
 
   &.md-focused label,
   &.md-has-value label{
-    top: -1rem;
+    top: -0.3rem;
   }
 
   .md-helper-text{
@@ -138,7 +152,7 @@
     font-size: 14px;
     font-weight: 400;
     color: $mdb-input-placeholder-color !important;
-    line-height: 1.4;
+    line-height: 1;
     top: 26px;
   }
 
@@ -217,7 +231,7 @@
 
   &.md-focused label,
   &.md-field.md-has-value label{
-    top: -.8rem;
+    top: -.4rem;
   }
 
   &.md-focused > .fa,
@@ -225,7 +239,7 @@
   &.md-focused > .fas,
   &.md-focused > .fab {
 
-    color: $brand-primary !important;
+    color: $esc-accent !important; //changed from $brand_primary
   }
 
   .success.md-icon,
