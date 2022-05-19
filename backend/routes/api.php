@@ -60,7 +60,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
     //this is for multirows patch method
-    Route::patch('/addgs','GradesheetController@addgs');
+    Route::put('/addgs/{id}','GradesheetController@addgs');
 
     //update  GRADESHEET
     Route::put('/updategs/{gradesheetid}','GradesheetController@updategradesheetinfo');
@@ -103,7 +103,10 @@ Route::post('/createaccprof','LoginController@createProfessor');
 //update of account 
 //konting edit nalang
 Route::put('/updateAdmin/{id}','AdminController@updateAccountAdmin');   
-Route::put('/updateStudent/{id}','AdminController@updateAccountUser');   
+Route::put('/updateStudent/{id}','AdminController@updateAccountUser');
+Route::put('/updateProf/{profid}','AdminController@updateAccountProf');   
+Route::put('/updateManager/{id}','AdminController@updateAccountManager');   
+
 
 //evaluation api
 Route::get('/archieveevalform','ArchieveController@archieveeval');
@@ -126,3 +129,11 @@ Route::get('/showscolmis','ScholasticRecordController@showscolasticMIS');
 
 //student schol
 Route::get('/studentschol/{studentnumber}','ScholasticRecordController@scholstudent');
+
+
+//update info
+Route::put('/scholupdate/{srmsid}','ScholasticRecordController@scholupdate');
+
+//update archieve
+
+Route::put('/scholarch/{srmsid}','ArchieveController@scholarch');

@@ -13,7 +13,7 @@ class Gradeofstudent extends Model
       ];
   
   
-      protected $primaryKey = 'gradesheetid';
+      protected $primaryKey = ['gradesheetid'];
      
      
       public $timestamps = false;

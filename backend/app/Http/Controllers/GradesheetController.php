@@ -34,7 +34,7 @@ class GradesheetController extends Controller
         $studentname = $request->studLN . " ". $request->studFN  . " ". $request->studMI;
   
 
-        $gradetable = new Gradeofstudent;
+  /*       $gradetable = new Gradeofstudent;
         $gradetable->gradesheetid  = $request->gradesheetid;
         $gradetable->student_number  = $request->studNum;
         $gradetable->studentname  = Str::upper($studentname);
@@ -42,10 +42,22 @@ class GradesheetController extends Controller
         $gradetable->finalterm  = $request->studFG;
         $gradetable->finalgrade  = $request->finalgrade;
         $gradetable->save();
+ */
 
-        return response()->json(['message'=>'grade added successfully']);
 
-        
+$create = DB::table('gradeofstudents')->insert(
+    ['gradesheetid' => $request->gradesheetid, 
+    'student_number' =>  $request->studNum,
+    'studentname'  => Str::upper($studentname),
+    'midterm'  => $request->studMG,
+    'finalterm'  => $request->studFG,
+    'finalgrade'  => $request->finalgrade,
+]);
+
+
+       // return response()->json(['message'=>'grade added successfully']);
+
+        return response()->json($create);
     }
 
 
@@ -64,8 +76,6 @@ class GradesheetController extends Controller
             'classProg' => 'required',
             'classYr' => 'required',
             'classSec' => 'required',
-            'profName' => 'required',
-            'profRank' => 'required',
 
         ]); 
 
@@ -84,8 +94,6 @@ class GradesheetController extends Controller
         $gradetable->course_short  =Str::upper($request->classProg);
         $gradetable->course_year  = Str::upper($request->classYr);
         $gradetable->course_section  = Str::upper($request->classSec);
-        $gradetable->professor  = Str::upper($request->profName);
-        $gradetable->facultyrank  = Str::upper($request->profRank);
         $gradetable->professorID  =$request->profID;
 
         
@@ -186,21 +194,41 @@ class GradesheetController extends Controller
     }
 
     //patch method
-    public function addgs(Request $request)
+    public function addgs(Request $request,$id)
     {
 
         $this->validate($request,[
-            'student_number.*' => 'required',
-            'studentname.*' => 'required',
-            'midterm.*' => 'required',
-            'finalterm.*' => 'required',
-            'finalgrade.*' => 'required',
-            'gradesheetid.*' => 'required',
+            'student_number' => 'required',
+            'studentname' => 'required',
+            'midterm' => 'required',
+            'finalterm' => 'required',
+            'finalgrade' => 'required',
+            'gradesheetid' => 'required',
 
         ]);
   
 
-        $requestData = $request->all();
+    //    $requestData = $request->all();
+
+
+  
+
+    $gradeofstudent = DB::table('gradeofstudents')
+    ->where('id', $id)
+    ->update(['student_number' => $request->student_number,
+    'studentname' => $request->studentname,
+    'midterm' => $request->midterm,
+    'finalterm' => $request->finalterm,
+    'finalgrade' => $request->finalgrade,
+//    'archieve' =>$request->arch
+            ]);
+
+    return response()->json($gradeofstudent);
+    
+   
+
+    
+            //return response()->json(['message'=>'successfull update']);
 
   /* foreach( $requestData as $key=>$datainside){
 
@@ -215,12 +243,16 @@ class GradesheetController extends Controller
 
             } 
  */
+           // Gradeofstudent::query()->update(['student_number' => 0, 'column2' => 'New']);
 
-  
-
-              Gradeofstudent::upsert($requestData);
+             // Gradeofstudent::upsert($requestData);
+ //             Gradeofstudent::upsert($requestData,["name"],["value"]);
  
-              return response()->json(['message'=>'grade added successfully']);
+
+        //Gradeofstudent::update(array_merge($request->all(), ['midterm' => 'midterm']));
+                
+        
+         
         
 
               /*   foreach ($requestData as $key => $data) {

@@ -46,4 +46,30 @@ class ScholasticRecordController extends Controller
     }
 
 
+    //MIS UPDATE
+
+    public function scholupdate(Request $request, $srms_id){
+        $studentupdate = DB::table('scholinfos')
+        ->where('srms_id', $srms_id)
+        ->update(['student_number' => $request->studNum,
+        'course' => $request->studProgram,
+        'section' => $request->studSection,
+        'surname' => $request->studLN,
+        'firstname' => $request->studFN,
+        'middlename' => $request->studMI,
+        'birthday' => $request->studBirthday,
+        'address' => $request->studAddress,
+        'contact' => $request->studContactNum,
+        'elementary' => $request->studElemSchool,
+        'elemyeargrad' => $request->studElemGradYr,
+        'highschool' => $request->studHighSchool,
+        'hsyeargrad' => $request->studHighSchoolGradYr,
+    //    'archieve' =>$request->arch
+                ]);
+
+        return response()->json($studentupdate);
+
+    }
+
+
 }

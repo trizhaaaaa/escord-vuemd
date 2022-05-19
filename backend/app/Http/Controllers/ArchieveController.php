@@ -72,6 +72,20 @@ class ArchieveController extends Controller
      }
 
 
+     //update
+
+
+     public function scholarch(Request $request,$srms_id){
+        $studentarch = DB::table('scholinfos')
+        ->where('srms_id', $srms_id)
+        ->update(['archieve' => '1'
+                ]);
+
+        return response()->json($studentarch);
+
+     }
+
+
      public function pdfconversion($data,Request $request){
 
         $pdf = PDF::loadView('file.pdf', ['data' => $data]);

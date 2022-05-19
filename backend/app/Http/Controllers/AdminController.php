@@ -25,9 +25,9 @@ class AdminController extends Controller
             'email' => 'required',
             'lastname' => 'required',
             'firstname' => 'required',
-            'username' => 'required',
             'student_number' => 'required',
-            'password' =>'required'
+            'password' =>'required',
+            'confirmpass'=>'required|same:password|'
         ]);
 
        
@@ -39,7 +39,6 @@ class AdminController extends Controller
             'email' => $request->email,
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
-            'username' => $request->username,
             'student_number' => $request->student_number,
             'password' =>Hash::make($request->password)
 
@@ -58,19 +57,22 @@ public function updateAccountUser(Request $request, $id){
 
     $request->validate([
         'email' => 'required',
-        'lastname' => 'required',
-        'firstname' => 'required',
+        'name'=>'required',
         'student_number' => 'required',
+        'password' => 'required',
+        'confirmpass' => 'required|same:password|',
+
+
     ]);
 
    
    
-    $name = $request->firstname . " ". $request->lastname;
+   // $name = $request->firstname . " ". $request->lastname;
  
 //      $input = $request->all();
     $user = DB::table('users')->where('id', $id)->limit(1)->update([
         'email' => $request->email,
-        'name' => $name,
+        'name' => $request->name,
         'student_number' => $request->student_number,
         'password' =>Hash::make($request->password)
 
@@ -81,6 +83,80 @@ public function updateAccountUser(Request $request, $id){
      return response()->json(['message'=>'successfull update']);
         
         
+}
+
+
+
+//update account prof 
+
+public function updateAccountProf(Request $request, $profid){
+
+    $request->validate([
+        'email' => 'required',
+        'firstname'=>'required',
+        'middleinitial' => 'required',
+        'lastname' => 'required',
+        'faculty_rank' => 'required',
+        'password' => 'required',
+        'confirmpass' => 'required|same:password|',
+
+
+    ]);
+
+   
+   
+   // $name = $request->firstname . " ". $request->lastname;
+ 
+//      $input = $request->all();
+    $user = DB::table('professor_accounts')->where('id', $profid)->limit(1)->update([
+        'email' => $request->email,
+        'firstname'=> $request->firstname,
+        'middleinitial' =>  $request->middleinitial,
+        'lastname' =>  $request->lastname,
+        'faculty_rank' =>  $request->faculty_rank,
+        'password' =>Hash::make($request->password)
+
+    ]);
+
+    
+
+     return response()->json(['message'=>'successfull update']);
+
+}
+
+
+
+//update account prof 
+
+public function updateAccountManager(Request $request, $managerid){
+
+
+
+    $request->validate([
+        'email' => 'required',
+        'name'=>'required',
+        'password' => 'required',
+        'confirmpass' => 'required|same:password|',
+
+
+    ]);
+
+   
+   
+   // $name = $request->name . " ". $request->lastname;
+ 
+//      $input = $request->all();
+    $user = DB::table('managers')->where('id', $managerid)->limit(1)->update([
+        'email' => $request->email,
+        'name'=> $request->name,
+        'password' =>Hash::make($request->password)
+
+    ]);
+
+    
+
+     return response()->json(['message'=>'successfull update']);
+
 }
 
 
