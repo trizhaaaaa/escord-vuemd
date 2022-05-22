@@ -13,7 +13,6 @@
 
             <div class="md-layout-item" align="right">
               <md-card class="card1">
-              
                 <md-field>
                   <md-icon class="" align="left">search</md-icon>
                     <label>Search</label>

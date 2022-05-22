@@ -21,6 +21,8 @@ import escStaffScholasticRecord from "./escord-components/Staff/StaffScholasticR
 import escStaffEvaluationForm from "./escord-components/Staff/staffEvaluationForm.vue";
 import escProf_GSPage from "./escord-components/Prof/profGradesheetPage.vue";
 import escStaffDash from "./escord-components/Staff/staffDashboard.vue";
+import escStaffSrMainMenu from "./escord-components/Staff/staffSrMainMenu.vue";
+
 
 
 Vue.use(Router);
@@ -105,11 +107,11 @@ export default new Router({
       component: escStaffScholasticRecord
     },
     {
-<<<<<<< HEAD
       path: "/staff-evaluation-form",
       name: "Staff Evaluation form",
       component: escStaffEvaluationForm
-=======
+    },
+    {
       path: "/gradesheet-detail",
       name: "Gradesheet Detail",
       component: escProf_GSPage
@@ -118,10 +120,14 @@ export default new Router({
       path: "/staff-dashboard",
       name: "Staff Dashboard",
       component: escStaffDash
-
->>>>>>> 8b2d631dc5a8b8c40613d286db48bf1d85b6ae57
+    },
+    {
+      path: "/staff-Scholastic record-Main menu",
+      name: "Staff Scholastic Record Main Menu",
+      component: escStaffSrMainMenu
     }
   ],
+  
   scrollBehavior: to => {
     if (to.hash) {
       return { selector: to.hash };
