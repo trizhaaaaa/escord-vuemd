@@ -18,13 +18,10 @@ import escContactUs from "./escord-components/esc-ContactUs.vue";
 import escStudDash from "./escord-components/Student/studDashboard.vue";
 import escProfDash from "./escord-components/Prof/profDashboard.vue";
 import escStaffScholasticRecord from "./escord-components/Staff/StaffScholasticRecord.vue";
-<<<<<<< HEAD
 import escStaffEvaluationForm from "./escord-components/Staff/staffEvaluationForm.vue";
-=======
 import escProf_GSPage from "./escord-components/Prof/profGradesheetPage.vue";
 import escStaffDash from "./escord-components/Staff/staffDashboard.vue";
 
->>>>>>> 8b2d631dc5a8b8c40613d286db48bf1d85b6ae57
 
 Vue.use(Router);
 
