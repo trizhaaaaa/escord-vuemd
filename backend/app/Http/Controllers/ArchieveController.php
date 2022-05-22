@@ -18,9 +18,7 @@ class ArchieveController extends Controller
  $gradesheet = DB::table('gradsheetinfo')->where('archieve', '1')->get();
       
     if ($gradesheet) {
-        return response()->json([
-            'success' => true,
-            'grades' =>$gradesheet
+        return response()->json([$gradesheet
         ]);
     } else {
         return response()->json([
@@ -36,9 +34,7 @@ class ArchieveController extends Controller
         $scholinfo = DB::table('scholinfos')->where('archieve', '1')->get();
       
         if ($scholinfo) {
-            return response()->json([
-                'success' => true,
-                'grades' =>$scholinfo
+            return response()->json([$scholinfo
             ]);
         } else {
             return response()->json([
@@ -56,9 +52,7 @@ class ArchieveController extends Controller
         $evalform = DB::table('evaluation_forms')->where('archieve', '1')->get();
       
         if ($evalform) {
-            return response()->json([
-                'success' => true,
-                'grades' =>$evalform
+            return response()->json([$evalform
             ]);
         } else {
             return response()->json([
@@ -69,6 +63,18 @@ class ArchieveController extends Controller
     
 
             //archieve query of evaluation
+     }
+
+
+     public function gradesheetunArchieve(Request $request, $gradesheetid){
+       
+        $gsunarchieve = DB::table('gradsheetinfo')
+        ->where('gradesheetid', $gradesheetid)
+        ->update(['archieve' => null,
+                ]);
+
+        return response()->json($gsunarchieve);
+
      }
 
 

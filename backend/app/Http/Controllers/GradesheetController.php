@@ -283,6 +283,16 @@ $create = DB::table('gradeofstudents')->insert(
      }
 
 
+     public function paginatecard(Request $request, $profid){
+
+
+        $gradesheetprof = DB::table('gradsheetinfo')->where('professorID', $profid)->paginate(2);
+        return response()->json($gradesheetprof);
+
+
+     }
+
+
   
 
 }

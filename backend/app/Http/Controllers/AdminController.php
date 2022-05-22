@@ -233,4 +233,15 @@ $user = ProfessorAccount::where('email', $request->userEmail)->first();
         }
         return response()->json($user);
     }
+
+
+    public function showprofaccount() {
+
+        $user = ProfessorAccount::all();
+
+        if(!$user){
+            return response()->json(['message'=>'couldnt get connect to the server']);
+        }
+        return response()->json($user);
+    }
 }

@@ -35,8 +35,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-
-  
+//paginatin
+  Route::get('/paginatecard/{profid}','GradesheetController@paginatecard');
   
 
 
@@ -74,6 +74,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::get('/archieveschol','ArchieveController@archievescholastic');
 
 
+    Route::put('/unarchieveGS/{gsid}','ArchieveController@gradesheetunArchieve');
    
 
 
@@ -92,6 +93,9 @@ Route::post('/userlogin','LoginController@login');
 //showing ng account
 Route::get('/showuseraccount','AdminController@showuseraccount');
 Route::get('/showadminaccount','AdminController@showadminaccount');
+Route::get('/showprofaccount','AdminController@showprofaccount');
+
+
 
 //creation of account
 Route::post('/createaccadm','LoginController@createaccountAdmin');
