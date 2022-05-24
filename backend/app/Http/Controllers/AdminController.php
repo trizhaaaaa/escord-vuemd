@@ -108,6 +108,18 @@ public function updateAccountProf(Request $request, $profid){
    // $name = $request->firstname . " ". $request->lastname;
  
 //      $input = $request->all();
+
+/* $request->validate([
+    'email' => 'required',
+    'firstname'=>'required',
+    'middleinitial' => 'required',
+    'lastname' => 'required',
+    'faculty_rank' => 'required',
+    'password' => 'required',
+    'confirmpass' => 'required|same:password|',
+
+
+]); */
     $user = DB::table('professor_accounts')->where('id', $profid)->limit(1)->update([
         'email' => $request->email,
         'firstname'=> $request->firstname,
@@ -146,6 +158,16 @@ public function updateAccountManager(Request $request, $managerid){
    // $name = $request->name . " ". $request->lastname;
  
 //      $input = $request->all();
+
+$request->validate([
+    'name' => 'required',
+    'email'=>'required',
+    'password' => 'required',
+    'confirmpass' => 'required|same:password|',
+
+
+]);
+
     $user = DB::table('managers')->where('id', $managerid)->limit(1)->update([
         'email' => $request->email,
         'name'=> $request->name,

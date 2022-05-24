@@ -15,11 +15,11 @@ class ArchieveController extends Controller
     public function archievegradesheet(){
 
     
- $gradesheet = DB::table('gradsheetinfo')->where('archieve', '1')->get();
+ $gradesheet = DB::table('gradsheetinfo')->where('archieve', '1')->paginate(5);
       
     if ($gradesheet) {
-        return response()->json([$gradesheet
-        ]);
+        return response()->json($gradesheet
+        );
     } else {
         return response()->json([
             'success' => false,
@@ -31,11 +31,11 @@ class ArchieveController extends Controller
 
     public function archievescholastic(){
        
-        $scholinfo = DB::table('scholinfos')->where('archieve', '1')->get();
+        $scholinfo = DB::table('scholinfos')->where('archieve', '1')->paginate(5);
       
         if ($scholinfo) {
-            return response()->json([$scholinfo
-            ]);
+            return response()->json($scholinfo
+            );
         } else {
             return response()->json([
                 'success' => false,
@@ -49,11 +49,11 @@ class ArchieveController extends Controller
 
      public function archieveeval(){
 
-        $evalform = DB::table('evaluation_forms')->where('archieve', '1')->get();
+        $evalform = DB::table('evaluation_forms')->where('archieve', '1')->paginate(5);
       
         if ($evalform) {
-            return response()->json([$evalform
-            ]);
+            return response()->json($evalform
+           );
         } else {
             return response()->json([
                 'success' => false,

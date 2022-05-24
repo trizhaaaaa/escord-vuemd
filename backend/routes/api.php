@@ -101,6 +101,12 @@ Route::get('/showprofaccount','AdminController@showprofaccount');
 Route::post('/createaccadm','LoginController@createaccountAdmin');
 Route::post('/createaccstud','LoginController@createaccountStudent');
 Route::post('/createaccprof','LoginController@createProfessor');
+
+
+//sending email concern
+
+Route::post('/sendemail','EmailController@sendemailconcern');
+
  
 
 
