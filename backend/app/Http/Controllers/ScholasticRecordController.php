@@ -27,7 +27,12 @@ class ScholasticRecordController extends Controller
     public function showscolasticMIS(Request $request){
             //
 
-            $scholinfo= DB::table('scholinfos')->orderBy('surname')->get();
+            $scholinfo= DB::table('scholinfos')->where('archieve', null)->orwhere('archieve', '0')->when(request('search'), function($query) {
+                $query->where('firstname', 'like', '%' . request('search') . '%')->orWhere('surname', 'like', '%' . request('search') . '%')
+                ->orWhere('student_number', 'like', '%' . request('search') . '%')
+                ->orWhere('course', 'like', '%' . request('search') . '%')
+                ->orWhere('srms_id', 'like', '%' . request('search') . '%')
+                ->orWhere('section', 'like', '%' . request('search') . '%');})->orderBy('surname')->paginate(10);
 
 
         return response()->json($scholinfo);

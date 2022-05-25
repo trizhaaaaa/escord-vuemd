@@ -286,9 +286,14 @@ $create = DB::table('gradeofstudents')->insert(
      public function paginatecard(Request $request, $profid){
 
 
-        $gradesheetprof = DB::table('gradsheetinfo')->where('professorID', $profid)->paginate(5);
-        return response()->json($gradesheetprof);
+        /* $gradesheetprof = DB::table('gradsheetinfo')->where('professorID', $profid)->paginate(5);
+        return response()->json($gradesheetprof); */
 
+
+         return DB::table('gradsheetinfo')->where('professorID', $profid)->where('archieve', null)->orwhere('archieve', '0')->when(request('search'), function($query) {
+            $query->where('course_short', 'like', '%' . request('search') . '%')->orWhere('subjectcode', 'like', '%' . request('search') . '%')
+            ->orWhere('sem_startyear', 'like', '%' . request('search') . '%')->orWhere('sem_endyear', 'like', '%' . request('search') . '%');
+        })->orderBy('gradesheetid', 'desc')->paginate(5); 
 
      }
 

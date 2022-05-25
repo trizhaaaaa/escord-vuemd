@@ -12,10 +12,16 @@ class ArchieveController extends Controller
     //
 
 
-    public function archievegradesheet(){
+    public function archievegradesheet(Request $request, $profid){
 
     
- $gradesheet = DB::table('gradsheetinfo')->where('archieve', '1')->paginate(5);
+ $gradesheet = DB::table('gradsheetinfo')
+ ->where([
+    ['professorID', '=', $profid],
+    ['archieve', '=', '1'],])->when(request('search'), function($query) {
+        $query->where('course_short', 'like', '%' . request('search') . '%')->orWhere('gradesheetid', 'like', '%' . request('search') . '%')
+        ->orWhere('course_year', 'like', '%' . request('search') . '%')->orWhere('course_section', 'like', '%' . request('search') . '%');
+    })->paginate(10);
       
     if ($gradesheet) {
         return response()->json($gradesheet
@@ -31,7 +37,14 @@ class ArchieveController extends Controller
 
     public function archievescholastic(){
        
-        $scholinfo = DB::table('scholinfos')->where('archieve', '1')->paginate(5);
+        $scholinfo = DB::table('scholinfos')->where('archieve', '1')
+        ->when(request('search'), function($query) {
+            $query->where('student_number', 'like', '%' . request('search') . '%')
+            ->orwhere('firstname', 'like', '%' . request('search') . '%')->orWhere('surname', 'like', '%' . request('search') . '%')
+            ->orWhere('course', 'like', '%' . request('search') . '%')
+            ->orWhere('section', 'like', '%' . request('search') . '%')
+            ->orWhere('srms_id', 'like', '%' . request('search') . '%');
+        })->paginate(10);
       
         if ($scholinfo) {
             return response()->json($scholinfo
@@ -49,7 +62,11 @@ class ArchieveController extends Controller
 
      public function archieveeval(){
 
-        $evalform = DB::table('evaluation_forms')->where('archieve', '1')->paginate(5);
+        $evalform = DB::table('evaluation_forms')->where('archieve', '1')
+        ->when(request('search'), function($query) {
+            $query->where('status_of_ef', 'like', '%' . request('search') . '%')
+            ->orWhere('srms_id', 'like', '%' . request('search') . '%')
+            ->orWhere('evalform_id', 'like', '%' . request('search') . '%');})->paginate(10);
       
         if ($evalform) {
             return response()->json($evalform

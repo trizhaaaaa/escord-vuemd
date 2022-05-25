@@ -93,6 +93,7 @@ class LoginController extends Controller
         $name = $request->firstname . " ". $request->lastname;
     
         User::create([
+          
             'email' =>$request->email,
             'student_number'=>$request->student_number,
             'name' => $name,
@@ -120,7 +121,7 @@ class LoginController extends Controller
         ]);
 
      
-      
+       // ($request->getAttributes())->sendEmailVerificationNotification(),
     
         ProfessorAccount::create([
             'email' =>$request->profEmail,

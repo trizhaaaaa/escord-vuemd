@@ -70,7 +70,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
    //SHOW NG ARCHEIVE NG GRADESHEET
-    Route::get('/archievegs','ArchieveController@archievegradesheet');
+    Route::get('/archievegs/{profid}','ArchieveController@archievegradesheet');
     Route::get('/archieveschol','ArchieveController@archievescholastic');
 
 
@@ -106,6 +106,12 @@ Route::post('/createaccprof','LoginController@createProfessor');
 //sending email concern
 
 Route::post('/sendemail','EmailController@sendemailconcern');
+
+//verification
+
+Route::get('email/verify/{id}', 'EmailController@verify'); // Make sure to keep this as your route name
+
+Route::get('email/resend', 'EmailController@resend');
 
  
 

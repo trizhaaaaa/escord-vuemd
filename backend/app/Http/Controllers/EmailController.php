@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use SendGrid;
+use App\ProfessorAccount;
+
 
 class EmailController extends Controller
 {
@@ -31,7 +33,7 @@ class EmailController extends Controller
         $email = new \SendGrid\Mail\Mail(); 
         $email->setFrom($from, $sendername);
         $email->setSubject("ESCORD UCC CONCERN");
-        $email->addTo("uccscholasticmanagement@gmail.com", "UCC ESCORD");
+        $email->addTo("ucc.escord@gmail.com", "UCC ESCORD");
         $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
         $email->addContent(
             "text/html",  $emailContent
@@ -47,5 +49,33 @@ class EmailController extends Controller
         }   
 
 
+    }
+
+
+
+    public function verify($user_id, Request $request) {
+        if (!$request->hasValidSignature()) {
+            return response()->json(["msg" => "Invalid/Expired url provided."], 401);
+        }
+    
+        $user = ProfessorAccount::findOrFail($user_id);
+    
+        if (!$user->hasVerifiedEmail()) {
+            $user->markEmailAsVerified();
+        }
+    
+        //return redirect()->to('/');
+        return response()->json(["msg" => "REDIRECT."]);
+
+    }
+    
+    public function resend() {
+        if (auth()->user()->hasVerifiedEmail()) {
+            return response()->json(["msg" => "Email already verified."], 400);
+        }
+    
+        auth()->user()->sendEmailVerificationNotification();
+    
+        return response()->json(["msg" => "Email verification link sent on your email id"]);
     }
 }
