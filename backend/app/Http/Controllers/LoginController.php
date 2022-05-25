@@ -54,27 +54,29 @@ class LoginController extends Controller
 
         $request->validate([
             'email' => 'required',
-            'lastname' => 'required',
-            'firstname' => 'required',
-            'username' => 'required',
-            'student_number' => 'required',
+            'lastName' => 'required',
+            'firstName' => 'required',
+            'userNo' => 'required',
+            'middleName'=> 'required',
 
         ]);
 
+        $all = $request->all();
+
       
-         
+       
         Admin::create([
             'email' =>$request->email,
-            'student_number'=>$request->student_number,
-            'lastname' =>$request->lastname,
-            'firstname' => $request->firstname,
-            'username' => $request->username,
+            'student_number'=>$request->userNo,
+            'lastname' =>$request->lastName,
+            'firstname' => $request->firstName,
+            'middlename' => $request->middleName,
             'user_role' =>'staff',
-            'password' => Hash::make($request->student_number)
+            'password' => Hash::make($request->userNo)
             ]);
      
  
-        return response()->json(['message'=>'Account Creation Completed']);
+        return response()->json(['message'=>'User Account Create Success']);
 
 
     }
@@ -84,21 +86,21 @@ class LoginController extends Controller
 
         $request->validate([
             'email' => 'required',
-            'lastname' => 'required',
-            'firstname' => 'required',
-            'student_number' => 'required', 
+            'lastName' => 'required',
+            'firstName' => 'required',
+            'userNo' => 'required', 
         ]);
 
      
-        $name = $request->firstname . " ". $request->lastname;
+        $name = $request->firstName . " ". $request->middleName . " ". $request->lastName;
     
         User::create([
           
             'email' =>$request->email,
-            'student_number'=>$request->student_number,
+            'student_number'=>$request->userNo,
             'name' => $name,
             'user_role' =>'student',
-            'password' => Hash::make($request->student_number)
+            'password' => Hash::make($request->userNo)
             ]); 
      
  
