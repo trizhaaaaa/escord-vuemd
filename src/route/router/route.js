@@ -39,7 +39,12 @@ const escRegister  = () => import('../../escord-components/esc-Register.vue')
 
 const escStaff_SRPage   = () => import("../../escord-components/Staff/staffScholasticRecordDetail.vue")
 
+const escStaff_SRTab   = () => import("../../escord-components/Staff/ScholasticRecordTab.vue")
 
+const escStaff_EFTab   = () => import("../../escord-components/Staff/EvaluationFormTab.vue")
+
+const escManager_Addnewuser   = () => import("../../escord-components/Manager/Addnewuser.vue")
+const escManager_Addnewuser1   = () => import("../../escord-components/Manager/Addnewuser1.vue")
 const routes = [
 
   //---| ESCORD ROUTES |----
@@ -115,8 +120,28 @@ const routes = [
     name: "Scholastic Record Detail",
     components: {default: escStaff_SRPage, header: escHeader, footer: escFooter}
   },
+  {
+    path: "/scholasticrecordtab",
+    name: "ScholasticRecordTab",
+    components: {default: escStaff_SRTab, header: escHeader, footer: escFooter}
+  },
+  {
+    path: "/evaluationformtab",
+    name: "EvaluationFormTab",
+    components: {default: escStaff_EFTab, header: escHeader, footer: escFooter}
+  },
+  {
+    path: "/addnewuser",
+    name: "Addnewuser",
+    components: {default: escManager_Addnewuser, header: escHeader, footer: escFooter}
+  },
+  {
+    path: "/addnewuser1",
+    name: "Addnewuser1",
+    components: {default: escManager_Addnewuser1, header: escHeader, footer: escFooter}
+  },
 
-]
+] 
 
 
 export default routes;

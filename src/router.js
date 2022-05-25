@@ -26,6 +26,8 @@ import escProf_GSPage from "./escord-components/Prof/profGradesheetPage.vue";
 import escStaffDash from "./escord-components/Staff/staffDashboard.vue";
 import EvaluationFormTab from "./escord-components/Staff/EvaluationFormTab.vue";
 import ScholasticRecordTab from "./escord-components/Staff/ScholasticRecordTab.vue";
+import Addnewuser from "./escord-components/Manager/Addnewuser.vue";
+
 
 Vue.use(Router);
 
@@ -182,7 +184,11 @@ export default new Router({
       name: "ScholasticRecordTab",
       component: ScholasticRecordTab
     },
-
+    {
+      path: "/manager-addnewuser",
+      name: "Addnewuser",
+      component: Addnewuser
+    },
   ],
   scrollBehavior: to => {
     if (to.hash) {
