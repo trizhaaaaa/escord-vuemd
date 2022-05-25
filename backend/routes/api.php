@@ -139,6 +139,8 @@ Route::get('/enrolldb','EvaluationFormController@enrollmentdb');
 //mis schol
 Route::get('/perstudentschol/{studentnumber}','ScholasticRecordController@showscholastperStudent');
 
+Route::get('/studentCondition','ScholasticRecordController@showscolasticMISwithCourseSec');
+
 
 
 Route::get('/showscolmis','ScholasticRecordController@showscolasticMIS');

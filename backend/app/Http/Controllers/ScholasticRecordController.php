@@ -77,4 +77,27 @@ class ScholasticRecordController extends Controller
     }
 
 
+    public function showscolasticMISwithCourseSec(Request $request){
+        //
+        //$request->classProg
+        
+
+        $section = $request->classYr . $request->classSec;
+        $course = $request->classProg;
+
+      $scholinfo= DB::table('scholinfos')->where('section', '=', $section)->where('course','=', $course)->orWhere(function($q) {
+        $q->where('archieve', '0')
+        ->where('archieve',null);
+    })->when(request('search'), function($query) {
+            $query->where('firstname', 'like', '%' . request('search') . '%')->orWhere('surname', 'like', '%' . request('search') . '%')
+            ->orWhere('student_number', 'like', '%' . request('search') . '%')
+            ->orWhere('course', 'like', '%' . request('search') . '%')
+            ->orWhere('srms_id', 'like', '%' . request('search') . '%')
+            ->orWhere('section', 'like', '%' . request('search') . '%');})->orderBy('surname')->paginate(10); 
+
+    
+    return response()->json($scholinfo);
+}
+
+
 }
