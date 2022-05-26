@@ -238,7 +238,11 @@ $user = ProfessorAccount::where('email', $request->userEmail)->first();
 
     public function showadminaccount() {
 
-        $admin = Admin::all();
+        $admin = DB::table('admins')->when(request('search'), function($query) {
+            $query->where('firstname', 'like', '%' . request('search') . '%')
+            ->orWhere('lastname', 'like', '%' . request('search') . '%')
+            ->orWhere('student_number', 'like', '%' . request('search') . '%')
+            ;})->paginate(5);
         
         if(!$admin){
             return response()->json(['message'=>'couldnt get connect to the server']);
@@ -248,7 +252,11 @@ $user = ProfessorAccount::where('email', $request->userEmail)->first();
 
     public function showuseraccount() {
 
-        $user = User::all();
+        $user = DB::table('users')->when(request('search'), function($query) {
+            $query->where('name', 'like', '%' . request('search') . '%')->orWhere('email', 'like', '%' . request('search') . '%')
+            ->orWhere('student_number', 'like', '%' . request('search') . '%')
+            ;})->paginate(5);
+
 
         if(!$user){
             return response()->json(['message'=>'couldnt get connect to the server']);
@@ -259,11 +267,70 @@ $user = ProfessorAccount::where('email', $request->userEmail)->first();
 
     public function showprofaccount() {
 
-        $user = ProfessorAccount::all();
+        $prof =  DB::table('professor_accounts')->when(request('search'), function($query) {
+            $query->where('firstname', 'like', '%' . request('search') . '%')
+            ->orWhere('lastname', 'like', '%' . request('search') . '%')
+            ->orWhere('faculty_rank', 'like', '%' . request('search') . '%')
+            ;})->paginate(5);
 
-        if(!$user){
+        if(!$prof){
             return response()->json(['message'=>'couldnt get connect to the server']);
         }
-        return response()->json($user);
+        return response()->json($prof);
+    }
+
+
+    public function countProf(){
+        
+     $prof =   DB::table('professor_accounts')->count();
+
+     $stud =   DB::table('users')->count();
+ 
+     $staff =   DB::table('admins')->count();
+
+    
+
+
+     return response()->json(['prof'=>$prof,
+    'stud'=>$stud,
+    'staff'=>$staff]);
+
+
+    }
+
+    public function countStudent(){
+
+        $bscs = 'BS Computer Science';
+        $bsit = 'BS Information Technology';
+        $bsemc = 'BS Entertainment Multimedia Computing';
+        $bsis = 'BS Information System';
+
+     $bscstab=   DB::table('users')
+     ->leftJoin('scholinfos', 'users.student_number', '=', 'scholinfos.student_number')->where('course', $bscs)->count();
+    
+     $bsittab=   DB::table('users')
+     ->leftJoin('scholinfos', 'users.student_number', '=', 'scholinfos.student_number')->where('course', $bsit)->count();
+    
+
+     $bsistab=   DB::table('users')
+     ->leftJoin('scholinfos', 'users.student_number', '=', 'scholinfos.student_number')->where('course', $bsis)->count();
+    
+     $bsemctab=   DB::table('users')
+     ->leftJoin('scholinfos', 'users.student_number', '=', 'scholinfos.student_number')->where('course', $bsemc)->count();
+    
+
+     return response()->json(['bscs'=>$bscstab,
+     'bsit'=>$bsittab,
+     'bsis'=>$bsistab,
+     'bsemc'=>$bsemctab]);
+
+
+    }
+
+    public function countStaff(){
+     $staff =   DB::table('admins')->count();
+
+     return response()->json($staff);
+
     }
 }

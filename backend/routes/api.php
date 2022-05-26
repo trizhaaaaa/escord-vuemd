@@ -96,6 +96,15 @@ Route::get('/showadminaccount','AdminController@showadminaccount');
 Route::get('/showprofaccount','AdminController@showprofaccount');
 
 
+//GET THE COUNT OF TABLES
+
+Route::get('/countProf','AdminController@countProf');
+Route::get('/countStudent','AdminController@countStudent');
+Route::get('/countStaff','AdminController@countStaff');
+
+
+//
+
 
 //creation of account
 Route::post('/createaccadm','LoginController@createaccountAdmin');
@@ -139,6 +148,8 @@ Route::get('/enrolldb','EvaluationFormController@enrollmentdb');
 //mis schol
 Route::get('/perstudentschol/{studentnumber}','ScholasticRecordController@showscholastperStudent');
 
+
+//get
 Route::get('/studentCondition','ScholasticRecordController@showscolasticMISwithCourseSec');
 
 

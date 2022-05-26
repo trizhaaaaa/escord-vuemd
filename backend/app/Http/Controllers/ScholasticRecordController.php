@@ -12,14 +12,204 @@ class ScholasticRecordController extends Controller
 
     //show this to MIS TABLE
 
+    //BABANG TABLE SA SRMS
     public function showscholastperStudent(Request $request, $student_number){
         //this is per SR OF STUDENT
 
-        $studentscholinfo = DB::table('scholinfos')
-        ->leftJoin('gradeofstudents', 'scholinfos.student_number', '=', 'gradeofstudents.student_number')
-        ->leftJoin('gradsheetinfo', 'gradeofstudents.gradesheetid', '=', 'gradsheetinfo.gradesheetid')->where('scholinfos.student_number', $student_number)->limit(1)->get();
+        $studentscholinfo = DB::table('gradeofstudents')
+        ->leftJoin('gradsheetinfo', 'gradeofstudents.gradesheetid', '=', 'gradsheetinfo.gradesheetid')->where('gradeofstudents.student_number', $student_number)->orderBy('course_year')->get();
 
-        return response()->json($studentscholinfo);
+
+
+         $information = DB::table('scholinfos')->where('student_number',$student_number)->limit(1)->get();
+
+        
+        $batch = array();
+        //done first year
+        $firstyearFirstSem = array();
+        $firstyearSecondSem = array();
+
+        //
+
+        //second year
+        $secondyearFirstSem = array();
+        $secondyearSecondSem = array();
+
+        
+        //third year 
+        $thirdyearFirstSem = array();
+        $thirdyearSecondSem = array();
+
+
+        //
+        $fourthyearFirstSem = array();
+        $fourthyearSecondSem = array();
+
+
+
+
+        foreach($studentscholinfo as $items){
+            $gradesheetid = $items->gradesheetid;
+            $midterm = $items->midterm;
+            $finalterm = $items->finalterm;
+            $finalgrade = $items->finalgrade;
+            $semester = $items->semester;
+            $subjectdesc = $items->subjectdesc;
+            $subjectcode = $items->subjectcode;
+            $course_year = $items->course_year;
+            $sem_startyear = $items->sem_startyear;
+            $sem_endyear = $items->sem_endyear;
+
+
+            //first year
+            if($course_year === '1'){
+                //first sem
+                if($semester === 1){  
+            $firstyearFirstSem[] = array('student_number' => $student_number,'gradesheetid' => $gradesheetid,
+            'subjectdesc'=> $subjectdesc,
+            'subjectcode'=> $subjectcode,
+            'semester'=> $semester,
+            'sem_startyear' => $sem_startyear,
+            'sem_endyear' => $sem_endyear,
+            'stud_year'=>$course_year,
+            'midterm' => $midterm,
+            'finalterm' => $finalterm,
+            'finalgrade' => $finalgrade);
+                }
+            if($semester === 2){  //second sem
+                    $firstyearSecondSem[] = array('student_number' => $student_number,'gradesheetid' => $gradesheetid,
+                    'subjectdesc'=> $subjectdesc,
+                    'subjectcode'=> $subjectcode,
+                    'semester'=> $semester,
+                    'sem_startyear' => $sem_startyear,
+                    'sem_endyear' => $sem_endyear,
+                    'stud_year'=>$course_year,
+                    'midterm' => $midterm,
+                    'finalterm' => $finalterm,
+                    'finalgrade' => $finalgrade);
+
+                    }
+            }
+
+            //second year
+            if($course_year === '2'){
+
+                if($semester === 1){  
+                $secondyearFirstSem[] = array('student_number' => $student_number,'gradesheetid' => $gradesheetid,
+                'subjectdesc'=> $subjectdesc,
+                'subjectcode'=> $subjectcode,
+                'semester'=> $semester,
+                'sem_startyear' => $sem_startyear,
+                'sem_endyear' => $sem_endyear,
+                'stud_year'=>$course_year,
+                'midterm' => $midterm,
+                'finalterm' => $finalterm,
+                'finalgrade' => $finalgrade);
+
+            }
+
+            if($semester === 2){  
+                $secondyearSecondSem[] = array('student_number' => $student_number,'gradesheetid' => $gradesheetid,
+                'subjectdesc'=> $subjectdesc,
+                'subjectcode'=> $subjectcode,
+                'semester'=> $semester,
+                'sem_startyear' => $sem_startyear,
+                'sem_endyear' => $sem_endyear,
+                'stud_year'=>$course_year,
+                'midterm' => $midterm,
+                'finalterm' => $finalterm,
+                'finalgrade' => $finalgrade);
+                
+            }
+    
+             }
+             //third year
+             if($course_year === '3'){
+
+                if($semester === 1){
+                    $thirdyearFirstSem[] = array('student_number' => $student_number,'gradesheetid' => $gradesheetid,
+                    'subjectdesc'=> $subjectdesc,
+                    'subjectcode'=> $subjectcode,
+                    'semester'=> $semester,
+                    'sem_startyear' => $sem_startyear,
+                    'sem_endyear' => $sem_endyear,
+                    'stud_year'=>$course_year,
+                    'midterm' => $midterm,
+                    'finalterm' => $finalterm,
+                    'finalgrade' => $finalgrade);
+                }
+                if($semester === 2){
+
+                    $thirdyearSecondSem[] = array('student_number' => $student_number,'gradesheetid' => $gradesheetid,
+                    'subjectdesc'=> $subjectdesc,
+                    'subjectcode'=> $subjectcode,
+                    'semester'=> $semester,
+                    'sem_startyear' => $sem_startyear,
+                    'sem_endyear' => $sem_endyear,
+                    'stud_year'=>$course_year,
+                    'midterm' => $midterm,
+                    'finalterm' => $finalterm,
+                    'finalgrade' => $finalgrade);
+                }
+        
+          }
+            //fourth year
+            if($course_year === '4'){
+
+                if($semester === 1){
+            $fourthyearFirstSem[] = array('student_number' => $student_number,'gradesheetid' => $gradesheetid,
+            'subjectdesc'=> $subjectdesc,
+            'subjectcode'=> $subjectcode,
+            'semester'=> $semester,
+            'sem_startyear' => $sem_startyear,
+            'sem_endyear' => $sem_endyear,
+            'stud_year'=>$course_year,
+            'midterm' => $midterm,
+            'finalterm' => $finalterm,
+            'finalgrade' => $finalgrade);
+
+                }
+
+                if($semester === 2){
+                    $fourthyearSecondSem[] = array('student_number' => $student_number,'gradesheetid' => $gradesheetid,
+                    'subjectdesc'=> $subjectdesc,
+                    'subjectcode'=> $subjectcode,
+                    'semester'=> $semester,
+                    'sem_startyear' => $sem_startyear,
+                    'sem_endyear' => $sem_endyear,
+                    'stud_year'=>$course_year,
+                    'midterm' => $midterm,
+                    'finalterm' => $finalterm,
+                    'finalgrade' => $finalgrade);
+        
+                        }
+
+
+         }
+
+            $batch[] = array('student_number' => $student_number,'gradesheetid' => $gradesheetid,
+            'subjectdesc'=> $subjectdesc,
+            'subjectcode'=> $subjectcode,
+            'semester'=> $semester,
+            'sem_startyear' => $sem_startyear,
+            'sem_endyear' => $sem_endyear,
+            'stud_year'=>$course_year,
+            'midterm' => $midterm,
+            'finalterm' => $finalterm,
+            'finalgrade' => $finalgrade);
+        }
+
+
+        $batch += ['student_info' => $information]; 
+        
+        $data = array_merge(['student_info'=>$information,
+        'first'=> $firstyearFirstSem, 'firstSecondSem'=>$firstyearSecondSem,
+        'second'=>$secondyearFirstSem, 'secondSecondSem'=>$secondyearSecondSem,
+        'third'=>$thirdyearFirstSem, 'thirdSecondSem'=>$thirdyearSecondSem,
+        'fourth'=>$fourthyearFirstSem, 'fourthSecondSem'=>$fourthyearSecondSem]);
+      // $data = array_merge([$information],$batch);
+
+        return response()->json($data);
 
     }
 
@@ -84,19 +274,45 @@ class ScholasticRecordController extends Controller
 
         $section = $request->classYr . $request->classSec;
         $course = $request->classProg;
-
+ 
       $scholinfo= DB::table('scholinfos')->where('section', '=', $section)->where('course','=', $course)->orWhere(function($q) {
         $q->where('archieve', '0')
         ->where('archieve',null);
     })->when(request('search'), function($query) {
             $query->where('firstname', 'like', '%' . request('search') . '%')->orWhere('surname', 'like', '%' . request('search') . '%')
             ->orWhere('student_number', 'like', '%' . request('search') . '%')
-            ->orWhere('course', 'like', '%' . request('search') . '%')
-            ->orWhere('srms_id', 'like', '%' . request('search') . '%')
-            ->orWhere('section', 'like', '%' . request('search') . '%');})->orderBy('surname')->paginate(10); 
+           ;})->orderBy('surname')->paginate(10); 
+
+
+
+/* $scholinfo= DB::table('scholinfos')->where('section', '=', $section)->where('course','=', $course)->orWhere(function($q) {
+    $q->where('archieve', '0')
+    ->where('archieve',null);
+}); 
+
+$search = $request->search;
+
+if($search !== "") 
+{
+
+    $search = $request->search;
 
     
-    return response()->json($scholinfo);
+  $scholinfo = $scholinfo->where('firstname','LIKE',"%{$search}%")
+        ->orWhere('student_number', 'like',"%{$search}%"); 
+} 
+
+$schols = $scholinfo->orderBy('surname')->paginate(10);
+ */
+return response()->json($scholinfo);
+   
+}
+
+
+public function PerGradesofStudentsSRMS(Request $request){
+
+    
+
 }
 
 

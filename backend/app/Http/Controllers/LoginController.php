@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Admin;
 use App\ProfessorAccount;
-
+use App\Scholinfo;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -94,14 +95,30 @@ class LoginController extends Controller
      
         $name = $request->firstName . " ". $request->middleName . " ". $request->lastName;
     
-        User::create([
+         User::create([
           
             'email' =>$request->email,
             'student_number'=>$request->userNo,
             'name' => $name,
             'user_role' =>'student',
             'password' => Hash::make($request->userNo)
-            ]); 
+            ]);  
+
+
+        $srms_id = Str::uuid()->getHex();
+
+         Scholinfo::create([
+                'srms_id'=>$srms_id,
+                'student_number'=>$request->userNo,
+                'firstname' => $request->firstName,
+                'middlename'=> $request->middleName,
+                'surname' => $request->lastName,
+                'course'=> $request->course,
+                'section'=>$request->section
+            ]);
+
+
+            
      
  
         return response()->json(['message'=>'User Account Create Success']);

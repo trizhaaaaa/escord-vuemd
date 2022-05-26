@@ -18,4 +18,6 @@ class Scholinfo extends Model
 
 
         protected $primaryKey = 'srms_id';
+      public $timestamps = false;
+
 }
