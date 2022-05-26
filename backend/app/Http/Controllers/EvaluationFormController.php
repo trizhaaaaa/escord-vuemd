@@ -51,28 +51,31 @@ class EvaluationFormController extends Controller
     //creation ng account
     public function enrollmentdb(){
 
-        $finalArray = [];
+      /*   $finalArray = [];
        
-        $gradesheetid = Str::uuid();
+        $gradesheetid = Str::uuid(); */
 
       
         
-        $student_detail = DB::connection('mysql2')->table("tblstudents")->get();
+        $student_detail = DB::connection('mysql2')->table("tblstudents")->select('studentNumber', 'studentType')
+        ->when(request('search'), function($query) {
+            $query->where('studentNumber', 'like', '%' . request('search') . '%')
+            ->orWhere('studentType', 'like', '%' . request('search') . '%');
+        })->paginate(10);
 
-
+/* 
         $batch = array();
         foreach($student_detail as $items){
             $student_number = $items->studentNumber;
-            $email = $items->email;
-            $batch[] = array('student_number' => $student_number,'email' => $email,'gradesheetid' =>  $gradesheetid = Str::uuid(),'password' => $student_number,'user_role'=>'student');
-        }
+            $batch[] = array('student_number' => $student_number);
+        } */
        // $merged = $student_detail->merge($data);
      //   $finalArray = array_merge($data, $$arr1);
 
 
         //$result = $merged->all();
 
-return response()->json($batch);
+return response()->json($student_detail);
 
     }
 
