@@ -166,3 +166,10 @@ Route::put('/scholupdate/{srmsid}','ScholasticRecordController@scholupdate');
 //update archieve
 
 Route::put('/scholarch/{srmsid}','ArchieveController@scholarch');
+
+
+//sendPasswordReset
+
+
+Route::post('/SendCode','ForgotPassword@createCodeForForgetPassword');
+Route::post('/updatePassword','ForgotPassword@UpdatePassword');
