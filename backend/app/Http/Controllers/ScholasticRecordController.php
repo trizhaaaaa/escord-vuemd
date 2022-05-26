@@ -251,7 +251,7 @@ class ScholasticRecordController extends Controller
         'section' => $request->studSection,
         'surname' => $request->studLN,
         'firstname' => $request->studFN,
-        'middlename' => $request->studMI,
+        'middlename' => $request->studMN,
         'birthday' => $request->studBirthday,
         'address' => $request->studAddress,
         'contact' => $request->studContactNum,
