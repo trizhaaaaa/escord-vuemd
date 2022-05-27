@@ -159,4 +159,47 @@ return response()->json($student_detail);
 
 
     }
+
+
+    public function getEvalTablePerStudent(Request $request,$srms_id){
+        
+      
+        $perstudenteval = DB::table('evaluation_forms')->where('srms_id',$srms_id)->get();
+
+         return response()->json($perstudenteval);
+
+
+    }
+
+
+    public function getEvalFormGradePerEvalid(Request $request,$eval_id){
+        
+      
+        $evalperID = DB::table('eval_details')->where('evalform_id',$eval_id)->get();
+
+         return response()->json($evalperID);
+
+
+    }
+
+    public function evalTopView(Request $request, $srms_id){
+
+        $topview = DB::table('evaluation_forms')
+        ->leftJoin('scholinfos', 'evaluation_forms.srms_id', '=', 'scholinfos.srms_id')
+        ->leftJoin('scholstudents', 'scholinfos.srms_id', '=', 'scholstudents.srms_id')->where('scholinfos.srms_id',$srms_id)->get();
+
+        return response()->json($topview);
+
+    }
+
+    public function getsrmsid(Request $request,$studentnumber){
+        $getsrmsid = DB::table('users')
+        ->leftJoin('scholinfos', 'users.student_number', '=', 'scholinfos.student_number')
+        ->where('scholinfos.student_number',$studentnumber)->get('srms_id');
+
+
+        return response()->json($getsrmsid);
+
+        
+    }
 }

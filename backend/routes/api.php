@@ -181,3 +181,17 @@ Route::post('/updatePassword','ForgotPassword@UpdatePassword');
 //evaluation post
 
 Route::post('/evalCreate','EvaluationFormController@insertEval');
+
+//student part evaltable
+
+Route::get('/evalTableStudent/{gradesheetid}','EvaluationFormController@getEvalTablePerStudent');
+
+Route::get('/evalPerevalID/{evalid}','EvaluationFormController@getEvalFormGradePerEvalid');
+
+
+Route::get('/evalTopView/{srms_id}','EvaluationFormController@evalTopView');
+
+
+//get srms id
+Route::get('/getsrmsid/{studentnumber}','EvaluationFormController@getsrmsid');
+
