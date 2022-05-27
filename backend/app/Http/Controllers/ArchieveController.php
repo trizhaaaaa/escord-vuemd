@@ -97,11 +97,23 @@ class ArchieveController extends Controller
 
      //update
 
-
+     //archieve schol
      public function scholarch(Request $request,$srms_id){
         $studentarch = DB::table('scholinfos')
         ->where('srms_id', $srms_id)
         ->update(['archieve' => '1'
+                ]);
+
+        return response()->json($studentarch);
+
+     }
+
+     //unarchieve schol
+
+     public function unarchieveSchol(Request $request,$srms_id){
+        $studentarch = DB::table('scholinfos')
+        ->where('srms_id', $srms_id)
+        ->update(['archieve' => null,
                 ]);
 
         return response()->json($studentarch);

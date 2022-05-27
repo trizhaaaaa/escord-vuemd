@@ -74,9 +74,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::get('/archieveschol','ArchieveController@archievescholastic');
 
 
+    Route::put('/unarchieveSchol','ArchieveController@unarchieveSchol');
+
+
     Route::put('/unarchieveGS/{gsid}','ArchieveController@gradesheetunArchieve');
    
-
+    
 
 
 

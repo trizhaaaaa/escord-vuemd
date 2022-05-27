@@ -193,9 +193,16 @@ $request->validate([
             'device_name' => 'required',
         ]);
      
-$user = ProfessorAccount::where('email', $request->userEmail)->first();
+        $countprof = ProfessorAccount::where('email', $request->userEmail)->limit(1)->count();
+
+        $countMan =  Manager::where('email', $request->userEmail)->limit(1)->count();
+
+        
+        $user = ProfessorAccount::where('email', $request->userEmail)->first();
 
         if($user){
+
+            
             if (! $user || ! Hash::check($request->userPassword, $user->password)) {
                 throw ValidationException::withMessages([
                     'email' => ['Invalid Account Information.'],
