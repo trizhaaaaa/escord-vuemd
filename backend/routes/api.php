@@ -173,3 +173,8 @@ Route::put('/scholarch/{srmsid}','ArchieveController@scholarch');
 
 Route::post('/SendCode','ForgotPassword@createCodeForForgetPassword');
 Route::post('/updatePassword','ForgotPassword@UpdatePassword');
+
+
+//evaluation post
+
+Route::post('/evalCreate','EvaluationFormController@insertEval');

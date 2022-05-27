@@ -59,6 +59,7 @@ class ScholasticRecordController extends Controller
             $course_year = $items->course_year;
             $sem_startyear = $items->sem_startyear;
             $sem_endyear = $items->sem_endyear;
+            $units = $items->units;
 
 
             //first year
@@ -74,7 +75,8 @@ class ScholasticRecordController extends Controller
             'stud_year'=>$course_year,
             'midterm' => $midterm,
             'finalterm' => $finalterm,
-            'finalgrade' => $finalgrade);
+            'finalgrade' => $finalgrade,
+            'units'=>$units);
                 }
             if($semester === 2){  //second sem
                     $firstyearSecondSem[] = array('student_number' => $student_number,'gradesheetid' => $gradesheetid,
@@ -86,7 +88,8 @@ class ScholasticRecordController extends Controller
                     'stud_year'=>$course_year,
                     'midterm' => $midterm,
                     'finalterm' => $finalterm,
-                    'finalgrade' => $finalgrade);
+                    'finalgrade' => $finalgrade,
+                    'units'=>$units);
 
                     }
             }
@@ -104,7 +107,8 @@ class ScholasticRecordController extends Controller
                 'stud_year'=>$course_year,
                 'midterm' => $midterm,
                 'finalterm' => $finalterm,
-                'finalgrade' => $finalgrade);
+                'finalgrade' => $finalgrade,
+                'units'=>$units);
 
             }
 
@@ -118,7 +122,8 @@ class ScholasticRecordController extends Controller
                 'stud_year'=>$course_year,
                 'midterm' => $midterm,
                 'finalterm' => $finalterm,
-                'finalgrade' => $finalgrade);
+                'finalgrade' => $finalgrade,
+                'units'=>$units);
                 
             }
     
@@ -136,7 +141,8 @@ class ScholasticRecordController extends Controller
                     'stud_year'=>$course_year,
                     'midterm' => $midterm,
                     'finalterm' => $finalterm,
-                    'finalgrade' => $finalgrade);
+                    'finalgrade' => $finalgrade,
+                    'units'=>$units);
                 }
                 if($semester === 2){
 
@@ -149,7 +155,8 @@ class ScholasticRecordController extends Controller
                     'stud_year'=>$course_year,
                     'midterm' => $midterm,
                     'finalterm' => $finalterm,
-                    'finalgrade' => $finalgrade);
+                    'finalgrade' => $finalgrade,
+                    'units'=>$units);
                 }
         
           }
@@ -166,7 +173,8 @@ class ScholasticRecordController extends Controller
             'stud_year'=>$course_year,
             'midterm' => $midterm,
             'finalterm' => $finalterm,
-            'finalgrade' => $finalgrade);
+            'finalgrade' => $finalgrade,
+            'units'=>$units);
 
                 }
 
@@ -180,7 +188,8 @@ class ScholasticRecordController extends Controller
                     'stud_year'=>$course_year,
                     'midterm' => $midterm,
                     'finalterm' => $finalterm,
-                    'finalgrade' => $finalgrade);
+                    'finalgrade' => $finalgrade,
+                    'units'=>$units);
         
                         }
 
@@ -196,7 +205,8 @@ class ScholasticRecordController extends Controller
             'stud_year'=>$course_year,
             'midterm' => $midterm,
             'finalterm' => $finalterm,
-            'finalgrade' => $finalgrade);
+            'finalgrade' => $finalgrade,
+            'units'=>$units);
         }
 
 
@@ -209,7 +219,9 @@ class ScholasticRecordController extends Controller
         'fourth'=>$fourthyearFirstSem, 'fourthSecondSem'=>$fourthyearSecondSem]);
       // $data = array_merge([$information],$batch);
 
-        return response()->json($data);
+
+    
+    return response()->json($data);
 
     }
 

@@ -10,6 +10,8 @@ use App\Scholinfo;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Validation\ValidationException;
 
 
@@ -51,8 +53,9 @@ class LoginController extends Controller
 
     public function createaccountAdmin(Request $request){
 
+        $information = Admin::where('email', $request->email)->limit(1)->count();
      
-
+        if($information === 0) {
         $request->validate([
             'email' => 'required',
             'lastName' => 'required',
@@ -62,7 +65,7 @@ class LoginController extends Controller
 
         ]);
 
-        $all = $request->all();
+     //   $all = $request->all();
 
       
        
@@ -75,25 +78,36 @@ class LoginController extends Controller
             'user_role' =>'staff',
             'password' => Hash::make($request->userNo)
             ]);
-     
- 
-        return response()->json(['message'=>'User Account Create Success']);
 
+            return response()->json(['message'=>'User Account Create Success']);
+
+        }else{
+     
+            return response()->json(['message'=>'The account already existing']);
+     
+        }
 
     }
 
     public function createaccountStudent(Request $request){
-       
 
         $request->validate([
             'email' => 'required',
             'lastName' => 'required',
             'firstName' => 'required',
             'userNo' => 'required', 
-        ]);
+        ]); 
 
      
-        $name = $request->firstName . " ". $request->middleName . " ". $request->lastName;
+       
+        $information = User::where('email', $request->email)->orwhere('student_number', $request->userNo)->limit(1)->count();
+
+
+
+        if($information === 0) {
+       
+       
+       $name = $request->firstName . " ". $request->middleName . " ". $request->lastName;
     
          User::create([
           
@@ -117,12 +131,16 @@ class LoginController extends Controller
                 'section'=>$request->section
             ]);
 
-
             
+            return response()->json(['message'=>'Account Succesfully Created']);
+
+        }else{
+
+            return response()->json(['message'=>'The account already existing']);
+
+        }
      
  
-        return response()->json(['message'=>'User Account Create Success']);
-
 
     }
 
@@ -139,9 +157,12 @@ class LoginController extends Controller
             'profPasswordConfirm' => 'required|same:profPassword|',
         ]);
 
+        $information = ProfessorAccount::where('email', $request->profEmail)->limit(1)->count();
+
      
        // ($request->getAttributes())->sendEmailVerificationNotification(),
-    
+       if($information === 0) {
+       
         ProfessorAccount::create([
             'email' =>$request->profEmail,
             'firstname' => $request->profFN,
@@ -154,6 +175,12 @@ class LoginController extends Controller
      
  
         return response()->json(['message'=>'User Account Create Success']);
+         }else{
+
+        return response()->json(['message'=>'The account already existing']);
+
+         }
+
 
     }
 

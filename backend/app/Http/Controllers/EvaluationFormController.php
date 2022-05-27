@@ -128,4 +128,35 @@ return response()->json($student_detail);
 
         
     }
+
+
+    public function insertEval(Request $request){
+
+
+            $evalid = Str::random(40);
+
+        $evaldetails = DB::table('eval_details')->insert(
+            ['evalform_id' => $evalid, 
+            'subjectcode' =>  $request->subjcode,
+            'subjectdesc'  =>$request->subjdesc,
+            'grade'  => $request->studGrade,
+            'units'  => $request->studUnits,
+            'finalgrade'  => $request->finalgrade,
+        ]);
+
+
+        $evalform = DB::table('evaluation_forms')->insert(
+            ['evalform_id' => $evalid, 
+            'status_of_ef' =>  $request->status,
+            'gradesheetid' =>  '',
+            'srms_id' => $request->srms_id
+
+            //add total column for fg x units
+        ]);
+        
+    return response()->json($evaldetails);
+            
+
+
+    }
 }
