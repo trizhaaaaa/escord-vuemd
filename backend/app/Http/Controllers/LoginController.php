@@ -52,8 +52,11 @@ class LoginController extends Controller
     }
 
     public function createaccountAdmin(Request $request){
+     
+        try { 
+        $staffusername = 101 . $request->userNo;
 
-        $information = Admin::where('email', $request->email)->limit(1)->count();
+        $information = Admin::where('email', $request->email)->where('student_number', $staffusername)->limit(1)->count();
      
         if($information === 0) {
         $request->validate([
@@ -66,15 +69,16 @@ class LoginController extends Controller
         ]);
 
      //   $all = $request->all();
-
+        
+     $staffusername = 101 . $request->userNo;
       
        
         Admin::create([
             'email' =>$request->email,
-            'student_number'=>$request->userNo,
-            'lastname' =>$request->lastName,
-            'firstname' => $request->firstName,
-            'middlename' => $request->middleName,
+            'student_number'=>$staffusername,
+            'lastname' =>Str::upper($request->lastName),
+            'firstname' => Str::upper($request->firstName),
+            'middlename' => Str::upper($request->middleName),
             'user_role' =>'staff',
             'password' => Hash::make($request->userNo)
             ]);
@@ -86,7 +90,10 @@ class LoginController extends Controller
             return response()->json(['message'=>'The account already existing']);
      
         }
+    } catch(\Illuminate\Database\QueryException $ex){ 
+        return response()->json(['message'=>'The account already existing']);
 
+    }
     }
 
     public function createaccountStudent(Request $request){
@@ -113,7 +120,7 @@ class LoginController extends Controller
           
             'email' =>$request->email,
             'student_number'=>$request->userNo,
-            'name' => $name,
+            'name' => Str::upper($name),
             'user_role' =>'student',
             'password' => Hash::make($request->userNo)
             ]);  
@@ -124,11 +131,11 @@ class LoginController extends Controller
          Scholinfo::create([
                 'srms_id'=>$srms_id,
                 'student_number'=>$request->userNo,
-                'firstname' => $request->firstName,
-                'middlename'=> $request->middleName,
-                'surname' => $request->lastName,
-                'course'=> $request->course,
-                'section'=>$request->section
+                'firstname' => Str::upper($request->firstName),
+                'middlename'=> Str::upper($request->middleName),
+                'surname' => Str::upper($request->lastName),
+                'course'=> Str::upper($request->course),
+                'section'=>Str::upper($request->section)
             ]);
 
             
@@ -165,10 +172,10 @@ class LoginController extends Controller
        
         ProfessorAccount::create([
             'email' =>$request->profEmail,
-            'firstname' => $request->profFN,
-            'middleinitial' => $request->profMI,
-            'lastname' => $request->profLN,
-            'faculty_rank' => $request->profRank,
+            'firstname' => Str::upper($request->profFN),
+            'middleinitial' => Str::upper($request->profMI),
+            'lastname' => Str::upper($request->profLN),
+            'faculty_rank' => Str::upper($request->profRank),
             'user_role' =>'professor',
             'password' => Hash::make($request->profPassword)
             ]); 

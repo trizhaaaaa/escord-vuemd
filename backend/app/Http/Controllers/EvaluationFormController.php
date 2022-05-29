@@ -33,7 +33,7 @@ class EvaluationFormController extends Controller
 
 
         $allevalform = DB::table('evaluation_forms')
-        ->leftJoin('scholinfos', 'evaluation_forms.srms_id', '=', 'scholinfos.srms_id')->where('evaluation_forms.archieve', null)->orwhere('evaluation_forms.archieve', '0')->when(request('search'), function($query) {
+        ->leftJoin('scholinfos', 'evaluation_forms.srms_id', '=', 'scholinfos.srms_id')->where('evaluation_forms.archieve', null)->when(request('search'), function($query) {
             $query->where('firstname', 'like', '%' . request('search') . '%')->orWhere('surname', 'like', '%' . request('search') . '%')
             ->orWhere('student_number', 'like', '%' . request('search') . '%')
             ->orWhere('evalform_id', 'like', '%' . request('search') . '%')
@@ -137,8 +137,8 @@ return response()->json($student_detail);
 
         $evaldetails = DB::table('eval_details')->insert(
             ['evalform_id' => $evalid, 
-            'subjectcode' =>  $request->subjcode,
-            'subjectdesc'  =>$request->subjdesc,
+            'subjectcode' =>  Str::upper($request->subjcode),
+            'subjectdesc'  =>Str::upper($request->subjdesc),
             'grade'  => $request->studGrade,
             'units'  => $request->studUnits,
             'finalgrade'  => $request->finalgrade,
@@ -147,7 +147,7 @@ return response()->json($student_detail);
 
         $evalform = DB::table('evaluation_forms')->insert(
             ['evalform_id' => $evalid, 
-            'status_of_ef' =>  $request->status,
+            'status_of_ef' =>  Str::upper($request->status),
             'gradesheetid' =>  '',
             'srms_id' => $request->srms_id
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 
 
 class ScholasticRecordController extends Controller
@@ -259,18 +261,18 @@ class ScholasticRecordController extends Controller
         $studentupdate = DB::table('scholinfos')
         ->where('srms_id', $srms_id)
         ->update(['student_number' => $request->studNum,
-        'course' => $request->studProgram,
-        'section' => $request->studSection,
-        'surname' => $request->studLN,
-        'firstname' => $request->studFN,
-        'middlename' => $request->studMN,
-        'birthday' => $request->studBirthday,
-        'address' => $request->studAddress,
+        'course' => Str::upper($request->studProgram),
+        'section' => Str::upper($request->studSection),
+        'surname' => Str::upper($request->studLN),
+        'firstname' => Str::upper($request->studFN),
+        'middlename' => Str::upper($request->studMN),
+        'birthday' => Str::upper($request->studBirthday),
+        'address' => Str::upper($request->studAddress),
         'contact' => $request->studContactNum,
-        'elementary' => $request->studElemSchool,
-        'elemyeargrad' => $request->studElemGradYr,
-        'highschool' => $request->studHighSchool,
-        'hsyeargrad' => $request->studHighSchoolGradYr,
+        'elementary' => Str::upper($request->studElemSchool),
+        'elemyeargrad' => Str::upper($request->studElemGradYr),
+        'highschool' => Str::upper($request->studHighSchool),
+        'hsyeargrad' => Str::upper($request->studHighSchoolGradYr),
     //    'archieve' =>$request->arch
                 ]);
 

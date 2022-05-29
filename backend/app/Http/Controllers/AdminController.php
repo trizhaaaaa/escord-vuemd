@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 
 
 class AdminController extends Controller
@@ -37,8 +39,8 @@ class AdminController extends Controller
   //      $input = $request->all();
         $admins = DB::table('admins')->where('id', $id)->limit(1)->update([
             'email' => $request->email,
-            'lastname' => $request->lastname,
-            'firstname' => $request->firstname,
+            'lastname' => Str::upper($request->lastname),
+            'firstname' => Str::upper($request->firstname),
             'student_number' => $request->student_number,
             'password' =>Hash::make($request->password)
 
@@ -72,7 +74,7 @@ public function updateAccountUser(Request $request, $id){
 //      $input = $request->all();
     $user = DB::table('users')->where('id', $id)->limit(1)->update([
         'email' => $request->email,
-        'name' => $request->name,
+        'name' => Str::upper($request->name),
         'student_number' => $request->student_number,
         'password' =>Hash::make($request->password)
 
@@ -122,10 +124,10 @@ public function updateAccountProf(Request $request, $profid){
 ]); */
     $user = DB::table('professor_accounts')->where('id', $profid)->limit(1)->update([
         'email' => $request->email,
-        'firstname'=> $request->firstname,
-        'middleinitial' =>  $request->middleinitial,
-        'lastname' =>  $request->lastname,
-        'faculty_rank' =>  $request->faculty_rank,
+        'firstname'=> Str::upper($request->firstname),
+        'middleinitial' =>  Str::upper($request->middleinitial),
+        'lastname' =>  Str::upper($request->lastname),
+        'faculty_rank' =>  Str::upper($request->faculty_rank),
         'password' =>Hash::make($request->password)
 
     ]);
@@ -138,7 +140,7 @@ public function updateAccountProf(Request $request, $profid){
 
 
 
-//update account prof 
+//update account manager update
 
 public function updateAccountManager(Request $request, $managerid){
 
@@ -170,7 +172,7 @@ $request->validate([
 
     $user = DB::table('managers')->where('id', $managerid)->limit(1)->update([
         'email' => $request->email,
-        'name'=> $request->name,
+        'name'=> Str::upper($request->name),
         'password' =>Hash::make($request->password)
 
     ]);
@@ -193,9 +195,9 @@ $request->validate([
             'device_name' => 'required',
         ]);
      
-        $countprof = ProfessorAccount::where('email', $request->userEmail)->limit(1)->count();
+        //$countprof = ProfessorAccount::where('email', $request->userEmail)->limit(1)->count();
 
-        $countMan =  Manager::where('email', $request->userEmail)->limit(1)->count();
+        //$countMan =  Manager::where('email', $request->userEmail)->limit(1)->count();
 
         
         $user = ProfessorAccount::where('email', $request->userEmail)->first();

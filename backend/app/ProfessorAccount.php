@@ -15,7 +15,7 @@ class ProfessorAccount extends Authenticatable
     //
     protected $fillable = [
         'user_role', 'email', 'password','firstname',
-        'middleinitial','lastname','faculty_rank'
+        'middleinitial','lastname','faculty_rank','code'
     ];
 
     /**
