@@ -59,7 +59,9 @@ public function updateAccountUser(Request $request, $id){
 
     $request->validate([
         'email' => 'required',
-        'name'=>'required',
+        'firstName'=>'required',
+        'middlename'=>'required',
+        'surname'=>'required',
         'student_number' => 'required',
         'password' => 'required',
         'confirmpass' => 'required|same:password|',
@@ -69,12 +71,12 @@ public function updateAccountUser(Request $request, $id){
 
    
    
-   // $name = $request->firstname . " ". $request->lastname;
+    $name = $request->firstName . " " . $request->middlename ." ". $request->surname;
  
 //      $input = $request->all();
     $user = DB::table('users')->where('id', $id)->limit(1)->update([
         'email' => $request->email,
-        'name' => Str::upper($request->name),
+        'name' => Str::upper($name),
         'student_number' => $request->student_number,
         'password' =>Hash::make($request->password)
 
