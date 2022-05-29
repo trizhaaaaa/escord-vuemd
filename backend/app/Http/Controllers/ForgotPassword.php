@@ -80,9 +80,10 @@ class ForgotPassword extends Controller
              }
             
         
+          /*    if($user === 0 || $prof === 0 || $admin === 0 ) {
+                return response()->json(['message' => 'Email is not existed within the system.']);
 
-
-        
+             } */
    
     }
 

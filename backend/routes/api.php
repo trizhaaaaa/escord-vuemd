@@ -195,3 +195,9 @@ Route::get('/evalTopView/{srms_id}','EvaluationFormController@evalTopView');
 //get srms id
 Route::get('/getsrmsid/{studentnumber}','EvaluationFormController@getsrmsid');
 
+
+
+//insert concern from db
+
+Route::post('/insertconcern','ConcernController@insertConcern');
+Route::get('/showconcern','ConcernController@showConcernInMIS');
