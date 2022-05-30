@@ -132,27 +132,27 @@ return response()->json($student_detail);
 
     public function insertEval(Request $request){
 
-
+            $status = "REGULAR";
             $evalid = Str::random(40);
 
         $evaldetails = DB::table('eval_details')->insert(
-            ['evalform_id' => $evalid, 
-            'subjectcode' =>  Str::upper($request->subjcode),
-            'subjectdesc'  =>Str::upper($request->subjdesc),
-            'grade'  => $request->studGrade,
-            'units'  => $request->studUnits,
-            'finalgrade'  => $request->finalgrade,
+            ['evalform_id' => $request->srms_id, 
+            'subjectcode' =>  Str::upper($request->selectedSubjCode),
+            'subjectdesc'  =>Str::upper($request->selectedSubject),
+            'grade'  => $request->selectedSubjUnit,
+            'units'  => $request->selectedSubjUnit,
+            'finalgrade'  => $request->selectedSubjUnit, //change this to finalgrade
         ]);
 
 
-        $evalform = DB::table('evaluation_forms')->insert(
+      /*   $evalform = DB::table('evaluation_forms')->insert(
             ['evalform_id' => $evalid, 
-            'status_of_ef' =>  Str::upper($request->status),
+            'status_of_ef' =>  Str::upper($status),
             'gradesheetid' =>  '',
             'srms_id' => $request->srms_id
 
             //add total column for fg x units
-        ]);
+        ]); */
         
     return response()->json($evaldetails);
             
@@ -164,7 +164,7 @@ return response()->json($student_detail);
     public function getEvalTablePerStudent(Request $request,$srms_id){
         
       
-        $perstudenteval = DB::table('evaluation_forms')->where('srms_id',$srms_id)->get();
+        $perstudenteval = DB::table('eval_details')->where('evalform_id',$srms_id)->get();
 
          return response()->json($perstudenteval);
 
@@ -201,5 +201,63 @@ return response()->json($student_detail);
         return response()->json($getsrmsid);
 
         
+    }
+
+    public function evalupdate(Request $request, $srms_id){
+       
+        $studentupdate = DB::table('scholinfos')
+        ->where('srms_id', $srms_id)
+        ->update(['student_number' => $request->student_number,
+        'course' => Str::upper($request->course),
+        'section' => Str::upper($request->section),
+        'surname' => Str::upper($request->surname),
+        'firstname' => Str::upper($request->firstname),
+        'middlename' => Str::upper($request->middlename),
+        'semester'=>$request->semester,
+        'sem_startyear'=>$request->sem_startyear,
+        'sem_endyeaer'=>$request->sem_endyeaer,
+     
+                ]);
+
+    
+        return response()->json($studentupdate);
+
+    }
+
+    //update row
+
+
+    
+    public function updateEval(Request $request,$evalid){
+
+           // $status = "REGULAR";
+           // $evalid = Str::random(40);
+     
+        $evaldetails = DB::table('eval_details')
+        ->where('id', $evalid)
+        ->update([ 
+            'subjectcode' =>  Str::upper($request->subjectcode),
+            'subjectdesc'  =>Str::upper($request->subjectdesc),
+            'grade'  => $request->grade,
+            'units'  => $request->units,
+            'finalgrade'  => $request->finalgrade, //change this to finalgrade
+        ]);
+
+
+      /*   $evalform = DB::table('evaluation_forms')->insert(
+            ['evalform_id' => $evalid, 
+            'status_of_ef' =>  Str::upper($status),
+            'gradesheetid' =>  '',
+            'srms_id' => $request->srms_id
+
+            //add total column for fg x units
+        ]); */
+
+    //    $sawrequest = $request->all();
+        
+    return response()->json($evaldetails);
+            
+
+
     }
 }

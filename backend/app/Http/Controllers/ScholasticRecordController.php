@@ -247,8 +247,7 @@ class ScholasticRecordController extends Controller
     public function scholstudent(Request $request, $student_number){
 
         $student = DB::table('scholinfos')
-        ->leftJoin('scholstudentgrades', 'scholinfos.srms_id', '=', 'scholstudentgrades.srms_id')
-        ->leftJoin('scholstudents', 'scholstudentgrades.srms_id', '=', 'scholstudents.srms_id')->where('scholinfos.student_number', $student_number)->limit(1)->get();
+        ->leftJoin('scholstudentgrades', 'scholinfos.srms_id', '=', 'scholstudentgrades.srms_id')->where('scholinfos.student_number', $student_number)->limit(1)->get();
        
         return response()->json($student);
 

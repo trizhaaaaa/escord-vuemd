@@ -27,6 +27,7 @@ class AdminController extends Controller
             'email' => 'required',
             'lastname' => 'required',
             'firstname' => 'required',
+            'middlename' => 'required',
             'student_number' => 'required',
             'password' =>'required',
             'confirmpass'=>'required|same:password|'
@@ -41,6 +42,7 @@ class AdminController extends Controller
             'email' => $request->email,
             'lastname' => Str::upper($request->lastname),
             'firstname' => Str::upper($request->firstname),
+            'middlename' => Str::upper($request->middlename),
             'student_number' => $request->student_number,
             'password' =>Hash::make($request->password)
 

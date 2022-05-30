@@ -74,7 +74,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::get('/archieveschol','ArchieveController@archievescholastic');
 
 
-    Route::put('/unarchieveSchol','ArchieveController@unarchieveSchol');
+    Route::put('/unarchieveSchol/{unarchieveid}','ArchieveController@unarchieveSchol');
 
 
     Route::put('/unarchieveGS/{gsid}','ArchieveController@gradesheetunArchieve');
@@ -101,7 +101,7 @@ Route::get('/showprofaccount','AdminController@showprofaccount');
 
 //GET THE COUNT OF TABLES
 
-Route::get('/countProf','AdminController@countProf');
+Route::get('/countProf','AdminController@countProf')->middleware('auth:sanctum');
 Route::get('/countStudent','AdminController@countStudent');
 Route::get('/countStaff','AdminController@countStaff');
 
@@ -139,6 +139,7 @@ Route::put('/updateManager/{id}','AdminController@updateAccountManager');
 //evaluation api
 Route::get('/archieveevalform','ArchieveController@archieveeval');
 Route::get('/evalform','EvaluationFormController@EvalShow');
+Route::put('/updateEval/{evalid}','EvaluationFormController@updateEval');
 
 
 //TRIAL FOR ENROLLMENT DB
@@ -182,6 +183,8 @@ Route::post('/updatePassword','ForgotPassword@UpdatePassword');
 
 Route::post('/evalCreate','EvaluationFormController@insertEval');
 
+Route::put('/evalupdate/{srms_id}','EvaluationFormController@evalupdate');
+
 //student part evaltable
 
 Route::get('/evalTableStudent/{gradesheetid}','EvaluationFormController@getEvalTablePerStudent');
@@ -201,3 +204,8 @@ Route::get('/getsrmsid/{studentnumber}','EvaluationFormController@getsrmsid');
 
 Route::post('/insertconcern','ConcernController@insertConcern');
 Route::get('/showconcern','ConcernController@showConcernInMIS');
+
+
+//
+
+Route::post('/email','ForgotPassword@email');

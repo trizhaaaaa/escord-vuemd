@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ConcernMail extends Mailable
+class MailForgotPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,6 +19,7 @@ class ConcernMail extends Mailable
     public function __construct()
     {
         //
+        $this->details = $details;
     }
 
     /**
@@ -28,6 +29,6 @@ class ConcernMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        //return $this->view('view.name');
     }
 }

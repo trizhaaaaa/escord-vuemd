@@ -10,7 +10,8 @@ use App\User;
 use App\Admin;
 use App\ProfessorAccount;
 use Illuminate\Support\Facades\Hash;
-
+use Mail;
+use App\Mail\MailForgotPassword;
 use SendGrid;
 
 use Illuminate\Support\Str;
@@ -80,21 +81,52 @@ class ForgotPassword extends Controller
              }
             
         
-          /*    if($user === 0 || $prof === 0 || $admin === 0 ) {
-                return response()->json(['message' => 'Email is not existed within the system.']);
+           if($user === 0 || $prof === 0 || $admin === 0 ) {
+                return response()->json(['message' => '1']);
 
-             } */
+             } 
    
     }
 
-
+    //$sendMail, $code
     public function email($sendMail, $code){
 
+         $content = "This is your forget password code: " . $code;
+     
+        $data = [
+            'subject' => 'UCC ESCORD FORGET PASSWORD',
+            'email' => $sendMail,
+            'content' => $content
+          ];
 
+        Mail::send([],$data, function($message) use ($data) {
+            $message->to($data['email'])
+            ->from('uccscholasticmanagement@gmail.com')
+            ->subject($data['subject'])
+            ->setBody($data['content']);
+          });
+
+    
+
+
+        return response()->json(['message' => 'Email succeded']);
+
+   //     Mail::to('uccscholasticmanagement@gmail.com')->send(new MailForgotPassword($message));
+
+     /*    $data['name'] = "This is your forget password code :" . $code;
+ 
+        Mail::send('mail', $data, function($message) {
+ 
+            $message->to('uccscholasticmanagement@gmail.com', 'Receiver Name')
+ 
+                    ->subject('Forgot Password ESCORD(UCC-SRMS)');
+        });
+  */
+      
        // return response()->json(['message'=>$sendMail,$code]);
 
      //   $emailContent = $validated['senderMsg'];
-      $emailContent = 'This is the code of your account : ' . $code;
+   /*    $emailContent = 'This is the code of your account : ' . $code;
 
         $email = new \SendGrid\Mail\Mail(); 
         $email->setFrom("ucc.escord@gmail.com", "UCC ESCORD FORGET PASSWORD CODE");
@@ -112,7 +144,7 @@ class ForgotPassword extends Controller
             print $response->body() . "\n";
         } catch (Exception $e) {
             echo 'Caught exception: '. $e->getMessage() ."\n";
-        }    
+        }     */
 
     }
 

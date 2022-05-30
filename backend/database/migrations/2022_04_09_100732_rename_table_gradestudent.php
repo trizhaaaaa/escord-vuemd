@@ -14,7 +14,7 @@ class RenameTableGradestudent extends Migration
     public function up()
     {
         //
-        Schema::rename('gradeofstudent', 'gradeofstudents');
+        //Schema::rename('gradeofstudent', 'gradeofstudents');
     }
 
     /**
@@ -25,7 +25,7 @@ class RenameTableGradestudent extends Migration
     public function down()
     {
         //
-        Schema::rename('gradeofstudent', 'gradeofstudents');
+        //Schema::rename('gradeofstudent', 'gradeofstudents');
 
     }
 }

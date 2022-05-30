@@ -31,7 +31,7 @@ class CreateGradsheetinfoTable extends Migration
             $table->string('professor');
             $table->string('facultyrank');
 
-            $table->foreign('gradesheetid')->references('gradesheetid')->on('gradeofstudents')->onUpdate('cascade');
+//            $table->foreign('gradesheetid')->references('gradesheetid')->on('gradeofstudents')->onUpdate('cascade');
 
 
         });
