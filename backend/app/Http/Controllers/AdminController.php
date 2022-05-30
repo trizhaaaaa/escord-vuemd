@@ -150,11 +150,11 @@ public function updateAccountManager(Request $request, $managerid){
 
     $request->validate([
         'email' => 'required',
-        'name'=>'required',
+        'firstname'=>'required',
+        'lastname'=>'required',
+        'middleinitial' => 'required',
         'password' => 'required',
         'confirmpass' => 'required|same:password|',
-
-
     ]);
 
    
@@ -162,19 +162,21 @@ public function updateAccountManager(Request $request, $managerid){
    // $name = $request->name . " ". $request->lastname;
  
 //      $input = $request->all();
-
+/* 
 $request->validate([
-    'name' => 'required',
+    'firstname' => 'required',
     'email'=>'required',
     'password' => 'required',
     'confirmpass' => 'required|same:password|',
 
 
-]);
+]); */
 
     $user = DB::table('managers')->where('id', $managerid)->limit(1)->update([
         'email' => $request->email,
-        'name'=> Str::upper($request->name),
+        'firstname'=> Str::upper($request->firstname),
+        'middleinitial'=> Str::upper($request->middleinitial),
+        'lastname'=> Str::upper($request->lastname),
         'password' =>Hash::make($request->password)
 
     ]);

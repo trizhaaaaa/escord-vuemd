@@ -214,12 +214,12 @@ class ScholasticRecordController extends Controller
 
         $batch += ['student_info' => $information]; 
         
-        $data = array_merge(['student_info'=>$information,
+       $data = array_merge(['student_info'=>$information,
         'first'=> $firstyearFirstSem, 'firstSecondSem'=>$firstyearSecondSem,
         'second'=>$secondyearFirstSem, 'secondSecondSem'=>$secondyearSecondSem,
         'third'=>$thirdyearFirstSem, 'thirdSecondSem'=>$thirdyearSecondSem,
         'fourth'=>$fourthyearFirstSem, 'fourthSecondSem'=>$fourthyearSecondSem]);
-      // $data = array_merge([$information],$batch);
+   //   $data = array_merge([$information],$batch);
 
 
     
