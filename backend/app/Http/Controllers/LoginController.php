@@ -160,15 +160,16 @@ class LoginController extends Controller
             'profMI' => 'required',
             'profLN' => 'required',
             'profRank' => 'required',
-            'profPassword' => 'required',
-            'profPasswordConfirm' => 'required|same:profPassword|',
         ]);
+
 
         $information = ProfessorAccount::where('email', $request->profEmail)->limit(1)->count();
 
      
        // ($request->getAttributes())->sendEmailVerificationNotification(),
        if($information === 0) {
+           
+        $profPassword = Str::upper($request->profFN) . 'UCCescord@SRMS2020';
        
         ProfessorAccount::create([
             'email' =>$request->profEmail,
@@ -177,7 +178,7 @@ class LoginController extends Controller
             'lastname' => Str::upper($request->profLN),
             'faculty_rank' => Str::upper($request->profRank),
             'user_role' =>'professor',
-            'password' => Hash::make($request->profPassword)
+            'password' => Hash::make($profPassword)
             ]); 
      
  

@@ -298,6 +298,15 @@ $create = DB::table('gradeofstudents')->insert(
      }
 
 
+     public function deleteRowGradesheet(Request $request,$evalid){
+
+        $deleterow =  DB::table('gradeofstudents')->where('id', $evalid)->delete();
+  
+        return response()->json($deleterow);
+  
+      }
+
+
   
 
 }

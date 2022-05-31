@@ -214,3 +214,6 @@ Route::post('/email','ForgotPassword@email');
 //eval deleted row
 
 Route::delete('/deleteRow/{evalid}','EvaluationFormController@deleteRow');
+
+
+Route::delete('/deleteRowGradesheet/{gsid}','GradesheetController@deleteRowGradesheet');
