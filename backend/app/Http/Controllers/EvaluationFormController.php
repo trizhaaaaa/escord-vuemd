@@ -260,4 +260,14 @@ return response()->json($student_detail);
 
 
     }
+
+    //delete row in evaluation table 
+
+    public function deleteRow(Request $request,$evalid){
+
+      $deleterow =  DB::table('eval_details')->where('id', $evalid)->delete();
+
+      return response()->json($deleterow);
+
+    }
 }

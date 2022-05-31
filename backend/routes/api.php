@@ -209,3 +209,8 @@ Route::get('/showconcern','ConcernController@showConcernInMIS');
 //
 
 Route::post('/email','ForgotPassword@email');
+
+
+//eval deleted row
+
+Route::delete('/deleteRow/{evalid}','EvaluationFormController@deleteRow');
