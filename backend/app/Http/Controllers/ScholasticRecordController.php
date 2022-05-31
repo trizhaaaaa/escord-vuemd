@@ -272,6 +272,7 @@ class ScholasticRecordController extends Controller
         'elemyeargrad' => Str::upper($request->studElemGradYr),
         'highschool' => Str::upper($request->studHighSchool),
         'hsyeargrad' => Str::upper($request->studHighSchoolGradYr),
+        'birthplace' => Str::upper($request->studBirthPlace),
     //    'archieve' =>$request->arch
                 ]);
 

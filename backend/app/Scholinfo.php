@@ -11,7 +11,7 @@ class Scholinfo extends Model
     protected $fillable = [
         'srms_id', 'student_number','firstname','middlename','surname','address','birthday'
         ,'contact','course','section','elementary','elemyeargrad','highschool'
-        ,'hsyeargrad','archieve','semester','sem_startyear','sem_endyeaer'];
+        ,'hsyeargrad','archieve','semester','sem_startyear','sem_endyeaer','birthplace'];
 
 
         protected $table = 'scholinfos';
