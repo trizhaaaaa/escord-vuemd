@@ -124,7 +124,7 @@ class LoginController extends Controller
             'user_role' =>'student',
             'password' => Hash::make($request->userNo)
             ]);  
-
+        //    $srms_id =  $randomNumber = random_int(100000, 999999);
 
         $srms_id = Str::uuid()->getHex();
 
