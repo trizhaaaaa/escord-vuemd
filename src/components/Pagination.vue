@@ -43,7 +43,8 @@ export default {
           "success",
           "warning",
           "info",
-          "rose"
+          "rose",
+          "esc-accent"
         ].includes(value);
       }
     },

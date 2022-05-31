@@ -265,9 +265,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-  .change-bg-color {
-    background-color: #545454;
-  }
-</style>

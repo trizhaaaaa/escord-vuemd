@@ -4,30 +4,33 @@
       class="section page-header header-filter"
       :style="headerStyle"
     ></parallax>
+   
 
-    <div class="main main-raised">
+    <div class="main main-raised" ref="DownloadComp">
       <div class="section profile-content">
         <div class="container">
-
+       
           <div class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between">
 
             <div class="__gradesheet-subject md-layout-item md-size-100">
                 <h4>
-                    <strong>{{subjCode}}</strong>
-                    {{subjDesc}}
+                    <strong>{{getGS.subjectcode}}</strong>
+                   {{getGS.subjectdesc}}
+ 
+                
                 </h4>
             </div>
             
             <div class="__gradesheet-info md-layout-item md-xsmall-size-100 md-size-70">
 
                     <h5 class="md-subheading">
-                        {{classYr}}{{classSec}} | {{classProg}}
+                        {{getGS.course_year}}{{getGS.course_section}} | {{getGS.course_short}}
                     </h5>
                     <p class="md-caption __top-md-caption">
-                        {{subjDay}}, {{subjTime}}
+                        {{getGS.day}} , {{getGS.time}}
                     </p>
                     <p class="md-caption">
-                        {{subjSem}},  SY. {{subjSY_start}}-{{subjSY_end}}
+                        {{getGS.semester}} SEMESTER,  SY. {{getGS.sem_startyear}}-{{getGS.sem_endyear}}
                     </p>
 
             </div>
@@ -43,16 +46,16 @@
                     </md-button>
                 </div>
 
-                <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
-                    <md-button
+             <!--    <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
+                    <md-button @click="sendArrayofData"
                     class="md-esc-darkgrey md-raised md-round md-just-icon">
                         <md-icon>save</md-icon>
                         <md-tooltip md-direction="bottom">Save Changes </md-tooltip>
                     </md-button>
                 </div>
-
+ -->
                 <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
-                    <md-button
+                    <md-button  @click="archievebtn"
                     class="md-esc-darkgrey md-raised md-round md-just-icon">
                         <md-icon>inventory</md-icon>
                         <md-tooltip md-direction="bottom">Archive Gradesheet</md-tooltip>
@@ -66,6 +69,14 @@
                         <md-tooltip md-direction="bottom">Download Gradesheet</md-tooltip>
                     </md-button>
                 </div>
+       
+              <!--    <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
+                    <md-button  @click="refreshGradesheet"
+                    class="md-esc-darkgrey md-raised md-round md-just-icon">
+                        <md-icon>refresh</md-icon>
+                        <md-tooltip md-direction="bottom">Refresh Gradesheet</md-tooltip>
+                    </md-button>
+                </div> -->
 
             </div>
 
@@ -73,35 +84,54 @@
 
           <md-divider></md-divider>
 
-          <div class="__gradesheet-table">
+           <div v-if='loadingStatus'>
+            <md-progress-spinner class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between" md-mode="indeterminate"></md-progress-spinner>
+          
+          </div>
 
-            <md-table
+          <div  v-else  class="__gradesheet-table">
+
+            <md-table 
               v-model="studentList"
               md-sort="studLN"
               md-sort-order="asc">
 
               <md-table-row class="title">
+                <md-table-head class="text-center">Actions</md-table-head>
                 <md-table-head class="text-center">Student Number</md-table-head>
                 <md-table-head class="text-center">Name</md-table-head>
                 <md-table-head class="text-center">Midterm</md-table-head>
                 <md-table-head class="text-center">Final Term</md-table-head>
                 <md-table-head class="text-center">Remarks</md-table-head>
+                
               </md-table-row>
 
               <md-table-row
-              v-for="(_, index) in studentList"
+              v-for="(_, index) in getrow"
               :key="index">
+
+               <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
+                    <md-button @click.prevent="sendArrayofData(getrow[index])"
+                    class="md-esc-darkgrey md-raised md-round md-just-icon">
+                        <md-icon>save</md-icon>
+                        <md-tooltip md-direction="bottom">save</md-tooltip>
+                    </md-button>
+                </div>
+
                 
                 <md-table-cell class="text-center">
-                  {{studentList[index].studNum}}
+                  {{getrow[index].student_number}}
                 </md-table-cell>
 
+
+
                 <md-table-cell>
-                  {{studentList[index].studLN}}, {{studentList[index].studFN}} {{studentList[index].studMI}}
+               {{getrow[index].studentname}}
                 </md-table-cell>
 
                <md-table-cell>
-                  <md-vuelidated
+              
+                 <md-vuelidated
                   :key="index"
                   :messages="{
                     required: 'Field cannot be blank.',
@@ -111,15 +141,18 @@
                   }" 
                   field="md-field" 
                   class="has-esc-accent">
-                    <md-input
+                   <md-input 
                     type="number"
                     class="text-center"
-                    v-model="studentList[index].studMG"></md-input>
-                  </md-vuelidated>
+                     v-model="getrow[index].midterm"
+                   ></md-input> 
+                  </md-vuelidated> 
+               
                 </md-table-cell>
 
                 <md-table-cell>
-                  <md-vuelidated
+                
+                 <md-vuelidated
                   :key="index"
                   :messages="{
                     required: 'Field cannot be blank.',
@@ -129,17 +162,18 @@
                   }" 
                   field="md-field" 
                   class="has-esc-accent">
-                    <md-input
+                    <md-input 
                     type="number"
                     class="text-center"
-                    v-model="studentList[index].studFG"></md-input>
-                  </md-vuelidated>
+                    v-model="getrow[index].finalterm"></md-input>
+                  </md-vuelidated> 
+                 
                 </md-table-cell>
 
                 <md-table-cell>
                   <md-field class="has-esc-accent">
-                    <md-input
-                    v-model="studentList[index].studRemark"></md-input>
+                  <md-input 
+                    v-model="getrow[index].finalgrade"></md-input> <!---edit this var--->
                   </md-field>
                 </md-table-cell>                
                 
@@ -190,7 +224,7 @@
                       <md-field class="has-esc-accent md-layout-item md-size-40"
                       :class="getValidationClass('studFN')">
                         <label>First Name</label>
-                        <md-input v-model="addStud.studFN"
+                        <md-input  v-model="addStud.studFN"
                         :disabled="sending"></md-input>
 
                         <span class="md-error" v-if="!$v.addStud.studFN.required">First name is required.</span>
@@ -199,6 +233,30 @@
                       <md-field class="has-esc-accent md-layout-item md-size-15">
                         <label>MI</label>
                         <md-input v-model="addStud.studMI"></md-input>
+                      </md-field>
+                    </div>
+
+
+                    <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between md-size-100">
+
+                      <md-field class="has-esc-accent md-layout-item md-size-45"
+                      :class="getValidationClass('studMG')">
+                        <label>Midterm Grade</label>
+                        <md-input
+                        type="number" v-model="addStud.studMG"
+                        :disabled="sending"></md-input>
+
+                        <span class="md-error" v-if="!$v.addStud.studMG.required">Midterm grade is required.</span>
+                      </md-field>
+
+                      <md-field class="has-esc-accent md-layout-item md-size-45"
+                      :class="getValidationClass('studFG')">
+                        <label>Final Term Grade</label>
+                        <md-input
+                        type="number" v-model="addStud.studFG"
+                        :disabled="sending"></md-input>
+
+                        <span class="md-error" v-if="!$v.addStud.studFG.required">Final term grade is required.</span>
                       </md-field>
                     </div>
 
@@ -221,12 +279,13 @@
                         :disabled="sending"
                         >
                           <md-icon>add</md-icon>
-                          ADD
+                          ADD 
                         </md-button>
                       </div>
                   </div>
                   
                   <md-snackbar
+                    md-position="left"
                     :md-active.sync="studAdded">
                     {{addedStudentInfo}} is added to the gradesheet.
                   </md-snackbar>
@@ -247,6 +306,9 @@
 <script>
 // modal import
 import { Modal } from "@/components";
+import { mapActions, mapGetters, mapMutations} from "vuex";
+import axios from "axios"
+
 
 //validation imports
 import { validationMixin } from 'vuelidate'
@@ -254,9 +316,23 @@ import { required, maxLength, minValue, maxValue } from 'vuelidate/lib/validator
 
 export default {
   bodyClass: "profile-page",
+  name:'Gradesheetpage',
   components: {
-      Modal
+      Modal,
+    
+ 
   },
+  mounted() {
+          this.$store.dispatch('showgsinfo',{ route: this.$route.params.gradeshid });
+         // let studentrow = this.$store.getters.getrow;
+
+        //  studentrow.forEach(student => this.studentList = student);
+     // console.log(this.studentList)
+          
+      },
+      created(){
+          this.studentGrade = this.$store.getters.getrow;
+      },
   data() {
     return {
       /* GRADESHEET TABLE DATA */
@@ -273,39 +349,12 @@ export default {
       classSec: "A",
       profName: "JOEMEN BARRIOS",
       profRank: "MASTER TEACHER III",
+    
 
       studentList: [
-        {
-          studNum: 20190001,
-          studLN: "LUCAS",
-          studFN: "TRIZHALYN",
-          studMI: "L",
-          studMG: "5",
-          studFG: "5",
-          studRemark: "PASSED"
-          
-        },
-        {
-          studNum: 20190002,
-          studLN: "MAGLANGIT",
-          studFN: "TRIZHA",
-          studMI: "F",
-          studMG: "2",
-          studFG: "5",
-          studRemark: "PASSED"
-          
-        },
-        {
-          studNum: 20190003,
-          studLN: "FRANCISCO",
-          studFN: "TRIZH",
-          studMI: "M",
-          studMG: "3",
-          studFG: "3",
-          studRemark: "PASSED"
-          
-        }
+    
       ],
+      studentGrade: [],
 
        /*modal default value on load*/
       classicModal: false,
@@ -315,11 +364,17 @@ export default {
         studNum: null,
         studLN: null,
         studFN: null,
-        studMI: ""
+        studMI: null,
+        studMG: null,
+        studFG: null,
+        gradesheetid: this.$route.params.gradeshid,
+        finalgrade: 1, //this is for testing only
       },
       studAdded: false,
       sending: false,
       addedStudentInfo: '',
+   
+     
     };
   },
 
@@ -327,15 +382,15 @@ export default {
 
    /* for validation */
    validations: {
-       studentList: {
+       getrow: {
          $each: {
-           studMG: {
+           midterm: {
              required,
              maxLength: maxLength(4),
              minValue: minValue(1.00),
              maxValue: maxValue(5.00)},
 
-           studFG: {
+           finalterm: {
              required,
              maxLength: maxLength(4),
              minValue: minValue(1.00),
@@ -346,7 +401,9 @@ export default {
        addStud: {
         studNum: {required},
         studLN: {required},
-        studFN: {required}
+        studFN: {required},
+        studMG: {required},
+        studFG: {required}
       },
    },
   props: {
@@ -364,13 +421,51 @@ export default {
       return {
         backgroundImage: `url(${this.header})`
       };
-    }
+    },
+    loadingStatus(){
+      return this.$store.getters.loadingStatus
+    },
+       ...mapGetters({getrow : 'getrow'}),
+     ...mapGetters({getGS : 'getGS'}),
+
+  
   },
 
   methods: {
     /*modal function*/
+          ...mapActions({ archgradesheet: "archgradesheet" }),
+          ...mapActions({ refreshGS: "showgsinfo" }),
+
+          ...mapActions({ addStudGradesheet: "addStudGradesheet" }),
+          ...mapActions({ updateGradesheetData: "updateGradesheetData" }),
+
+ // ...mapMutations(['setspeciGS']),
+    sendArrayofData(index){
+        //UPDATE 
+        //  console.log(index);
+
+   // this.updateGradesheetData({route:index.id}, this.index);
+
+  
+        axios.put('/api/addgs/'+index.id, index).then((response)=>{
+        
+
+         //     console.log('create professor accounts' , response.data);
+
+            
+             }).catch((errors)=>{
+  
+             this.error =  errors.response.data;
+   
+             })
+    },
+
     classicModalHide() {
       this.classicModal = false;
+    },
+
+    refreshGradesheet(){
+        this.refreshGS({ route: this.$route.params.gradeshid })
     },
 
     /* add student modal validation methods */
@@ -388,30 +483,67 @@ export default {
         this.addStud.studNum = null
         this.addStud.studLN = null
         this.addStud.studFN = null
-        this.addStud.studMI = ""
+        this.addStud.studMI = null
+        this.addStud.studMG = null
+        this.addStud.studFG = null
       },
       addStudent () {
         this.sending = true
-
+     
+       this.addStudGradesheet(this.addStud)
+       
+   
+      
         // Instead of this timeout, here you can call your API
-        window.setTimeout(() => {
+      window.setTimeout(() => {
           this.addedStudentInfo = `${this.addStud.studLN}, ${this.addStud.studFN} ${this.addStud.studMI}`
           this.studAdded = true
           this.sending = false
           this.clearForm()
-        }, 1500)
+        }, 1500)  
+
+        this.refreshGradesheet();
       },
       addValidate () {
         this.$v.$touch()
 
         if (!this.$v.$invalid) {
+  
           this.addStudent()
-          console.log("Student is added successfully.")
+            
+        //    console.log("Student is added successfully.")
         }
         else {
-          console.log("Cannot add student to the gradesheet.");
+         //   console.log("Cannot add student to the gradesheet.");
         }
-    }
+    },
+
+      archievebtn(){
+       
+        
+      axios.put('api/archievegs/'+ this.$route.params.gradeshid, { 
+            status_archieve: '1', }).then((response)=>{
+          
+       
+                //    console.log('archieve successfull');
+                  
+                //add notification time out here 
+
+       
+    
+    }).catch((errors)=>{
+          
+                 //  console.log('error in archeiveing');
+    
+          
+       
+                 })  
+ 
+           },
+
+        
+
+     
   }
 };
 </script>

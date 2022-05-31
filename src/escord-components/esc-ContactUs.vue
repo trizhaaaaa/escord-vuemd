@@ -10,6 +10,7 @@
             <md-card>
                 <md-card-header>
                     <h3 class="title">Leave us a message!</h3>
+                <!--    <p>  {{successnotif}}</p> -->
                     <p class="description">For suggestions or inquiries, please fill out the required fields below.</p>
                 </md-card-header>
                 <md-card-content>
@@ -24,7 +25,7 @@
                             v-model="msgData.senderName"></md-input>
                         </md-field>
 
-                        <md-field
+                   <md-field
                         :class="getValidationClass('senderEmail')"
                         class="md-form-group has-esc-accent">
                             <md-icon>email</md-icon>
@@ -90,16 +91,19 @@
 //validation imports
 import { validationMixin } from 'vuelidate'
 import { required, email } from 'vuelidate/lib/validators'
+import axios from 'axios'
 
 export default {
   bodyClass: "escord-contact-us-page",
   data() {
     return {
         /* form data */
+          successnotif:'',
       msgData: {
           senderName: null,
           senderEmail: null,
-          senderMsg: null
+          senderMsg: null,
+        
       },
       sending: false
     };
@@ -141,6 +145,8 @@ export default {
       msgValidate () {
         this.$v.$touch()
 
+        this.sendingConcern();
+
         if (!this.$v.$invalid) {
           console.log("Message sent successfully.")
         }
@@ -153,6 +159,28 @@ export default {
       this.msgData.senderName = null;
       this.msgData.senderEmail = null;
       this.msgData.senderMsg = null;
+    },
+
+    sendingConcern(){
+
+            
+           
+            axios.post('api/insertconcern', this.msgData).then(response => {
+
+                    this.successnotif = 'Concern Send';
+        
+              
+          
+
+            
+             }).catch((errors)=>{
+  
+             this.error =  errors.response.data;
+   
+             })
+
+            
+
     }
   }
 };

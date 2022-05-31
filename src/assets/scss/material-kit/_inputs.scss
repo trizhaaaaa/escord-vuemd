@@ -59,6 +59,18 @@
       color: $esc-darkgrey !important;
     }
   }
+
+  &.has-esc-darkgrey {
+    &:before {
+      background-color: $esc-darkgrey !important;
+    }
+
+    .md-input {
+      font-weight: 500;
+      -webkit-text-fill-color: $esc-darkgrey !important;
+      color: $esc-darkgrey !important;
+    }
+  }
   //---------------------------------
 
   @include inputs-color('green', $brand-success);

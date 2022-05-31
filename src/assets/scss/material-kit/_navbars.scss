@@ -321,6 +321,13 @@
 .md-list-item{
   list-style: none;
 
+  /* ESCORD ---- NO BG md-list-item*/
+  &.__no-bg {
+    .router-link-active .md-ripple{
+      background-color: transparent !important;
+    }
+  }
+
   .router-link-active .md-ripple{
     background-color: rgba(255,255,255,.1);
   }

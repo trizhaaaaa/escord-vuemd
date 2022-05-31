@@ -1,6 +1,6 @@
 import axios from "axios"
 import store from "../../store"
-//import router from '../../route'
+import router from "./../../route";
 
 
 
@@ -41,19 +41,15 @@ const actions = {
                
                 return dispatch('currentUserLog').then(() => {
                  
-                        console.log('RUNNING ACTIONS 2')
+                    //    console.log('RUNNING ACTIONS 2')
 
 
                 })
-       //   this.$router.push({name:'Dashboard'});
-              //       console.log(response.data);
-          //this.$router.push('Dashboard', () => this.$router.go(0))
-
-        //   window.location.replace("home");
+     
                   }).catch((errors)=>{
-        //   
+    
                commit("setError",errors.response.data.errors.email[0]);
-          //       console.log(errors.response.data.errors.email[0]);
+     
                   })
         
                 }); //end of axios
@@ -61,33 +57,44 @@ const actions = {
 
         },
 
-       currentUserLog({commit}){
+       currentUserLog({commit,dispatch}){
            
         axios.get('/api/user').then(response => {
-                //   this.currentUser = response.data
+
+              commit('setUser',response.data)
                 localStorage.setItem('role', response.data.user_role);
+                localStorage.setItem('email',response.data.email);
+
+              //  console.log(response.data.id);
+                if(response.data.user_role === "staff"){
+                  //    router.push({path:'/About'});
+                  router.push('/staff-dashboard', () => router.go(0)).catch(err => {})
+              
+                      
+                }else if (response.data.user_role === "superadmin"){
+                  router.push('/admin-dashboard', () => router.go(0)).catch(err => {})
 
                 
-                  if(response.data.user_role === "admin"){
-                    //    router.push({path:'/About'});
-                    router.push('/AdminDashboard', () => router.go(0))
-                
-                        
-                  }else if (response.data.user_role === "superadmin"){
-                //    router.push({path:'/Dashboard'});
-               
-                    router.push('/Dashboard',() => router.go(0));
-               
-                    
-                  }else{
-                 //   router.push({path:'/AdminDashboard'});
-                 router.push('/StudentDashboard', () => router.go(0))
+                }else if (response.data.user_role === "student"){
+              //    router.push({path:'/Dashboard'});
+             
+              router.push({name: 'Student Dashboard', params:{student_number: response.data.student_number }}, () => router.go(0)).catch(err => {})
+
+             
                   
-                  }
+                }else{
+
+               router.push({name:'Professor Dashboard', params:{userid: response.data.id }}, () => router.go(0)).catch(err => {})
+             //  router.push({path:'/prof-dashboard'});
+             //  router.push('/prof-dashboard', () => router.go(0)).catch(err => {})
+                
+                }
+ 
+             }).catch(()=>{
+             //    console.log("Error in getting the user")
+             })
    
-               }).catch(()=>{
-                   console.log("Error in getting the user")
-               })
+        
            },
 
 
@@ -101,9 +108,64 @@ const actions = {
                   commit('setRole',response.data.user_role)
    
                }).catch(()=>{
-                   console.log("Error in getting the user")
+             //      console.log("Error in getting the user")
                })
            },
+
+
+
+
+           AnotherUser({commit, dispatch},User){
+
+            axios.get('/sanctum/csrf-cookie').then(response => {
+                  axios.post('/api/userlogin',User).then((response)=>{
+                  //   localStorage.setItem('isLoggedIn','true');
+                     localStorage.setItem('token',response.data);
+                      
+                     axios.defaults.headers.common["Authorization"] = `Bearer ${response.data}`;
+                    //   this.$router.push({name:'Dashboard'});
+                 
+                  return dispatch('currentUserLog').then(() => {
+                   
+                        //  console.log('RUNNING ACTIONS 2')
+  
+  
+                  })
+       
+                    }).catch((errors)=>{
+
+                  
+                 commit("setError",errors.response.data.errors.userStudNum[0]);
+       
+                    })
+          
+                  }); //end of axios
+          
+  
+          },
+
+
+          loggingOut({commit}){ 
+
+            axios.post('/api/logout').then((response)=>{
+              localStorage.removeItem('role');
+              localStorage.removeItem('token');
+              localStorage.removeItem('email');
+              
+               //  this.$router.push('/');
+
+               router.push('/login', () => router.go(0)).catch(err => {})
+         
+                           
+              }).then(response=>{
+          // console.log(response);
+
+
+                  })
+               
+   
+
+          },
     
 }
 
@@ -126,6 +188,11 @@ const mutations = {
         state.isAuthenticated = false;
     },
 }
+
+
+  
+  
+ 
 
 
 

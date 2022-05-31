@@ -122,4 +122,17 @@
             }
         }
     }
+
+    &.pagination-esc-accent{
+        > .page-item.active > a,
+        > .page-item.active > span{
+            &,
+            &:focus,
+            &:hover{
+                background-color: $esc-accent;
+                border-color: $esc-accent;
+                @include shadow-4dp-color($esc-accent);
+            }
+        }
+    }
 }
